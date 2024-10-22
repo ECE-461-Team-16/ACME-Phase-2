@@ -2,14 +2,13 @@
 
 # Install dependencies
 install_dependencies() {
-    echo "Installing dependencies..."
-    npm install
-    npm install axios-mock-adapter
+    npm install > /dev/null 2>&1
+    npm install axios-mock-adapter > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "Error installing dependencies"
         exit 1
     fi
-    echo "7 dependencies installed..."
+    echo "5 dependencies installed..."
 }
 
 # Compile the ts files
