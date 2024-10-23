@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Package Directory</title>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Package Directory</h1>
+    
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" class="search-bar" placeholder="Search for packages..." onkeyup="filterPackages()">
+    
+    <!-- Package List -->
+    <ul id="packageList" class="package-list">
+      <!-- Placeholder packages -->
+      <li class="package-item" data-name="Package One">
+        <h3>Package One</h3>
+        <p>Description: This is a placeholder package description for Package One.</p>
+        <div class="actions">
+          <a href="/packages/package-one.zip" download>Download</a>
+          <a href="/rate?package=package-one">Check Rating</a>
+          <a href="/packages/package-one">View Details</a>
+        </div>
+      </li>
+
+      <li class="package-item" data-name="Package Two">
+        <h3>Package Two</h3>
+        <p>Description: This is a placeholder package description for Package Two.</p>
+        <div class="actions">
+          <a href="/packages/package-two.zip" download>Download</a>
+          <a href="/rate?package=package-two">Check Rating</a>
+          <a href="/packages/package-two">View Details</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    // JavaScript to filter packages based on search input
+    function filterPackages() {
+      const searchValue = document.getElementById('searchBar').value.toLowerCase();
+      const packages = document.querySelectorAll('.package-item');
+
+      packages.forEach(pkg => {
+        const name = pkg.getAttribute('data-name').toLowerCase();
+        if (name.includes(searchValue)) {
+          pkg.style.display = 'block';
+        } else {
+          pkg.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

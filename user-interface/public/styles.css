@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .package-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .package-item {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .package-item h3 {
+    margin: 0;
+  }
+  
+  .actions {
+    margin-top: 10px;
+  }
+  
+  .actions a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .actions a:hover {
+    text-decoration: underline;
+  }
+  

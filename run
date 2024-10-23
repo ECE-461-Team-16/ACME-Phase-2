@@ -4,11 +4,14 @@
 install_dependencies() {
     npm install > /dev/null 2>&1
     npm install axios-mock-adapter > /dev/null 2>&1
+    npm install express sqlite3 bcryptjs > /dev/null 2>&1
+    npm install @types/express @types/sqlite3 @types/bcryptjs --save-dev > /dev/null 2>&1
+    
     if [ $? -ne 0 ]; then
         echo "Error installing dependencies"
         exit 1
     fi
-    echo "5 dependencies installed..."
+    echo "8 dependencies installed..."
 }
 
 # Compile the ts files

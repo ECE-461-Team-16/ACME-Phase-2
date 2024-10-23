@@ -4,15 +4,40 @@ on:
   pull_request:
     branches:
       - main  # CI triggers for PRs targeting 'main'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: read
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out code
         uses: actions/checkout@v3
 
+      - name: Set up .env file
+        run: |
+          touch .env
+          echo "GITHUB_TOKEN=${{ secrets.API_KEY }}" >> .env
+          echo "LOG_FILE=LOGFILE.txt" >> .env  # Assuming you want the file name as a string
+          echo "LOG_LEVEL=2" >> .env  # Assuming this is a static value you want
+          cat .env
+
+
+      - name: Verify GITHUB_TOKEN
+        run: |
+          echo "GITHUB_TOKEN=${{ secrets.API_KEY }}" # Make sure this matches your secret name
+          
+          if [ -n "${{ secrets.API_KEY }}" ]; then
+            echo "GITHUB_TOKEN is set"
+          else
+            echo "GITHUB_TOKEN is NOT set"
+          fi
+          
       - name: Install dependencies
         run: ./run install  # Your custom install command
 

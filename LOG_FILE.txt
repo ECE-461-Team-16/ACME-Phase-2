@@ -333,3 +333,86 @@
 2024-10-21 16:17:02 [INFO]: Folder ./cloudinary_npm-master has been deleted.
 2024-10-21 16:17:02 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
 2024-10-21 16:17:02 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-22 15:51:37 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-22 15:51:37 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-22 15:51:37 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-22 15:51:37 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-22 15:51:37 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-22 15:51:37 [INFO]: Default branch: main
+2024-10-22 15:51:37 [INFO]: Repository name: lodash
+2024-10-22 15:51:37 [INFO]: Path and default branch: ./lodash-main
+2024-10-22 15:51:37 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-22 15:51:37 [INFO]: Fetched npm package: express
+2024-10-22 15:51:37 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-22 15:51:37 [INFO]: Default branch: main
+2024-10-22 15:51:37 [INFO]: Repository name: lodash
+2024-10-22 15:51:37 [INFO]: Path and default branch: ./lodash-main
+2024-10-22 15:51:37 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-22 15:51:37 [INFO]: Error fetching issues
+2024-10-22 15:51:37 [INFO]: Fetching issues for repo: facebook/react
+2024-10-22 15:51:37 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-22 15:51:37 [INFO]: Repository zip fetched
+2024-10-22 15:51:37 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-22 15:51:37 [INFO]: Repository zip fetched
+2024-10-22 15:51:37 [INFO]: Repository zip saved
+2024-10-22 15:51:38 [INFO]: files: README.md,/home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2/
+2024-10-22 15:51:38 [INFO]: Reading README.md from /home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2//README.md
+2024-10-22 15:51:38 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-22 15:51:38 [INFO]: Folder undefined does not exist.
+2024-10-22 15:51:38 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-22 15:51:38 [INFO]: Correctness score for lodash/lodash: 0.3333333333333333
+2024-10-22 15:51:38 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-22 15:51:38 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-22 15:51:37 [INFO]: Repository zip saved
+2024-10-22 15:51:38 [INFO]: Repository downloaded and extracted to ./
+2024-10-22 15:51:38 [INFO]: Repository zip deleted
+2024-10-22 15:51:38 [INFO]: Repository downloaded and extracted to ./
+2024-10-22 15:51:38 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-22 15:51:38 [INFO]: files: README.md,/home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2/
+2024-10-22 15:51:38 [INFO]: Reading README.md from /home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2//README.md
+2024-10-22 15:51:38 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-22 15:51:38 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-22 15:51:38 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-22 15:51:38 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-22 15:51:38 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-22 15:51:38 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-22 15:51:38 [INFO]: Default branch: main
+2024-10-22 15:51:38 [INFO]: Repository name: lodash
+2024-10-22 15:51:38 [INFO]: Path and default branch: ./lodash-main
+2024-10-22 15:51:38 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-22 15:51:39 [INFO]: Repository zip fetched
+2024-10-22 15:51:39 [INFO]: Repository zip saved
+2024-10-22 15:51:40 [INFO]: Repository downloaded and extracted to ./
+2024-10-22 15:51:40 [INFO]: Repository zip deleted
+2024-10-22 15:51:40 [INFO]: Repository downloaded and extracted to ./
+2024-10-22 15:51:40 [INFO]: files: README.md,/home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2/
+2024-10-22 15:51:40 [INFO]: Reading README.md from /home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2//README.md
+2024-10-22 15:51:40 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-22 15:51:40 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-22 15:51:40 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-22 15:51:40 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-22 15:51:40 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-22 15:51:40 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-22 15:51:40 [INFO]: Default branch: master
+2024-10-22 15:51:40 [INFO]: Repository name: cloudinary_npm
+2024-10-22 15:51:40 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-22 15:51:40 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-22 15:51:41 [INFO]: Repository zip fetched
+2024-10-22 15:51:41 [INFO]: Repository zip saved
+2024-10-22 15:51:43 [INFO]: Repository downloaded and extracted to ./
+2024-10-22 15:51:43 [INFO]: Repository zip deleted
+2024-10-22 15:51:43 [INFO]: Repository downloaded and extracted to ./
+2024-10-22 15:51:43 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-22 15:51:43 [INFO]: files: README.md,/home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2/
+2024-10-22 15:51:43 [INFO]: Reading README.md from /home/shay/a/madden41/ece461/Troy-s-Fork-Phase-2//README.md
+2024-10-22 15:51:43 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-22 15:51:43 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-22 15:51:43 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-22 15:51:43 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-22 15:51:46 [INFO]: Responsive Maintainer score for facebook/react: 0.9599692415017758
+2024-10-22 15:51:46 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-22 15:51:46 [INFO]: Error fetching issues
+2024-10-22 15:51:46 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-22 15:51:48 [INFO]: Responsive Maintainer score for lodash/lodash: 0.10279590218888157
+2024-10-22 15:51:48 [INFO]: Net Score for lodash/lodash: 0.40683877065666446
+2024-10-22 15:51:48 [INFO]: Net Score Latency: 11.053 seconds
