@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh ubuntu@3.94.121.132 "cd /home/ubuntu/ACME-Phase-2 && git pull && ./run install && npx tsc user-interface/app.ts --outDir dist --esModuleInterop && node dist/app.js"
+          ssh ubuntu@3.94.121.132 "cd /home/ubuntu/ACME-Phase-2 && git pull && ./run install && cd user-interface && npx tsc app.ts --outDir dist --esModuleInterop && node dist/app.js"
 
       - name: Clean up SSH key
         run: |
