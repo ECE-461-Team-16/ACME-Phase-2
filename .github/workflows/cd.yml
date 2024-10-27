@@ -1,0 +1,32 @@
+name: Continuous Deployment to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AWS_RSA_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Add EC2 Host to Known Hosts
+        run: |
+          ssh-keyscan -H 3.94.121.132 >> ~/.ssh/known_hosts
+
+      - name: Deploy to EC2
+        run: |
+          ssh ubuntu@3.94.121.132 "cd /home/ubuntu/ACME-phase-2/ACME-Phase-2 && git pull"
+
+      - name: Clean up SSH key
+        run: |
+          rm -f ~/.ssh/id_rsa
