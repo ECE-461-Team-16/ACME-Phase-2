@@ -76,7 +76,7 @@ program
             const coverage: number = coverageResults ? Math.round(parseFloat(coverageResults[1])) : 0;
 
             console.log("Total: " + total);
-            console.log("Passedss: " + passed);
+            console.log("Passed: " + passed);
             console.log("Coverage: " + coverage + "%");
             console.log(`${passed}/${total} test cases passed. ${coverage}% line coverage achieved.`);
 
