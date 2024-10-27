@@ -82,7 +82,7 @@ program
 
             logger.debug("RC: 0");
             logger.close();
-            process.exit(0); // Success
+            process.exit(1); // Success
         } catch (error: any) {
             logger.info("Error running test cases");
 
