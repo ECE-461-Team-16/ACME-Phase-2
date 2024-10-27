@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh ubuntu@3.94.121.132 "cd /home/ubuntu/ACME-phase-2/ACME-Phase-2 && git pull"
+          ssh ubuntu@3.94.121.132 "cd /home/ubuntu/ACME-Phase-2 && git pull"
 
       - name: Clean up SSH key
         run: |

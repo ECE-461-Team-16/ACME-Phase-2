@@ -2,6 +2,16 @@
 
 # Install dependencies
 install_dependencies() {
+
+    if ! command -v node &> /dev/null; then #checks for node.js 
+        sudo apt update > /dev/null 2>&1
+        sudo apt install -y nodejs > /dev/null 2>&1
+    fi
+
+    if ! command -v npm &> /dev/null; then #checks for npm
+        sudo apt install -y npm > /dev/null 2>&1
+    fi
+    
     npm install > /dev/null 2>&1
     npm install axios-mock-adapter > /dev/null 2>&1
     npm install express sqlite3 bcryptjs > /dev/null 2>&1
