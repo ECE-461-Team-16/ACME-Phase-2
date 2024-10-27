@@ -5,7 +5,7 @@ import path from 'path';
 
 const app = express();
 
-// Correct database path using path.join and __dirname
+// Path for Database
 const dbPath = path.join(__dirname, '../db/users.db');
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
