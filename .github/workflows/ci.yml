@@ -16,30 +16,33 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
+      - name: Check out PR code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch the full history to avoid detached HEAD issues
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Set up .env file
         run: |
           touch .env
           echo "GITHUB_TOKEN=${{ secrets.API_KEY }}" >> .env
-          echo "LOG_FILE=LOGFILE.txt" >> .env  # Assuming you want the file name as a string
-          echo "LOG_LEVEL=2" >> .env  # Assuming this is a static value you want
+          echo "LOG_FILE=LOGFILE.txt" >> .env
+          echo "LOG_LEVEL=2" >> .env
           cat .env
-
 
       - name: Verify GITHUB_TOKEN
         run: |
-          echo "GITHUB_TOKEN=${{ secrets.API_KEY }}" # Make sure this matches your secret name
+          echo "GITHUB_TOKEN=${{ secrets.API_KEY }}" # Ensure this matches your secret
           
           if [ -n "${{ secrets.API_KEY }}" ]; then
             echo "GITHUB_TOKEN is set"
           else
             echo "GITHUB_TOKEN is NOT set"
           fi
-          
+
       - name: Install dependencies
-        run: ./run install  # Your custom install command
+        run: ./run install  # Custom install command
 
       - name: Run tests
-        run: ./run test  # Run Jest tests
+        run: ./run test  # Run your tests (e.g., Jest)
