@@ -71,18 +71,18 @@ program
             const testResults = stderr.match(/Tests:\s+(\d+)\s+passed,\s+(\d+)\s+total/);
             const coverageResults = stdout.match(/All files\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+[\d.]+\s+\|\s+([\d.]+)/);
 
-            const passed = testResults ? parseInt(testResults[1], 10) : 0;
-            const total = testResults ? parseInt(testResults[2], 10) : 0;
-            const coverage = coverageResults ? parseFloat(coverageResults[1]) : 0;
+            const passed: number = testResults ? Math.round(parseInt(testResults[1], 10)) : 0;
+            const total: number = testResults ? Math.round(parseInt(testResults[2], 10)) : 0;
+            const coverage: number = coverageResults ? Math.round(parseFloat(coverageResults[1])) : 0;
 
             console.log("Total: " + total);
-            console.log("Passed: " + passed);
+            console.log("Passedss: " + passed);
             console.log("Coverage: " + coverage + "%");
             console.log(`${passed}/${total} test cases passed. ${coverage}% line coverage achieved.`);
 
             logger.debug("RC: 0");
             logger.close();
-            process.exit(1); // Success
+            process.exit(0); // Success
         } catch (error: any) {
             logger.info("Error running test cases");
 
@@ -101,7 +101,7 @@ program
 
             logger.debug("RC: 1");
             logger.close();
-            process.exit(0); // zero exit code on error ?
+            process.exit(1); // Non-zero exit code on error
         }
     });
 
