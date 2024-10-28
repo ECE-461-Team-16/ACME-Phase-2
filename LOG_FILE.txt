@@ -416,3 +416,1499 @@
 2024-10-22 15:51:48 [INFO]: Responsive Maintainer score for lodash/lodash: 0.10279590218888157
 2024-10-22 15:51:48 [INFO]: Net Score for lodash/lodash: 0.40683877065666446
 2024-10-22 15:51:48 [INFO]: Net Score Latency: 11.053 seconds
+2024-10-27 20:07:46 [INFO]: Running test cases
+2024-10-27 20:07:52 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:07:52 [INFO]: Error fetching issues
+2024-10-27 20:07:52 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:07:52 [INFO]: Fetched npm package: express
+2024-10-27 20:07:52 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:07:52 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:07:52 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:07:53 [INFO]: Default branch: main
+2024-10-27 20:07:53 [INFO]: Repository name: lodash
+2024-10-27 20:07:53 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:07:53 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:07:53 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:07:53 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:07:53 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:07:53 [INFO]: Default branch: main
+2024-10-27 20:07:53 [INFO]: Repository name: lodash
+2024-10-27 20:07:53 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:07:53 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:07:53 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:07:53 [INFO]: Repository zip fetched
+2024-10-27 20:07:53 [INFO]: Repository zip fetched
+2024-10-27 20:07:53 [INFO]: Repository zip saved
+2024-10-27 20:07:53 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:07:53 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:07:53 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:07:53 [INFO]: Folder undefined does not exist.
+2024-10-27 20:07:53 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:07:54 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:07:54 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:07:54 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:07:53 [INFO]: Repository zip saved
+2024-10-27 20:07:54 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:07:54 [INFO]: Repository zip deleted
+2024-10-27 20:07:54 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:07:54 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:07:54 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:07:54 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:07:54 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:07:54 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:07:54 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:07:54 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:07:54 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:07:54 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:07:54 [INFO]: Default branch: main
+2024-10-27 20:07:54 [INFO]: Repository name: lodash
+2024-10-27 20:07:54 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:07:54 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:07:55 [INFO]: Repository zip fetched
+2024-10-27 20:07:55 [INFO]: Repository zip saved
+2024-10-27 20:07:56 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:07:56 [INFO]: Repository zip deleted
+2024-10-27 20:07:56 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:07:56 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:07:56 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:07:56 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:07:56 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:07:56 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:07:56 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:07:56 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:07:56 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:07:56 [INFO]: Default branch: master
+2024-10-27 20:07:56 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:07:56 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:07:56 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:07:58 [INFO]: Repository zip fetched
+2024-10-27 20:07:58 [INFO]: Repository zip saved
+2024-10-27 20:08:00 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:08:00 [INFO]: Repository zip deleted
+2024-10-27 20:08:00 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:08:00 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:08:00 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:08:00 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:08:00 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:08:00 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:08:00 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:08:00 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:08:02 [INFO]: Responsive Maintainer score for facebook/react: 0.9519720202552394
+2024-10-27 20:08:02 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:08:02 [INFO]: Error fetching issues
+2024-10-27 20:08:02 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:08:03 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:08:03 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:08:03 [INFO]: Net Score Latency: 10.093 seconds
+2024-10-27 20:09:35 [INFO]: Running test cases
+2024-10-27 20:09:40 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:09:40 [INFO]: Fetched npm package: express
+2024-10-27 20:09:40 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:09:40 [INFO]: Error fetching issues
+2024-10-27 20:09:40 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:09:40 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:09:40 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:09:41 [INFO]: Default branch: main
+2024-10-27 20:09:41 [INFO]: Repository name: lodash
+2024-10-27 20:09:41 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:09:41 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:09:41 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:09:41 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:09:41 [INFO]: Default branch: main
+2024-10-27 20:09:41 [INFO]: Repository name: lodash
+2024-10-27 20:09:41 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:09:41 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:09:41 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:09:41 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:09:41 [INFO]: Repository zip fetched
+2024-10-27 20:09:41 [INFO]: Repository zip fetched
+2024-10-27 20:09:41 [INFO]: Repository zip saved
+2024-10-27 20:09:41 [INFO]: Repository downloaded and extracted to undefined
+2024-10-27 20:09:41 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:09:41 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:09:41 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:09:41 [INFO]: Folder undefined does not exist.
+2024-10-27 20:09:41 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:09:41 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:09:41 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:09:41 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:09:41 [INFO]: Default branch: main
+2024-10-27 20:09:41 [INFO]: Repository name: lodash
+2024-10-27 20:09:41 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:09:41 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:09:41 [INFO]: Repository zip fetched
+2024-10-27 20:09:41 [INFO]: Repository zip saved
+2024-10-27 20:09:41 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:09:41 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:09:41 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:09:41 [INFO]: Folder undefined does not exist.
+2024-10-27 20:09:41 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:09:41 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:09:41 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:09:41 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:09:42 [INFO]: Default branch: master
+2024-10-27 20:09:42 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:09:42 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:09:42 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:09:41 [INFO]: Repository zip saved
+2024-10-27 20:09:42 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:09:42 [INFO]: Repository zip deleted
+2024-10-27 20:09:42 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:09:42 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:09:42 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:09:42 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:09:42 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:09:42 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:09:42 [INFO]: Repository zip fetched
+2024-10-27 20:09:42 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:09:42 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:09:42 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:09:43 [INFO]: Repository zip saved
+2024-10-27 20:09:44 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:09:44 [INFO]: Repository zip deleted
+2024-10-27 20:09:44 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:09:44 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:09:44 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:09:44 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:09:44 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:09:45 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:09:45 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:09:45 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:09:50 [INFO]: Responsive Maintainer score for facebook/react: 0.9519720202552394
+2024-10-27 20:09:50 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:09:50 [INFO]: Error fetching issues
+2024-10-27 20:09:50 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:09:51 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:09:51 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:09:51 [INFO]: Net Score Latency: 10.454 seconds
+2024-10-27 20:10:26 [INFO]: Running test cases
+2024-10-27 20:10:31 [INFO]: Fetched npm package: express
+2024-10-27 20:10:31 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:10:31 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:10:31 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:10:31 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:10:31 [INFO]: Error fetching issues
+2024-10-27 20:10:31 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:10:31 [INFO]: Default branch: main
+2024-10-27 20:10:31 [INFO]: Repository name: lodash
+2024-10-27 20:10:31 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:10:31 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:10:31 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:10:31 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:10:31 [INFO]: Default branch: main
+2024-10-27 20:10:31 [INFO]: Repository name: lodash
+2024-10-27 20:10:31 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:10:31 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:10:32 [INFO]: Repository zip fetched
+2024-10-27 20:10:32 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:10:32 [INFO]: Repository zip fetched
+2024-10-27 20:10:32 [INFO]: Repository zip saved
+2024-10-27 20:10:32 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:10:32 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:10:32 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:10:32 [INFO]: Folder undefined does not exist.
+2024-10-27 20:10:32 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:10:32 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:10:32 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:10:32 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:10:32 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:10:32 [INFO]: Repository zip saved
+2024-10-27 20:10:32 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:10:32 [INFO]: Repository zip deleted
+2024-10-27 20:10:32 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:10:32 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:10:32 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:10:32 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:10:32 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:10:32 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:10:32 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:10:32 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:10:32 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:10:32 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:10:32 [INFO]: Default branch: main
+2024-10-27 20:10:32 [INFO]: Repository name: lodash
+2024-10-27 20:10:32 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:10:32 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:10:33 [INFO]: Repository zip fetched
+2024-10-27 20:10:33 [INFO]: Repository zip saved
+2024-10-27 20:10:34 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:10:34 [INFO]: Repository zip deleted
+2024-10-27 20:10:34 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:10:34 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:10:34 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:10:34 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:10:34 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:10:34 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:10:34 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:10:34 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:10:34 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:10:34 [INFO]: Default branch: master
+2024-10-27 20:10:34 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:10:34 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:10:34 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:10:34 [INFO]: Repository zip fetched
+2024-10-27 20:10:34 [INFO]: Repository zip saved
+2024-10-27 20:10:36 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:10:36 [INFO]: Repository zip deleted
+2024-10-27 20:10:36 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:10:36 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:10:36 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:10:36 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:10:36 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:10:36 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:10:36 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:10:36 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:10:41 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:10:41 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:10:41 [INFO]: Net Score Latency: 9.498 seconds
+2024-10-27 20:10:41 [INFO]: Responsive Maintainer score for facebook/react: 0.9519720202552394
+2024-10-27 20:10:41 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:10:41 [INFO]: Error fetching issues
+2024-10-27 20:10:41 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:11:20 [INFO]: Running test cases
+2024-10-27 20:11:25 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:11:25 [INFO]: Fetched npm package: express
+2024-10-27 20:11:25 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:11:25 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:11:25 [INFO]: Error fetching issues
+2024-10-27 20:11:25 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:11:25 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:11:25 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:11:25 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:11:25 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:11:25 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:11:25 [INFO]: Default branch: main
+2024-10-27 20:11:25 [INFO]: Default branch: main
+2024-10-27 20:11:25 [INFO]: Repository name: lodash
+2024-10-27 20:11:25 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:11:25 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:11:25 [INFO]: Repository name: lodash
+2024-10-27 20:11:25 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:11:25 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:11:26 [INFO]: Repository zip fetched
+2024-10-27 20:11:26 [INFO]: Repository zip fetched
+2024-10-27 20:11:26 [INFO]: Repository zip saved
+2024-10-27 20:11:26 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:11:26 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:11:26 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:11:26 [INFO]: Folder undefined does not exist.
+2024-10-27 20:11:26 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:11:26 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:11:26 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:11:26 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:11:26 [INFO]: Repository zip saved
+2024-10-27 20:11:27 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:11:27 [INFO]: Repository zip deleted
+2024-10-27 20:11:27 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:11:27 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:11:27 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:11:27 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:11:27 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:11:27 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:11:27 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:11:27 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:11:27 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:11:27 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:11:27 [INFO]: Default branch: main
+2024-10-27 20:11:27 [INFO]: Repository name: lodash
+2024-10-27 20:11:27 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:11:27 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:11:27 [INFO]: Repository zip fetched
+2024-10-27 20:11:27 [INFO]: Repository zip saved
+2024-10-27 20:11:28 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:11:28 [INFO]: Repository zip deleted
+2024-10-27 20:11:28 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:11:28 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:11:28 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:11:28 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:11:28 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:11:28 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:11:28 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:11:28 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:11:28 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:11:28 [INFO]: Default branch: master
+2024-10-27 20:11:28 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:11:28 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:11:28 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:11:29 [INFO]: Repository zip fetched
+2024-10-27 20:11:29 [INFO]: Repository zip saved
+2024-10-27 20:11:30 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:11:30 [INFO]: Repository zip deleted
+2024-10-27 20:11:30 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:11:30 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:11:30 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:11:30 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:11:30 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:11:30 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:11:30 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:11:30 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:11:35 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:11:35 [INFO]: Responsive Maintainer score for facebook/react: 0.9519720202552394
+2024-10-27 20:11:35 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:11:35 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:11:35 [INFO]: Error fetching issues
+2024-10-27 20:11:35 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:11:35 [INFO]: Net Score Latency: 9.821 seconds
+2024-10-27 20:15:19 [INFO]: Running test cases
+2024-10-27 20:15:24 [INFO]: Fetched npm package: express
+2024-10-27 20:15:24 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:15:24 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:15:24 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:15:24 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:15:24 [INFO]: Error fetching issues
+2024-10-27 20:15:24 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:15:24 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:15:24 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:15:25 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:15:25 [INFO]: Default branch: main
+2024-10-27 20:15:25 [INFO]: Default branch: main
+2024-10-27 20:15:25 [INFO]: Repository name: lodash
+2024-10-27 20:15:25 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:15:25 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:15:25 [INFO]: Repository name: lodash
+2024-10-27 20:15:25 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:15:25 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:15:25 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:15:25 [INFO]: Repository zip fetched
+2024-10-27 20:15:25 [INFO]: Repository zip fetched
+2024-10-27 20:15:25 [INFO]: Repository zip saved
+2024-10-27 20:15:25 [INFO]: Repository downloaded and extracted to undefined
+2024-10-27 20:15:25 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:15:25 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:15:25 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:15:25 [INFO]: Folder undefined does not exist.
+2024-10-27 20:15:25 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:15:25 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:15:25 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:15:25 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:15:25 [INFO]: Default branch: main
+2024-10-27 20:15:25 [INFO]: Repository name: lodash
+2024-10-27 20:15:25 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:15:25 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:15:25 [INFO]: Repository zip fetched
+2024-10-27 20:15:25 [INFO]: Repository zip saved
+2024-10-27 20:15:26 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:15:26 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:15:26 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:15:26 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:15:26 [INFO]: Folder undefined does not exist.
+2024-10-27 20:15:26 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:15:26 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:15:26 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:15:26 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:15:25 [INFO]: Repository zip saved
+2024-10-27 20:15:26 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:15:26 [INFO]: Repository zip deleted
+2024-10-27 20:15:26 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:15:26 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:15:26 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:15:26 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:15:26 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:15:26 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:15:26 [INFO]: Default branch: master
+2024-10-27 20:15:26 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:15:26 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:15:26 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:15:26 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:15:26 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:15:26 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:15:27 [INFO]: Repository zip fetched
+2024-10-27 20:15:27 [INFO]: Repository zip saved
+2024-10-27 20:15:28 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:15:28 [INFO]: Repository zip deleted
+2024-10-27 20:15:28 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:15:28 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:15:28 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:15:28 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:15:28 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:15:28 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:15:28 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:15:28 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:15:34 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:15:34 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:15:34 [INFO]: Error fetching issues
+2024-10-27 20:15:34 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:15:34 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:15:35 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:15:35 [INFO]: Net Score Latency: 10.310 seconds
+2024-10-27 20:22:12 [INFO]: Running test cases
+2024-10-27 20:22:18 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:22:18 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:22:18 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:22:18 [INFO]: Default branch: main
+2024-10-27 20:22:18 [INFO]: Repository name: lodash
+2024-10-27 20:22:18 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:22:18 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:22:18 [INFO]: Fetched npm package: express
+2024-10-27 20:22:18 [INFO]: Error fetching issues
+2024-10-27 20:22:18 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:22:18 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:22:18 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:22:18 [INFO]: Repository zip fetched
+2024-10-27 20:22:18 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:22:18 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:22:18 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:22:18 [INFO]: Default branch: main
+2024-10-27 20:22:18 [INFO]: Repository name: lodash
+2024-10-27 20:22:18 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:22:18 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:22:18 [INFO]: Repository zip fetched
+2024-10-27 20:22:18 [INFO]: Repository zip saved
+2024-10-27 20:22:19 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:19 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:19 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:19 [INFO]: Folder undefined does not exist.
+2024-10-27 20:22:19 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:19 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:22:19 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:22:19 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:22:18 [INFO]: Repository zip saved
+2024-10-27 20:22:19 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:19 [INFO]: Repository zip deleted
+2024-10-27 20:22:19 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:19 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:22:19 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:19 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:19 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:19 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:22:19 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:19 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:19 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:22:19 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:22:19 [INFO]: Default branch: main
+2024-10-27 20:22:19 [INFO]: Repository name: lodash
+2024-10-27 20:22:19 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:22:19 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:22:19 [INFO]: Repository zip fetched
+2024-10-27 20:22:19 [INFO]: Repository zip saved
+2024-10-27 20:22:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:20 [INFO]: Repository zip deleted
+2024-10-27 20:22:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:20 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:20 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:20 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:21 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:22:21 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:21 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:21 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:22:21 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:22:21 [INFO]: Default branch: master
+2024-10-27 20:22:21 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:22:21 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:22:21 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:22:23 [INFO]: Repository zip fetched
+2024-10-27 20:22:23 [INFO]: Repository zip saved
+2024-10-27 20:22:24 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:24 [INFO]: Repository zip deleted
+2024-10-27 20:22:24 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:24 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:22:24 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:24 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:24 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:25 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:22:25 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:22:25 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:22:27 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:22:28 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:22:28 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:22:28 [INFO]: Net Score Latency: 9.713 seconds
+2024-10-27 20:22:28 [INFO]: Error fetching issues
+2024-10-27 20:22:28 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:22:31 [INFO]: Error running test cases
+2024-10-27 20:22:53 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:22:53 [INFO]: Error fetching issues
+2024-10-27 20:22:53 [INFO]: Fetched npm package: express
+2024-10-27 20:22:53 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:22:53 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:22:53 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:22:53 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:22:53 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:22:53 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:22:53 [INFO]: Default branch: main
+2024-10-27 20:22:53 [INFO]: Repository name: lodash
+2024-10-27 20:22:53 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:22:53 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:22:53 [INFO]: Default branch: main
+2024-10-27 20:22:53 [INFO]: Repository name: lodash
+2024-10-27 20:22:53 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:22:53 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:22:53 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:22:53 [INFO]: Repository zip fetched
+2024-10-27 20:22:53 [INFO]: Repository zip fetched
+2024-10-27 20:22:53 [INFO]: Repository zip saved
+2024-10-27 20:22:53 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:53 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:53 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:53 [INFO]: Folder undefined does not exist.
+2024-10-27 20:22:53 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:54 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:22:54 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:22:54 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:22:54 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:22:53 [INFO]: Repository zip saved
+2024-10-27 20:22:54 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:54 [INFO]: Repository zip deleted
+2024-10-27 20:22:54 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:54 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:22:54 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:54 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:54 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:55 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:22:55 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:55 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:55 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:22:55 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:22:55 [INFO]: Default branch: main
+2024-10-27 20:22:55 [INFO]: Repository name: lodash
+2024-10-27 20:22:55 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:22:55 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:22:55 [INFO]: Repository zip fetched
+2024-10-27 20:22:55 [INFO]: Repository zip saved
+2024-10-27 20:22:56 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:56 [INFO]: Repository zip deleted
+2024-10-27 20:22:56 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:56 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:56 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:56 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:56 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:22:56 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:56 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:22:56 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:22:56 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:22:56 [INFO]: Default branch: master
+2024-10-27 20:22:56 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:22:56 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:22:56 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:22:56 [INFO]: Repository zip fetched
+2024-10-27 20:22:56 [INFO]: Repository zip saved
+2024-10-27 20:22:58 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:58 [INFO]: Repository zip deleted
+2024-10-27 20:22:58 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:22:58 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:22:58 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:22:58 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:22:58 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:22:58 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:22:58 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:22:58 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:23:02 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:23:02 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:23:02 [INFO]: Error fetching issues
+2024-10-27 20:23:02 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:23:03 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:23:03 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:23:03 [INFO]: Net Score Latency: 9.517 seconds
+2024-10-27 20:23:52 [INFO]: Running test cases
+2024-10-27 20:23:57 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:23:57 [INFO]: Error fetching issues
+2024-10-27 20:23:57 [INFO]: Fetched npm package: express
+2024-10-27 20:23:57 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:23:57 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:23:57 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:23:57 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:23:57 [INFO]: Default branch: main
+2024-10-27 20:23:57 [INFO]: Repository name: lodash
+2024-10-27 20:23:57 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:23:57 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:23:57 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:23:57 [INFO]: Repository zip fetched
+2024-10-27 20:23:57 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:23:57 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:23:57 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:23:58 [INFO]: Default branch: main
+2024-10-27 20:23:58 [INFO]: Repository name: lodash
+2024-10-27 20:23:58 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:23:58 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:23:58 [INFO]: Repository zip fetched
+2024-10-27 20:23:58 [INFO]: Repository zip saved
+2024-10-27 20:23:58 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:23:58 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:23:58 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:23:58 [INFO]: Folder undefined does not exist.
+2024-10-27 20:23:58 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:23:58 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:23:58 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:23:58 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:23:57 [INFO]: Repository zip saved
+2024-10-27 20:23:58 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:23:58 [INFO]: Repository zip deleted
+2024-10-27 20:23:58 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:23:58 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:23:58 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:23:58 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:23:58 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:23:58 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:23:58 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:23:58 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:23:58 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:23:58 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:23:59 [INFO]: Default branch: main
+2024-10-27 20:23:59 [INFO]: Repository name: lodash
+2024-10-27 20:23:59 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:23:59 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:23:59 [INFO]: Repository zip fetched
+2024-10-27 20:23:59 [INFO]: Repository zip saved
+2024-10-27 20:23:59 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:23:59 [INFO]: Repository zip deleted
+2024-10-27 20:23:59 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:23:59 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:23:59 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:23:59 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:23:59 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:23:59 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:23:59 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:23:59 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:23:59 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:24:00 [INFO]: Default branch: master
+2024-10-27 20:24:00 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:24:00 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:24:00 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:24:00 [INFO]: Repository zip fetched
+2024-10-27 20:24:00 [INFO]: Repository zip saved
+2024-10-27 20:24:02 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:02 [INFO]: Repository zip deleted
+2024-10-27 20:24:02 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:02 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:24:02 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:02 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:02 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:02 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:24:02 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:24:02 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:24:07 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:24:07 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:24:07 [INFO]: Error fetching issues
+2024-10-27 20:24:07 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:24:07 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:24:07 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:24:07 [INFO]: Net Score Latency: 9.848 seconds
+2024-10-27 20:24:16 [INFO]: Running test cases
+2024-10-27 20:24:21 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:24:21 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:24:21 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:24:21 [INFO]: Fetched npm package: express
+2024-10-27 20:24:21 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:24:21 [INFO]: Default branch: main
+2024-10-27 20:24:21 [INFO]: Repository name: lodash
+2024-10-27 20:24:21 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:24:21 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:24:21 [INFO]: Error fetching issues
+2024-10-27 20:24:21 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:24:22 [INFO]: Repository zip fetched
+2024-10-27 20:24:22 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:24:22 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:24:22 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:24:22 [INFO]: Default branch: main
+2024-10-27 20:24:22 [INFO]: Repository name: lodash
+2024-10-27 20:24:22 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:24:22 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:24:22 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:24:22 [INFO]: Repository zip fetched
+2024-10-27 20:24:22 [INFO]: Repository zip saved
+2024-10-27 20:24:23 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:23 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:23 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:23 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:23 [INFO]: Folder undefined does not exist.
+2024-10-27 20:24:23 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:22 [INFO]: Repository zip saved
+2024-10-27 20:24:23 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:23 [INFO]: Repository zip deleted
+2024-10-27 20:24:23 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:23 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:24:23 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:23 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:23 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:23 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:24:23 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:23 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:23 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:24:23 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:24:23 [INFO]: Default branch: main
+2024-10-27 20:24:23 [INFO]: Repository name: lodash
+2024-10-27 20:24:23 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:24:23 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:24:23 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:24:23 [INFO]: Repository zip fetched
+2024-10-27 20:24:23 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:24:23 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:24:23 [INFO]: Repository zip saved
+2024-10-27 20:24:24 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:24 [INFO]: Repository zip deleted
+2024-10-27 20:24:24 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:24 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:24 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:24 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:24 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:24:24 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:24 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:24 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:24:24 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:24:24 [INFO]: Default branch: master
+2024-10-27 20:24:24 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:24:24 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:24:24 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:24:24 [INFO]: Repository zip fetched
+2024-10-27 20:24:25 [INFO]: Repository zip saved
+2024-10-27 20:24:26 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:26 [INFO]: Repository zip deleted
+2024-10-27 20:24:26 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:26 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:24:26 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:26 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:26 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:26 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:24:26 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:24:26 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:24:31 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:24:31 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:24:31 [INFO]: Error fetching issues
+2024-10-27 20:24:31 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:24:32 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:24:32 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:24:32 [INFO]: Net Score Latency: 10.154 seconds
+2024-10-27 20:24:42 [INFO]: Running test cases
+2024-10-27 20:24:48 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:24:48 [INFO]: Error fetching issues
+2024-10-27 20:24:48 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:24:48 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:24:48 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:24:48 [INFO]: Fetched npm package: express
+2024-10-27 20:24:48 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:24:48 [INFO]: Default branch: main
+2024-10-27 20:24:48 [INFO]: Repository name: lodash
+2024-10-27 20:24:48 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:24:48 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:24:48 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:24:48 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:24:48 [INFO]: Repository zip fetched
+2024-10-27 20:24:48 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:24:48 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:24:48 [INFO]: Default branch: main
+2024-10-27 20:24:48 [INFO]: Repository name: lodash
+2024-10-27 20:24:48 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:24:48 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:24:49 [INFO]: Repository zip fetched
+2024-10-27 20:24:49 [INFO]: Repository zip saved
+2024-10-27 20:24:49 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:49 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:49 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:49 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:49 [INFO]: Folder undefined does not exist.
+2024-10-27 20:24:49 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:48 [INFO]: Repository zip saved
+2024-10-27 20:24:49 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:49 [INFO]: Repository zip deleted
+2024-10-27 20:24:49 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:49 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:24:49 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:49 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:49 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:49 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:24:49 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:49 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:49 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:24:49 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:24:49 [INFO]: Default branch: main
+2024-10-27 20:24:49 [INFO]: Repository name: lodash
+2024-10-27 20:24:49 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:24:49 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:24:49 [INFO]: Repository zip fetched
+2024-10-27 20:24:49 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:24:50 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:24:50 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:24:49 [INFO]: Repository zip saved
+2024-10-27 20:24:50 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:50 [INFO]: Repository zip deleted
+2024-10-27 20:24:50 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:50 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:50 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:50 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:50 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:24:50 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:50 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:24:50 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:24:50 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:24:51 [INFO]: Default branch: master
+2024-10-27 20:24:51 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:24:51 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:24:51 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:24:51 [INFO]: Repository zip fetched
+2024-10-27 20:24:51 [INFO]: Repository zip saved
+2024-10-27 20:24:53 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:53 [INFO]: Repository zip deleted
+2024-10-27 20:24:53 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:24:53 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:24:53 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:24:53 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:24:53 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:24:53 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:24:53 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:24:53 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:24:58 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:24:58 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:24:58 [INFO]: Error fetching issues
+2024-10-27 20:24:58 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:24:58 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:24:58 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:24:58 [INFO]: Net Score Latency: 9.901 seconds
+2024-10-27 20:33:13 [INFO]: Running test cases
+2024-10-27 20:33:19 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:33:19 [INFO]: Fetched npm package: express
+2024-10-27 20:33:19 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:33:19 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:33:19 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:33:19 [INFO]: Error fetching issues
+2024-10-27 20:33:19 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:33:19 [INFO]: Default branch: main
+2024-10-27 20:33:19 [INFO]: Repository name: lodash
+2024-10-27 20:33:19 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:33:19 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:33:19 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:33:19 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:33:19 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:33:19 [INFO]: Default branch: main
+2024-10-27 20:33:19 [INFO]: Repository name: lodash
+2024-10-27 20:33:19 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:33:19 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:33:19 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:33:19 [INFO]: Repository zip fetched
+2024-10-27 20:33:19 [INFO]: Repository zip fetched
+2024-10-27 20:33:19 [INFO]: Repository zip saved
+2024-10-27 20:33:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:33:20 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:33:20 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:33:20 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:33:20 [INFO]: Folder undefined does not exist.
+2024-10-27 20:33:20 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:33:19 [INFO]: Repository zip saved
+2024-10-27 20:33:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:33:20 [INFO]: Repository zip deleted
+2024-10-27 20:33:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:33:20 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:33:20 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:33:20 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:33:20 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:33:20 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:33:20 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:33:20 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:33:20 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:33:20 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:33:20 [INFO]: Default branch: main
+2024-10-27 20:33:20 [INFO]: Repository name: lodash
+2024-10-27 20:33:20 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:33:20 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:33:20 [INFO]: Repository zip fetched
+2024-10-27 20:33:20 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:33:20 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:33:20 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:33:20 [INFO]: Repository zip saved
+2024-10-27 20:33:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:33:20 [INFO]: Repository zip deleted
+2024-10-27 20:33:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:33:20 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:33:20 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:33:20 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:33:20 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:33:20 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:33:20 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:33:20 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:33:20 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:33:21 [INFO]: Default branch: master
+2024-10-27 20:33:21 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:33:21 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:33:21 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:33:23 [INFO]: Repository zip fetched
+2024-10-27 20:33:23 [INFO]: Repository zip saved
+2024-10-27 20:33:24 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:33:24 [INFO]: Repository zip deleted
+2024-10-27 20:33:24 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:33:24 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:33:24 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:33:24 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:33:24 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:33:24 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:33:24 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:33:24 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:33:28 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:33:28 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:33:28 [INFO]: Error fetching issues
+2024-10-27 20:33:28 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:33:29 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:33:29 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:33:29 [INFO]: Net Score Latency: 10.011 seconds
+2024-10-27 20:37:59 [INFO]: Running test cases
+2024-10-27 20:38:05 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:38:05 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:38:05 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:38:05 [INFO]: Fetched npm package: express
+2024-10-27 20:38:05 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:38:05 [INFO]: Default branch: main
+2024-10-27 20:38:05 [INFO]: Repository name: lodash
+2024-10-27 20:38:05 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:38:05 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:38:05 [INFO]: Error fetching issues
+2024-10-27 20:38:05 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:38:05 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:38:05 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:38:05 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:38:05 [INFO]: Default branch: main
+2024-10-27 20:38:05 [INFO]: Repository name: lodash
+2024-10-27 20:38:05 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:38:05 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:38:05 [INFO]: Repository zip fetched
+2024-10-27 20:38:05 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:38:05 [INFO]: Repository zip fetched
+2024-10-27 20:38:05 [INFO]: Repository zip saved
+2024-10-27 20:38:06 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:06 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:06 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:06 [INFO]: Folder undefined does not exist.
+2024-10-27 20:38:06 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:06 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:38:06 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:38:06 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:38:05 [INFO]: Repository zip saved
+2024-10-27 20:38:06 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:06 [INFO]: Repository zip deleted
+2024-10-27 20:38:06 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:06 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:38:06 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:06 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:06 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:06 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:38:06 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:06 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:06 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:38:06 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:38:06 [INFO]: Default branch: main
+2024-10-27 20:38:06 [INFO]: Repository name: lodash
+2024-10-27 20:38:06 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:38:06 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:38:06 [INFO]: Repository zip fetched
+2024-10-27 20:38:06 [INFO]: Repository zip saved
+2024-10-27 20:38:07 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:07 [INFO]: Repository zip deleted
+2024-10-27 20:38:07 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:07 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:07 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:07 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:08 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:38:08 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:08 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:08 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:38:08 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:38:08 [INFO]: Default branch: master
+2024-10-27 20:38:08 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:38:08 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:38:08 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:38:10 [INFO]: Repository zip fetched
+2024-10-27 20:38:10 [INFO]: Repository zip saved
+2024-10-27 20:38:12 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:12 [INFO]: Repository zip deleted
+2024-10-27 20:38:12 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:12 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:38:12 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:12 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:12 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:12 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:38:12 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:38:12 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:38:14 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:38:14 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:38:14 [INFO]: Error fetching issues
+2024-10-27 20:38:14 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:38:15 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:38:15 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:38:15 [INFO]: Net Score Latency: 9.697 seconds
+2024-10-27 20:38:25 [INFO]: Running test cases
+2024-10-27 20:38:30 [INFO]: Fetched npm package: express
+2024-10-27 20:38:30 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:38:30 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:38:30 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:38:30 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:38:30 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:38:30 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:38:30 [INFO]: Error fetching issues
+2024-10-27 20:38:30 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:38:30 [INFO]: Default branch: main
+2024-10-27 20:38:30 [INFO]: Default branch: main
+2024-10-27 20:38:30 [INFO]: Repository name: lodash
+2024-10-27 20:38:30 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:38:30 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:38:30 [INFO]: Repository name: lodash
+2024-10-27 20:38:30 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:38:30 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:38:31 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:38:31 [INFO]: Repository zip fetched
+2024-10-27 20:38:31 [INFO]: Repository zip fetched
+2024-10-27 20:38:31 [INFO]: Repository zip saved
+2024-10-27 20:38:31 [INFO]: Repository downloaded and extracted to undefined
+2024-10-27 20:38:31 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:31 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:31 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:31 [INFO]: Folder undefined does not exist.
+2024-10-27 20:38:31 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:31 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:31 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:38:31 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:38:31 [INFO]: Default branch: main
+2024-10-27 20:38:31 [INFO]: Repository name: lodash
+2024-10-27 20:38:31 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:38:31 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:38:31 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:38:31 [INFO]: Repository zip fetched
+2024-10-27 20:38:31 [INFO]: Repository zip saved
+2024-10-27 20:38:31 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:31 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:31 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:31 [INFO]: Folder undefined does not exist.
+2024-10-27 20:38:31 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:31 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:31 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:38:31 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:38:31 [INFO]: Default branch: master
+2024-10-27 20:38:31 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:38:31 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:38:31 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:38:31 [INFO]: Repository zip saved
+2024-10-27 20:38:32 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:32 [INFO]: Repository zip deleted
+2024-10-27 20:38:32 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:32 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:32 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:32 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:32 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:38:32 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:38:32 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:38:32 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:38:32 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:38:33 [INFO]: Repository zip fetched
+2024-10-27 20:38:33 [INFO]: Repository zip saved
+2024-10-27 20:38:35 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:35 [INFO]: Repository zip deleted
+2024-10-27 20:38:35 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:38:35 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:38:35 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:38:35 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:38:35 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:38:35 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:38:35 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:38:35 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:38:40 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:38:40 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:38:40 [INFO]: Error fetching issues
+2024-10-27 20:38:40 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:38:41 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:38:42 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:38:42 [INFO]: Net Score Latency: 11.448 seconds
+2024-10-27 20:39:05 [INFO]: Running test cases
+2024-10-27 20:39:10 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:39:10 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:39:10 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:39:10 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:39:10 [INFO]: Fetched npm package: express
+2024-10-27 20:39:10 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:39:10 [INFO]: Default branch: main
+2024-10-27 20:39:10 [INFO]: Default branch: main
+2024-10-27 20:39:10 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:39:10 [INFO]: Repository name: lodash
+2024-10-27 20:39:10 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:39:10 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:39:10 [INFO]: Repository name: lodash
+2024-10-27 20:39:10 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:39:10 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:39:10 [INFO]: Error fetching issues
+2024-10-27 20:39:10 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:39:11 [INFO]: Repository zip fetched
+2024-10-27 20:39:11 [INFO]: Repository zip fetched
+2024-10-27 20:39:11 [INFO]: Repository zip saved
+2024-10-27 20:39:11 [INFO]: Repository downloaded and extracted to undefined
+2024-10-27 20:39:11 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:11 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:11 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:11 [INFO]: Folder undefined does not exist.
+2024-10-27 20:39:11 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:11 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:11 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:39:11 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:39:11 [INFO]: Default branch: main
+2024-10-27 20:39:11 [INFO]: Repository name: lodash
+2024-10-27 20:39:11 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:39:11 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:39:11 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:39:11 [INFO]: Repository zip fetched
+2024-10-27 20:39:11 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:39:11 [INFO]: Repository zip saved
+2024-10-27 20:39:11 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:11 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:11 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:11 [INFO]: Folder undefined does not exist.
+2024-10-27 20:39:11 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:11 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:11 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:39:11 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:39:11 [INFO]: Default branch: master
+2024-10-27 20:39:11 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:39:11 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:39:11 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:39:11 [INFO]: Repository zip saved
+2024-10-27 20:39:11 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:11 [INFO]: Repository zip deleted
+2024-10-27 20:39:11 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:11 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:11 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:11 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:11 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:39:11 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:12 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:39:12 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:39:12 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:39:12 [INFO]: Repository zip fetched
+2024-10-27 20:39:12 [INFO]: Repository zip saved
+2024-10-27 20:39:13 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:13 [INFO]: Repository zip deleted
+2024-10-27 20:39:13 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:13 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:39:13 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:13 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:13 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:13 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:39:13 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:39:13 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:39:24 [INFO]: Running test cases
+2024-10-27 20:39:29 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:39:29 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:39:29 [INFO]: Default branch: main
+2024-10-27 20:39:29 [INFO]: Repository name: lodash
+2024-10-27 20:39:29 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:39:29 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:39:29 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:39:29 [INFO]: Fetched npm package: express
+2024-10-27 20:39:29 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:39:29 [INFO]: Repository zip fetched
+2024-10-27 20:39:29 [INFO]: Error fetching issues
+2024-10-27 20:39:29 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:39:29 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:39:29 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:39:29 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:39:29 [INFO]: Default branch: main
+2024-10-27 20:39:29 [INFO]: Repository name: lodash
+2024-10-27 20:39:29 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:39:29 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:39:29 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:39:29 [INFO]: Repository zip fetched
+2024-10-27 20:39:29 [INFO]: Repository zip saved
+2024-10-27 20:39:30 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:30 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:30 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:30 [INFO]: Folder undefined does not exist.
+2024-10-27 20:39:30 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:29 [INFO]: Repository zip saved
+2024-10-27 20:39:30 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:30 [INFO]: Repository zip deleted
+2024-10-27 20:39:30 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:30 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:39:30 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:30 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:30 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:30 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:39:30 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:30 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:30 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:39:30 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:39:30 [INFO]: Default branch: main
+2024-10-27 20:39:30 [INFO]: Repository name: lodash
+2024-10-27 20:39:30 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:39:30 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:39:30 [INFO]: Repository zip fetched
+2024-10-27 20:39:30 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:39:30 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:39:30 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:39:30 [INFO]: Repository zip saved
+2024-10-27 20:39:30 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:30 [INFO]: Repository zip deleted
+2024-10-27 20:39:30 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:30 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:30 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:30 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:31 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:39:31 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:31 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:39:31 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:39:31 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:39:31 [INFO]: Default branch: master
+2024-10-27 20:39:31 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:39:31 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:39:31 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:39:31 [INFO]: Repository zip fetched
+2024-10-27 20:39:31 [INFO]: Repository zip saved
+2024-10-27 20:39:33 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:33 [INFO]: Repository zip deleted
+2024-10-27 20:39:33 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:39:33 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:39:33 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:39:33 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:39:33 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:39:33 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:39:33 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:39:33 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:39:38 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:39:38 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:39:38 [INFO]: Error fetching issues
+2024-10-27 20:39:38 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:39:39 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:39:39 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:39:39 [INFO]: Net Score Latency: 9.663 seconds
+2024-10-27 20:42:43 [INFO]: Running test cases
+2024-10-27 20:42:49 [INFO]: Fetched npm package: express
+2024-10-27 20:42:49 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:42:49 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:42:49 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:42:49 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:42:49 [INFO]: Error fetching issues
+2024-10-27 20:42:49 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:42:49 [INFO]: Default branch: main
+2024-10-27 20:42:49 [INFO]: Repository name: lodash
+2024-10-27 20:42:49 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:42:49 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:42:49 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:42:49 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:42:49 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:42:49 [INFO]: Repository zip fetched
+2024-10-27 20:42:49 [INFO]: Default branch: main
+2024-10-27 20:42:49 [INFO]: Repository name: lodash
+2024-10-27 20:42:49 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:42:49 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:42:49 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:42:50 [INFO]: Repository zip fetched
+2024-10-27 20:42:50 [INFO]: Repository zip saved
+2024-10-27 20:42:50 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:42:50 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:42:50 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:42:50 [INFO]: Folder undefined does not exist.
+2024-10-27 20:42:50 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:42:50 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:42:50 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:42:50 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:42:49 [INFO]: Repository zip saved
+2024-10-27 20:42:51 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:42:51 [INFO]: Repository zip deleted
+2024-10-27 20:42:51 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:42:51 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:42:51 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:42:51 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:42:51 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:42:51 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:42:51 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:42:51 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:42:51 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:42:51 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:42:52 [INFO]: Default branch: main
+2024-10-27 20:42:52 [INFO]: Repository name: lodash
+2024-10-27 20:42:52 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:42:52 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:42:52 [INFO]: Repository zip fetched
+2024-10-27 20:42:52 [INFO]: Repository zip saved
+2024-10-27 20:42:53 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:42:53 [INFO]: Repository zip deleted
+2024-10-27 20:42:53 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:42:53 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:42:53 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:42:53 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:42:53 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:42:53 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:42:53 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:42:53 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:42:53 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:42:54 [INFO]: Default branch: master
+2024-10-27 20:42:54 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:42:54 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:42:54 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:42:54 [INFO]: Repository zip fetched
+2024-10-27 20:42:54 [INFO]: Repository zip saved
+2024-10-27 20:42:56 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:42:56 [INFO]: Repository zip deleted
+2024-10-27 20:42:56 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:42:56 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:42:56 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:42:56 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:42:56 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:42:56 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:42:56 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:42:56 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:42:58 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:42:59 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:42:59 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:42:59 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:42:59 [INFO]: Net Score Latency: 9.351 seconds
+2024-10-27 20:42:59 [INFO]: Error fetching issues
+2024-10-27 20:42:59 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:43:08 [INFO]: Running test cases
+2024-10-27 20:43:13 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:43:13 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:43:13 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:43:13 [INFO]: Error fetching issues
+2024-10-27 20:43:13 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:43:14 [INFO]: Default branch: main
+2024-10-27 20:43:14 [INFO]: Repository name: lodash
+2024-10-27 20:43:14 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:43:14 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:43:14 [INFO]: Fetched npm package: express
+2024-10-27 20:43:14 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:43:14 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:43:14 [INFO]: Repository zip fetched
+2024-10-27 20:43:14 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:43:14 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:43:14 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:43:14 [INFO]: Default branch: main
+2024-10-27 20:43:14 [INFO]: Repository name: lodash
+2024-10-27 20:43:14 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:43:14 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:43:14 [INFO]: Repository zip fetched
+2024-10-27 20:43:14 [INFO]: Repository zip saved
+2024-10-27 20:43:14 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:43:14 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:43:14 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:43:14 [INFO]: Folder undefined does not exist.
+2024-10-27 20:43:14 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:43:15 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:43:14 [INFO]: Repository zip saved
+2024-10-27 20:43:15 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:43:15 [INFO]: Repository zip deleted
+2024-10-27 20:43:15 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:43:15 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:43:15 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:43:15 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:43:15 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:43:15 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:43:15 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:43:15 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:43:15 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:43:15 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:43:15 [INFO]: Default branch: main
+2024-10-27 20:43:15 [INFO]: Repository name: lodash
+2024-10-27 20:43:15 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:43:15 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:43:15 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:43:15 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:43:15 [INFO]: Repository zip fetched
+2024-10-27 20:43:15 [INFO]: Repository zip saved
+2024-10-27 20:43:16 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:43:16 [INFO]: Repository zip deleted
+2024-10-27 20:43:16 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:43:16 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:43:16 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:43:16 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:43:16 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:43:16 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:43:16 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:43:16 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:43:16 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:43:17 [INFO]: Default branch: master
+2024-10-27 20:43:17 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:43:17 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:43:17 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:43:17 [INFO]: Repository zip fetched
+2024-10-27 20:43:17 [INFO]: Repository zip saved
+2024-10-27 20:43:19 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:43:19 [INFO]: Repository zip deleted
+2024-10-27 20:43:19 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:43:19 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:43:19 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:43:19 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:43:19 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:43:19 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:43:19 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:43:19 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:43:23 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:43:23 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:43:23 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:43:23 [INFO]: Error fetching issues
+2024-10-27 20:43:23 [INFO]: Error fetching and calculating responsive maintainer
+2024-10-27 20:43:23 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:43:23 [INFO]: Net Score Latency: 9.361 seconds
+2024-10-27 20:48:08 [INFO]: Running test cases
+2024-10-27 20:48:13 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:48:13 [INFO]: Error fetching issues
+2024-10-27 20:48:13 [INFO]: Fetching issues for repo: facebook/react
+2024-10-27 20:48:13 [INFO]: Fetched npm package: express
+2024-10-27 20:48:13 [INFO]: Successfully fetched repository: expressjs/express
+2024-10-27 20:48:13 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:48:13 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:48:13 [ERROR]: Error getting bus factor: Invalid arguments
+2024-10-27 20:48:13 [INFO]: Default branch: main
+2024-10-27 20:48:13 [INFO]: Repository name: lodash
+2024-10-27 20:48:13 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:48:13 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:48:13 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:48:13 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:48:13 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:48:13 [INFO]: Default branch: main
+2024-10-27 20:48:13 [INFO]: Repository name: lodash
+2024-10-27 20:48:13 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:48:13 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:48:14 [INFO]: Repository zip fetched
+2024-10-27 20:48:14 [INFO]: Repository zip fetched
+2024-10-27 20:48:14 [INFO]: Repository zip saved
+2024-10-27 20:48:14 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:48:14 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:48:14 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:48:14 [INFO]: Folder undefined does not exist.
+2024-10-27 20:48:14 [INFO]: Ramp up score for lodash/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:48:14 [INFO]: Correctness score for lodash/lodash: 0.29411764705882354
+2024-10-27 20:48:14 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-10-27 20:48:14 [INFO]: Fetching issues for repo: lodash/lodash
+2024-10-27 20:48:14 [INFO]: Repository zip saved
+2024-10-27 20:48:15 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:48:15 [INFO]: Repository zip deleted
+2024-10-27 20:48:15 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:48:15 [INFO]: Repository downloaded and extracted to ./lodash-main
+2024-10-27 20:48:15 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:48:15 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:48:15 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:48:15 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:48:15 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:48:15 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:48:15 [INFO]: Downloading repository from https://github.com/lodash/lodash to ./
+2024-10-27 20:48:15 [INFO]: Fetching default branch for https://github.com/lodash/lodash
+2024-10-27 20:48:15 [INFO]: Default branch: main
+2024-10-27 20:48:15 [INFO]: Repository name: lodash
+2024-10-27 20:48:15 [INFO]: Path and default branch: ./lodash-main
+2024-10-27 20:48:15 [INFO]: Download URL: https://github.com/lodash/lodash/archive/main.zip
+2024-10-27 20:48:15 [INFO]: Repository zip fetched
+2024-10-27 20:48:15 [INFO]: Repository zip saved
+2024-10-27 20:48:16 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:48:16 [INFO]: Repository zip deleted
+2024-10-27 20:48:16 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:48:16 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:48:16 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:48:16 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:48:16 [INFO]: Folder ./lodash-main has been deleted.
+2024-10-27 20:48:16 [INFO]: Ramp up score for cloudinary/https://github.com/lodash/lodash: 0.38
+2024-10-27 20:48:16 [INFO]: Ramp up score for https://github.com/lodash/lodash: 0.38
+2024-10-27 20:48:16 [INFO]: Downloading repository from https://github.com/cloudinary/cloudinary_npm to ./
+2024-10-27 20:48:16 [INFO]: Fetching default branch for https://github.com/cloudinary/cloudinary_npm
+2024-10-27 20:48:16 [INFO]: Default branch: master
+2024-10-27 20:48:16 [INFO]: Repository name: cloudinary_npm
+2024-10-27 20:48:16 [INFO]: Path and default branch: ./cloudinary_npm-master
+2024-10-27 20:48:16 [INFO]: Download URL: https://github.com/cloudinary/cloudinary_npm/archive/master.zip
+2024-10-27 20:48:18 [INFO]: Repository zip fetched
+2024-10-27 20:48:19 [INFO]: Repository zip saved
+2024-10-27 20:48:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:48:20 [INFO]: Repository zip deleted
+2024-10-27 20:48:20 [INFO]: Repository downloaded and extracted to ./
+2024-10-27 20:48:20 [INFO]: Repository downloaded and extracted to ./cloudinary_npm-master
+2024-10-27 20:48:20 [INFO]: files: README.md,/home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham/
+2024-10-27 20:48:20 [INFO]: Reading README.md from /home/shay/a/phambt/Documents/ECE46100/ACME-Phase-2-Pham//README.md
+2024-10-27 20:48:20 [INFO]: Ramp up score: 0.38461538461538464
+2024-10-27 20:48:20 [INFO]: Folder ./cloudinary_npm-master has been deleted.
+2024-10-27 20:48:20 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:48:20 [INFO]: Ramp up score for https://github.com/cloudinary/cloudinary_npm: 0.38
+2024-10-27 20:48:23 [INFO]: Responsive Maintainer score for lodash/lodash: 0.07944299938392396
+2024-10-27 20:48:23 [INFO]: Net Score for lodash/lodash: 0.38806819393282427
+2024-10-27 20:48:23 [INFO]: Net Score Latency: 9.456 seconds
+2024-10-27 20:48:23 [INFO]: Responsive Maintainer score for facebook/react: 0.9518455713616673
+2024-10-27 20:48:23 [INFO]: Fetching issues for repo: invalidOwner/invalidRepo
+2024-10-27 20:48:23 [INFO]: Error fetching issues
+2024-10-27 20:48:23 [INFO]: Error fetching and calculating responsive maintainer
