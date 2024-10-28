@@ -23,7 +23,19 @@ jobs:
           ssh-keyscan -H 3.94.121.132 >> ~/.ssh/known_hosts
       - name: Deploy to EC2
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@3.94.121.132 "cd /home/ubuntu/ACME-Phase-2 && bash -c './run install && cd user-interface && npx tsc app.ts --outDir dist --esModuleInterop && node dist/app.js &'"
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@3.94.121.132 "
+            echo 'Changing directory...' &&
+            cd /home/ubuntu/ACME-Phase-2 &&
+            echo 'Running install...' &&
+            ./run install &&
+            echo 'Compiling TypeScript...' &&
+            cd user-interface &&
+            npx tsc app.ts --outDir dist --esModuleInterop &&
+            echo 'Starting server...' &&
+            nohup node dist/app.js >> nohup.out 2>&1 &
+            disown
+          "
+
       - name: Clean up SSH key
         run: |
           rm -f ~/.ssh/id_rsa

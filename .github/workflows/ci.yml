@@ -43,9 +43,9 @@ jobs:
 
       - name: Install dependencies
         run: ./run install  # Custom install command
-        
-      - name: Run sample url file
-        run: ./run "Sample Url File.txt" 
+
+      - name: run sample URL file
+        run: ./run "Sample Url File.txt"  # Custom install command
         
       - name: Run tests
         run: ./run test  # Run your tests (e.g., Jest)
