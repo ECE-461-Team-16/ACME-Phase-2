@@ -11,14 +11,25 @@ const execAsync = promisify(exec);
 
 const program = new Command();
 
+const folders = ['./tests', './src'];
+
 async function deleteJSFiles() {
-    const srcFolder = './src';
     try {
-        const { stdout, stderr } = await execAsync(`find ${srcFolder} -name "*.js" -type f -delete`);
-        if (stdout) logger.debug(`Deleted .js files: ${stdout}`);
-        if (stderr) logger.debug(`Errors while deleting .js files: ${stderr}`);
-    } catch (error: any) {
-        logger.debug(`Error deleting .js files: ${error.message}`);
+        const fileTypes = ["*.js", "*.js.map"];
+        
+        for (const folder of folders) {
+            for (const fileType of fileTypes) {
+                const { stdout, stderr } = await execAsync(`find ${folder} -name "${fileType}" -type f -delete`);
+                
+                if (stderr) {
+                    logger.debug(`Errors while deleting ${fileType} files in ${folder}: ${stderr}`);
+                } else {
+                    logger.debug(`Deleted ${fileType} files in ${folder}`);
+                }
+            }
+        }
+    } catch (error) {
+        logger.debug(`Error deleting files: ${error instanceof Error ? error.message : error}`);
     }
 }
 
