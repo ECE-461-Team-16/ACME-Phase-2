@@ -77,12 +77,12 @@ program
 
             console.log("Total: " + total);
             console.log("Passed: " + passed);
-            console.log("Coverage: " + coverage + "%");
-            console.log(`${passed}/${total} test cases passed. ${coverage}% line coverage achieved.`);
+            console.log("Coverage: " + Math.round(coverage) + "%");
+            console.log(`${passed}/${total} test cases passed. ${Math.round(coverage)}% line coverage achieved.`);
 
             logger.debug("RC: 0");
             logger.close();
-            process.exit(1); // Success
+            process.exit(0); // Success
         } catch (error: any) {
             logger.info("Error running test cases");
 
@@ -96,12 +96,12 @@ program
             logger.debug(`Test Results:\n${error.stdout}`);
             console.log("Total: " + total);
             console.log("Passed: " + passed);
-            console.log("Coverage: " + coverage + "%");
-            console.log(`${passed}/${total} test cases passed. ${coverage}% line coverage achieved.`);
+            console.log("Coverage: " + Math.round(coverage) + "%");
+            console.log(`${passed}/${total} test cases passed. ${Math.round(coverage)}% line coverage achieved.`);
 
             logger.debug("RC: 1");
             logger.close();
-            process.exit(0); // zero exit code on error ?
+            process.exit(1); // zero exit code on error ?
         }
     });
 
