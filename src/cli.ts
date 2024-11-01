@@ -7,16 +7,16 @@ import { log } from 'console';
 import { RunProject } from './netScore';
 import { loadEnvFile } from 'process';
 
-const execAsync = promisify(exec);
 
 const program = new Command();
+
+const execAsync = promisify(exec);
 
 async function deleteJSFiles() {
     const srcFolder = './src';
     try {
-        const { stdout, stderr } = await execAsync(`find ${srcFolder} -name "*.js" -type f -delete`);
-        if (stdout) logger.debug(`Deleted .js files: ${stdout}`);
-        if (stderr) logger.debug(`Errors while deleting .js files: ${stderr}`);
+        await execAsync(`find ${srcFolder} -name "*.js" -type f -delete`);
+        logger.debug("Deleted all .js files in the src folder.");
     } catch (error: any) {
         logger.debug(`Error deleting .js files: ${error.message}`);
     }

@@ -11,7 +11,8 @@ module.exports = {
     testMatch: ["**/__tests__/**/*.ts", "**/?(*.)+(spec|test).ts"],
     coveragePathIgnorePatterns: [
       "/node_modules/",
-      "/dist/"
+      "/dist/",
+      "cli.ts"
     ],
     transform: {
       "^.+\\.ts$": "ts-jest"
