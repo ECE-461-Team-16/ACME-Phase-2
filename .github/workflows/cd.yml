@@ -26,17 +26,19 @@ jobs:
           ssh -i ~/.ssh/id_rsa -o BatchMode=yes -o StrictHostKeyChecking=no ubuntu@3.94.121.132 "
             echo 'Changing directory...' &&
             cd /home/ubuntu/ACME-Phase-2 &&
+            git pull &&
+            
             echo 'Installing dependencies...' &&
-            npm run &&
-            npm run install-deps &&
+            ./run install &&
 
-            echo 'Building the project...' &&
+            echo 'Compiling TypeScript...' &&
             cd user-interface &&
-            npm run build-app &&
+            npx tsc app.ts --outDir dist --esModuleInterop &&
 
             echo 'Starting the server in the background...' &&
-            nohup npm run start >> nohup.out 2>&1 &
-            disown
+            nohup node /home/ubuntu/ACME-Phase-2/user-interface/app.js > log-$$.log 2>&1 &
+            echo 'Job done!'
+            exit 0
           "
 
       - name: Clean up SSH key
