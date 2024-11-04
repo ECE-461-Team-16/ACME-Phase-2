@@ -77,8 +77,8 @@ program
 
             console.log("Total: " + total);
             console.log("Passed: " + passed);
-            console.log("Coverage: " + coverage + "%");
-            console.log(`${passed}/${total} test cases passed. ${coverage}% line coverage achieved.`);
+            console.log("Coverage: " + Math.round(coverage) + "%");
+            console.log(`${passed}/${total} test cases passed. ${Math.round(coverage)}% line coverage achieved.`);
 
             logger.debug("RC: 0");
             logger.close();
@@ -96,8 +96,8 @@ program
             logger.debug(`Test Results:\n${error.stdout}`);
             console.log("Total: " + total);
             console.log("Passed: " + passed);
-            console.log("Coverage: " + coverage + "%");
-            console.log(`${passed}/${total} test cases passed. ${coverage}% line coverage achieved.`);
+            console.log("Coverage: " + Math.round(coverage) + "%");
+            console.log(`${passed}/${total} test cases passed. ${Math.round(coverage)}% line coverage achieved.`);
 
             logger.debug("RC: 1");
             logger.close();
@@ -113,7 +113,7 @@ program
         if (result === 1) { //Exit if the environment variables are not set
             logger.debug("RC: 1");
             logger.close();
-            process.exit(0);
+            process.exit(1);
         }
 
         logger.debug(`Processing URLS from file: ${urlFile}`);
@@ -123,7 +123,7 @@ program
             logger.info("File does not exist");
             logger.debug("RC: 1");
             logger.close();
-            process.exit(0);
+            process.exit(1);
         }
 
         //Read the file and process URLs
@@ -134,7 +134,7 @@ program
 
             logger.debug("RC: 0");
             logger.close();
-            process.exit(1);
+            process.exit(0);
 
         } catch (error: any) { //Error reading the file
             logger.info("Error reading the file");
@@ -142,7 +142,7 @@ program
 
             logger.debug("RC: 1");
             logger.close();
-            process.exit(0);
+            process.exit(1);
         }
     });
 
