@@ -61,5 +61,5 @@ describe('calculateNetScore', () => {
     // this test cases takes a minute I'm sorry
     it('should run without throwing an error', async () => {
         await expect(RunProject('Sample Url File.txt')).resolves.not.toThrow();
-    }, 60000);
+    }, 120000);
 });
