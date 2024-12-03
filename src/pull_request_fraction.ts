@@ -23,7 +23,7 @@ export interface RepositoryPullRequestInfo {
     };
 }
 
-async function getNpmPackageGithubRepo(packageName: string): Promise<string | null> {
+export async function getNpmPackageGithubRepo(packageName: string): Promise<string | null> {
     try {
         const response = await axios.get(`https://registry.npmjs.org/${packageName}`);
         const packageData = response.data;
@@ -52,7 +52,7 @@ async function getNpmPackageGithubRepo(packageName: string): Promise<string | nu
 }
 
 // Function to extract repository owner and name from a GitHub URL
-async function extractRepoInfo(url: string): Promise<{ owner: string; name: string } | null> {
+export async function extractRepoInfo(url: string): Promise<{ owner: string; name: string } | null> {
     const githubPattern = /https:\/\/github\.com\/([^/]+)\/([^/]+)/;
     const match = url.match(githubPattern);
 
