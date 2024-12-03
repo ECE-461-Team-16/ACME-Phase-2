@@ -4,6 +4,7 @@ import {getCorrectness} from './correctness'
 import {getBusFactor} from './busFactor'
 import {getResponsiveMaintainer} from './responsiveMaintainer'
 import {getLicense} from './license'
+import {getDependenciesFraction} from './fractionDependencies'
 import logger from './logger';
 import * as fs from 'fs';
 
@@ -101,6 +102,14 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
             license = -1;
         }
 
+        //Get Fraction of Dependencies Metric Score and Latency
+        let fractionofDependencies = await getDependenciesFraction(owner, repo, TOKEN);
+        const fractionofDependenciesEnd = Date.now();
+        if (fractionofDependencies === null) {
+            logger.debug('Error getting Fraction of Dependencies metric score');
+            fractionofDependencies = -1;
+        }
+
         //Net Score Calculation and Latency
         let netScore = calculateNetScore(rampUp, correctness, busFactor, responsiveMaintainer, license);
         const netScoreEnd = Date.now();
@@ -117,6 +126,7 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
         const busFactorLatency = ((busFactorEnd - correctnessEnd)/1000).toFixed(3);
         const responsiveMaintainerLatency = ((responsiveMaintainerEnd - busFactorEnd)/1000).toFixed(3);
         const licenseLatency = ((licenseEnd - responsiveMaintainerEnd)/1000).toFixed(3);
+        const fractionofDependenciesLatency = ((netScoreEnd - licenseEnd)/1000).toFixed(3);
 
         logger.info(`Net Score Latency: ${netScoreLatency} seconds`);
 
@@ -134,7 +144,9 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
             ResponsiveMaintainer: parseFloat(responsiveMaintainer.toFixed(1)),
             ResponsiveMaintainer_Latency: parseFloat(responsiveMaintainerLatency),
             License: parseFloat(license.toFixed(1)),
-            License_Latency: parseFloat(licenseLatency)
+            License_Latency: parseFloat(licenseLatency),
+            FractionofDependencies: parseFloat(fractionofDependencies.toFixed(1)),
+            FractionofDependencies_Latency: parseFloat(fractionofDependenciesLatency)
         }
         const json_output = JSON.stringify(output_data);
         //Print Output Data to Stdout

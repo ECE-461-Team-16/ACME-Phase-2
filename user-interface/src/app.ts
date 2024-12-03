@@ -7,9 +7,11 @@ import multer from 'multer';
 import fs from 'fs';
 import { exec } from 'child_process';
 
-
 const app = express();
 const PORT = 3000;
+
+// Declare server variable
+let server: any;
 
 const upload = multer({ dest: 'uploads/' }); // Temporary directory for file uploads
 
@@ -114,16 +116,35 @@ app.post('/delete_account', (req: Request, res: Response) => {
 
 // Handle uploading packages to S3
 app.post('/api/upload', upload.single('file'), async (req, res) => {
-  const { bucketName, key } = req.body; // Ensure these are passed from the client
-  const filePath = req.file.path;
+  const { bucketName, key } = req.body;
+  const filePath = req.file?.path; // Use optional chaining to prevent errors
 
   try {
+    if (!filePath) throw new Error('File path is missing');
     const result = await uploadToS3(bucketName, key, filePath);
+    fs.unlinkSync(filePath); // Clean up the temporary file
     res.status(200).json({ message: 'Upload successful', data: result });
   } catch (err) {
-    res.status(500).json({ error: 'Upload failed', details: err.message });
+    const error = err as Error;
+    res.status(500).json({ error: 'Upload failed', details: error.message });
   }
 });
+
+// Graceful shutdown
+const shutdown = () => {
+  console.log('Shutting down server...');
+  if (server) {
+    server.close(() => {
+      console.log('Server shut down complete.');
+      process.exit(0);
+    });
+  } else {
+    process.exit(0);
+  }
+};
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
 
 // Function to start the server
 const startServer = () => {
@@ -133,5 +154,4 @@ const startServer = () => {
 };
 
 // Start the server
-shutdown();
 startServer();

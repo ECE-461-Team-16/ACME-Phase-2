@@ -3,12 +3,12 @@
 # Install dependencies
 install_dependencies() {
 
-    if ! command -v node &> /dev/null; then #checks for node.js 
+    if ! command -v node &> /dev/null; then # checks for node.js 
         sudo apt update > /dev/null 2>&1
         sudo apt install -y nodejs > /dev/null 2>&1
     fi
 
-    if ! command -v npm &> /dev/null; then #checks for npm
+    if ! command -v npm &> /dev/null; then # checks for npm
         sudo apt install -y npm > /dev/null 2>&1
     fi
     
@@ -17,6 +17,9 @@ install_dependencies() {
     npm install express sqlite3 bcryptjs > /dev/null 2>&1
     npm install @types/express @types/sqlite3 @types/bcryptjs --save-dev > /dev/null 2>&1
     npm install @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev > /dev/null 2>&1
+    npm install aws-sdk # AWS interactions
+    npm install multer
+
 
     
     if [ $? -ne 0 ]; then
