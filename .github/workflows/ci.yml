@@ -44,8 +44,8 @@ jobs:
       - name: Install dependencies
         run: ./run install  # Your custom install command
 
-      - name: Run tests
-        run: ./run test
+      # - name: Run tests
+      #   run: ./run test
 
       - name: Runs test (in detail)
         run: npx jest --no-cache --coverage
