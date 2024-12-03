@@ -46,7 +46,7 @@ export async function getDependenciesFraction(owner: string, repo: string, TOKEN
 
         return pinnedCount / Object.keys(dependencies).length;
     } catch (error) {
-        console.error("Error processing dependencies:", (error as Error).message);
+        logger.debug("Error processing dependencies:", (error as Error).message);
         return 0; // Return 0 on error
     }
 }
