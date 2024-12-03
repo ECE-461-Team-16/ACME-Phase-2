@@ -5,6 +5,7 @@ import {getBusFactor} from './busFactor'
 import {getResponsiveMaintainer} from './responsiveMaintainer'
 import {getLicense} from './license'
 import {getDependenciesFraction} from './fractionDependencies'
+import {getFractionCodeReview} from './pull_request_fraction'
 import logger from './logger';
 import * as fs from 'fs';
 
@@ -110,6 +111,14 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
             fractionofDependencies = -1;
         }
 
+        //Get Fraction of Pull Request through code review Metric Score and Latency
+        let fractionofPullRequest = await getFractionCodeReview(url);
+        const fractionofPullRequestEnd = Date.now();
+        if (fractionofPullRequest === null) {
+            logger.debug('Error getting Fraction of Pull Request through code review metric score');
+            fractionofPullRequest = -1;
+        }
+
         //Net Score Calculation and Latency
         let netScore = calculateNetScore(rampUp, correctness, busFactor, responsiveMaintainer, license);
         const netScoreEnd = Date.now();
@@ -127,6 +136,7 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
         const responsiveMaintainerLatency = ((responsiveMaintainerEnd - busFactorEnd)/1000).toFixed(3);
         const licenseLatency = ((licenseEnd - responsiveMaintainerEnd)/1000).toFixed(3);
         const fractionofDependenciesLatency = ((netScoreEnd - licenseEnd)/1000).toFixed(3);
+        const fractionofPullRequestLatency = ((netScoreEnd - licenseEnd)/1000).toFixed(3);
 
         logger.info(`Net Score Latency: ${netScoreLatency} seconds`);
 
@@ -146,7 +156,9 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
             License: parseFloat(license.toFixed(1)),
             License_Latency: parseFloat(licenseLatency),
             FractionofDependencies: parseFloat(fractionofDependencies.toFixed(1)),
-            FractionofDependencies_Latency: parseFloat(fractionofDependenciesLatency)
+            FractionofDependencies_Latency: parseFloat(fractionofDependenciesLatency),
+            FractionofPullRequest: parseFloat(fractionofPullRequest.toFixed(1)),
+            FractionofPullRequest_Latency: parseFloat(fractionofPullRequestLatency)
         }
         const json_output = JSON.stringify(output_data);
         //Print Output Data to Stdout

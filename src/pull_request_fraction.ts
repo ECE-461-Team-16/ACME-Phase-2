@@ -5,13 +5,6 @@ import axios from 'axios';
 dotenv.config({ path: '../.env' });
 const TOKEN = process.env.GITHUB_TOKEN;
 
-// Validate token
-if (!TOKEN) {
-    console.error('GitHub token is missing. Please check your .env file.');
-    process.exit(1);
-}
-console.log(`Loaded GitHub Token: ${TOKEN ? 'Yes' : 'No'}`);
-
 // GraphQL API endpoint
 const GITHUB_API_URL = 'https://api.github.com/graphql';
 
@@ -29,16 +22,55 @@ export interface RepositoryPullRequestInfo {
     };
 }
 
+async function getNpmPackageGithubRepo(packageName: string): Promise<string | null> {
+    try {
+        const response = await axios.get(`https://registry.npmjs.org/${packageName}`);
+        const packageData = response.data;
+  
+        if (packageData.repository && packageData.repository.url) {
+            let repoUrl = packageData.repository.url;
+  
+            if (repoUrl.startsWith('git+ssh://git@')) {
+                repoUrl = repoUrl.replace('git+ssh://git@', 'https://').replace('.git', '');
+            } else if (repoUrl.startsWith('git+')) {
+                repoUrl = repoUrl.replace('git+', '').replace('.git', '');
+            } else {
+                repoUrl = repoUrl.replace('.git', ''); // Always remove `.git` suffix
+            }
+  
+            if (repoUrl.includes('github.com')) {
+                return repoUrl;
+            }
+        }
+  
+        return null;
+    } catch (error) {
+        console.error(`Failed to fetch NPM package data for ${packageName}:`, error);
+        return null;
+    }
+}
+
 // Function to extract repository owner and name from a GitHub URL
-function extractRepoInfo(url: string): { owner: string; name: string } | null {
+async function extractRepoInfo(url: string): Promise<{ owner: string; name: string } | null> {
     const githubPattern = /https:\/\/github\.com\/([^/]+)\/([^/]+)/;
     const match = url.match(githubPattern);
 
     if (match && match[1] && match[2]) {
         return { owner: match[1], name: match[2] };
+    } else if (url.startsWith("https://www.npmjs.com")) {
+        const packageName = url.split("/").pop(); // Extract the package name from the URL
+        if (packageName) {
+            const repoUrl = await getNpmPackageGithubRepo(packageName); // Ensure this is awaited
+            if (repoUrl) {
+                const repoMatch = repoUrl.match(githubPattern);
+                if (repoMatch && repoMatch[1] && repoMatch[2]) {
+                    return { owner: repoMatch[1], name: repoMatch[2] };
+                }
+            }
+        }
     }
 
-    return null; // Not a valid GitHub repository URL
+    return null; // Not a valid GitHub or npm package URL
 }
 
 // Function to fetch pull request info via GraphQL
@@ -78,39 +110,31 @@ async function fetchPullRequestInfo(owner: string, name: string): Promise<Reposi
     }
 }
 
-// Main function to process multiple URLs and print results
-(async () => {
-    const urls = [
-        'https://github.com/cloudinary/cloudinary_npm',
-        'https://github.com/nullivex/nodist',
-        'https://github.com/lodash/lodash',
-    ];
-
-    for (const url of urls) {
-        const repoInfo = extractRepoInfo(url);
+export async function getFractionCodeReview(url: string): Promise<number | null> {
+    try {
+        const repoInfo = await extractRepoInfo(url);
 
         if (!repoInfo) {
             console.log(`Invalid or unsupported URL: ${url}`);
-            continue;
+            return null;
         }
 
         const { owner, name } = repoInfo;
 
-        try {
-            console.log(`Processing repository: ${owner}/${name}`);
-            const data = await fetchPullRequestInfo(owner, name);
+        console.log(`Processing repository: ${owner}/${name}`);
+        const data = await fetchPullRequestInfo(owner, name);
 
-            const totalPRs = data.data.repository.pullRequests.totalCount;
-            const approvedPRs = data.data.repository.approvedPullRequests.totalCount;
-            const fraction = totalPRs > 0 ? approvedPRs / totalPRs : 0;
+        const totalPRs = data.data.repository.pullRequests.totalCount;
+        const approvedPRs = data.data.repository.approvedPullRequests.totalCount;
 
-            console.log(`Repository: ${owner}/${name}`);
-            console.log(`Total Pull Requests: ${totalPRs}`);
-            console.log(`Approved Pull Requests: ${approvedPRs}`);
-            console.log(`Approved PR Fraction: ${fraction.toFixed(2)}`);
-            console.log('-----------------------------');
-        } catch (error) {
-            console.error(`Error processing ${owner}/${name}: ${(error as Error).message}`);
-        }
+        // Calculate the fraction of approved pull requests
+        const fraction = totalPRs > 0 ? approvedPRs / totalPRs : 0;
+        
+        return fraction;
+    } catch (error) {
+        console.error(`Error processing URL ${url}: ${(error as Error).message}`);
+        return null;
     }
-})();
+}
+
+
