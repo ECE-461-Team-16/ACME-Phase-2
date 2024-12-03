@@ -1,20 +1,19 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Application } from 'express';
 import sqlite3 from 'sqlite3';
 import bcrypt from 'bcryptjs';
 import path from 'path';
-import { uploadToS3 } from './routes/s3uploader'; // Import the function from the other file
-import multer from 'multer';
+import fileUpload from 'express-fileupload';
+import { uploadS3 } from './routes/uploadS3';
 import fs from 'fs';
-import { exec } from 'child_process';
 
 
 const app = express();
 const PORT = 3000;
 
-const upload = multer({ dest: 'uploads/' }); // Temporary directory for file uploads
+let server: any; // Define a variable to hold the server instance
 
 // Database setup
-const dbPath = path.join(__dirname, '../db/users.db');
+const dbPath = path.join(__dirname, './db/users.db');
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error(`Error opening database at ${dbPath}: ${err.message}`);
@@ -24,6 +23,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
 });
 
 // Middleware setup
+app.use(fileUpload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -112,18 +112,58 @@ app.post('/delete_account', (req: Request, res: Response) => {
   });
 });
 
-// Handle uploading packages to S3
-app.post('/api/upload', upload.single('file'), async (req, res) => {
-  const { bucketName, key } = req.body; // Ensure these are passed from the client
-  const filePath = req.file.path;
+app.put('/upload/:packageName/:version', async (req: Request, res: Response): Promise<void> => {
+  const { packageName, version } = req.params;
+  const file = req.files?.package as fileUpload.UploadedFile;
+
+  if (!file) {
+    res.status(400).send('No file uploaded');
+    return;
+  }
+
+  const key = `${packageName}/${version}/${file.name}`;
 
   try {
-    const result = await uploadToS3(bucketName, key, filePath);
-    res.status(200).json({ message: 'Upload successful', data: result });
+    const tempFilePath = path.join(__dirname, file.name);
+    await file.mv(tempFilePath);
+
+    const result = await uploadS3(tempFilePath, 'team16-npm-registry', key);
+
+    fs.unlinkSync(tempFilePath);
+
+    res.status(200).send(`File uploaded successfully: ${result.Location}`);
   } catch (err) {
-    res.status(500).json({ error: 'Upload failed', details: err.message });
+    console.error('Error during upload:', err);
+    res.status(500).send('Error uploading file');
   }
 });
+
+// Graceful shutdown function
+const shutdown = (callback?: () => void) => {
+  console.log('Received shutdown signal. Closing server...');
+
+  // Stop accepting new requests
+  server.close(() => {
+    console.log('Server stopped accepting new connections.');
+
+    // Close the database connection
+    db.close((err) => {
+      if (err) {
+        console.error('Error closing database:', err.message);
+        process.exit(1); // Exit with an error code
+      } else {
+        console.log('Database connection closed.');
+      }
+
+      // Execute the callback if provided (e.g., final cleanup actions)
+      if (callback) {
+        callback();
+      }
+
+      process.exit(0); // Exit gracefully
+    });
+  });
+};
 
 // Function to start the server
 const startServer = () => {

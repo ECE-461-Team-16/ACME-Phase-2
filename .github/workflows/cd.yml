@@ -22,7 +22,7 @@ jobs:
       - name: Add EC2 Host to Known Hosts
         run: |
           ssh-keyscan -H 52.87.248.32 >> ~/.ssh/known_hosts
-
+          
       - name: Deploy to EC2
         run: |
           ssh -i ~/.ssh/id_rsa -o BatchMode=yes -o StrictHostKeyChecking=no ubuntu@52.87.248.32 "
@@ -30,6 +30,12 @@ jobs:
             cd /home/ubuntu/ACME-Phase-2 &&
             git fetch origin &&
             git reset --hard origin/main &&
+
+            echo 'Setting up .env...' &&
+            touch .env &&
+            echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env &&
+            echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env &&
+            cat .env &&
             
             echo 'Installing dependencies...' &&
             ./run install &&

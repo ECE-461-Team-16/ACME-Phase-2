@@ -10,13 +10,12 @@
 <body>
   <div class="container">
     <h1>Package Directory</h1>
-    
+
     <!-- Search Bar -->
     <input type="text" id="searchBar" class="search-bar" placeholder="Search for packages..." onkeyup="filterPackages()">
-    
+
     <!-- Package List -->
     <ul id="packageList" class="package-list">
-      <!-- Placeholder packages -->
       <li class="package-item" data-name="Package One">
         <h3>Package One</h3>
         <p>Description: This is a placeholder package description for Package One.</p>
@@ -26,7 +25,6 @@
           <a href="/packages/package-one">View Details</a>
         </div>
       </li>
-
       <li class="package-item" data-name="Package Two">
         <h3>Package Two</h3>
         <p>Description: This is a placeholder package description for Package Two.</p>
@@ -37,6 +35,28 @@
         </div>
       </li>
     </ul>
+
+    <!-- Upload Form -->
+    <div class="upload-section">
+      <h2>Upload a Package</h2>
+      <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="packageName">Package Name:</label>
+        <input type="text" id="packageName" name="packageName" required>
+
+        <label for="version">Version:</label>
+        <input type="text" id="version" name="version" placeholder="e.g., 1.0.0" required>
+
+        <label for="package">Select .zip File:</label>
+        <input type="file" id="package" name="package" accept=".zip" required>
+
+        <label for="debloat">
+          <input type="checkbox" id="debloat" name="debloat">
+          Enable Debloating
+        </label>
+
+        <button type="submit">Upload</button>
+      </form>
+    </div>
   </div>
 
   <script>
