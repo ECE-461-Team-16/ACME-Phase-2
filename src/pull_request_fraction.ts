@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import axios from 'axios';
+import logger from './logger';
 
 // Load environment variables
 dotenv.config({ path: '../.env' });
@@ -45,7 +46,7 @@ async function getNpmPackageGithubRepo(packageName: string): Promise<string | nu
   
         return null;
     } catch (error) {
-        console.error(`Failed to fetch NPM package data for ${packageName}:`, error);
+        logger.debug(`Failed to fetch NPM package data for ${packageName}:`, error);
         return null;
     }
 }
@@ -105,7 +106,7 @@ async function fetchPullRequestInfo(owner: string, name: string): Promise<Reposi
 
         return response.data as RepositoryPullRequestInfo;
     } catch (error) {
-        console.error(`Error in GraphQL request: ${(error as Error).message}`);
+        logger.debug(`Error in GraphQL request: ${(error as Error).message}`);
         throw error;
     }
 }
@@ -115,13 +116,13 @@ export async function getFractionCodeReview(url: string): Promise<number | null>
         const repoInfo = await extractRepoInfo(url);
 
         if (!repoInfo) {
-            console.log(`Invalid or unsupported URL: ${url}`);
+            logger.info(`Invalid or unsupported URL: ${url}`);
             return null;
         }
 
         const { owner, name } = repoInfo;
 
-        console.log(`Processing repository: ${owner}/${name}`);
+        logger.info(`Processing repository: ${owner}/${name}`);
         const data = await fetchPullRequestInfo(owner, name);
 
         const totalPRs = data.data.repository.pullRequests.totalCount;
@@ -132,7 +133,7 @@ export async function getFractionCodeReview(url: string): Promise<number | null>
         
         return fraction;
     } catch (error) {
-        console.error(`Error processing URL ${url}: ${(error as Error).message}`);
+        logger.debug(`Error processing URL ${url}: ${(error as Error).message}`);
         return null;
     }
 }
