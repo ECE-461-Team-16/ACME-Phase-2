@@ -1,9 +1,9 @@
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import axios from 'axios';
 import logger from './logger';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+dotenv.config();
 
 const TOKEN = process.env.GITHUB_TOKEN;
 if (!TOKEN) {
