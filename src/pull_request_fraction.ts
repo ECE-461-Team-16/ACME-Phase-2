@@ -5,6 +5,11 @@ import logger from './logger';
 // Load environment variables
 dotenv.config();
 const TOKEN = process.env.GITHUB_TOKEN;
+if (!TOKEN) {
+    console.log("Missing GITHUB_TOKEN. Please provide a valid token in the .env file.");
+} else {
+    console.log("bruh");
+}
 
 // GraphQL API endpoint
 const GITHUB_API_URL = 'https://api.github.com/graphql';

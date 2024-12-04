@@ -11,11 +11,18 @@ import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 
 // Load environment variables
-dotenv.config({ path: '../.env' });
+dotenv.config();
 
 //Main Function to Run Project
 export async function RunProject(inputFilePath: string) {
     const TOKEN: string = process.env.GITHUB_TOKEN || '';
+    
+    if (!TOKEN) {
+        console.log("Missing GITHUB_TOKEN. Please provide a valid token in the .env file.");
+    } else {
+        console.log("bruh");
+    }
+
     const inputfile = fs.readFileSync(inputFilePath, 'utf-8');
     const lines: string[] = inputfile.split(/\r?\n/);
 
