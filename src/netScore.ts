@@ -8,6 +8,10 @@ import {getDependenciesFraction} from './fractionDependencies'
 import {getFractionCodeReview} from './pull_request_fraction'
 import logger from './logger';
 import * as fs from 'fs';
+import * as dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config({ path: '../.env' });
 
 //Main Function to Run Project
 export async function RunProject(inputFilePath: string) {
