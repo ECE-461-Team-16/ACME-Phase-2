@@ -48,7 +48,6 @@ describe('calculateBusFactor', () => {
         const maxAcceptableContributors = 100;
         const numContributors = 19;
         const bf_score = calculateBusFactor(minAcceptableContributors, maxAcceptableContributors, numContributors);
-        console.log(`bf_score: ${bf_score}`);
         expect(bf_score).toBe(0.1);
     });
     it('getNumContributors should return null if inputs are invalid', async () => {
