@@ -3,7 +3,7 @@ import axios from 'axios';
 import logger from './logger';
 
 // Load environment variables
-dotenv.config({ path: '../.env' });
+dotenv.config();
 const TOKEN = process.env.GITHUB_TOKEN;
 
 // GraphQL API endpoint
