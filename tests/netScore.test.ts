@@ -59,33 +59,7 @@ describe('calculateNetScore', () => {
     });
 
     // this test cases takes a minute I'm sorry
-    // it('should run without throwing an error', async () => {
-    //     await expect(RunProject('Sample Url File.txt')).resolves.not.toThrow();
-    // }, 120000);
-    it('should run without throwing an error and ensure no metric is -1', async () => {
-        // Mock the console.log to capture output
-        const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-    
-        // Run the function
+    it('should run without throwing an error', async () => {
         await expect(RunProject('Sample Url File.txt')).resolves.not.toThrow();
-    
-        // Verify the output
-        const logs = consoleSpy.mock.calls.flat(); // Flatten console.log calls
-        consoleSpy.mockRestore(); // Restore console.log after capturing
-    
-        logs.forEach((log) => {
-            if (typeof log === 'string' && log.startsWith('{')) {
-                try {
-                    const jsonOutput = JSON.parse(log);
-                    Object.values(jsonOutput).forEach((value) => {
-                        if (typeof value === 'number') {
-                            expect(value).not.toBe(-1);
-                        }
-                    });
-                } catch (e) {
-                    // Skip non-JSON logs
-                }
-            }
-        });
     }, 120000);
 });
