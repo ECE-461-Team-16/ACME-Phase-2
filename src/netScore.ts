@@ -9,9 +9,9 @@ import {getFractionCodeReview} from './pull_request_fraction'
 import logger from './logger';
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
+import path from 'path';
 
-// Load environment variables
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 //Main Function to Run Project
 export async function RunProject(inputFilePath: string) {

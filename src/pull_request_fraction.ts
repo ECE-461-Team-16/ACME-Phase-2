@@ -1,9 +1,10 @@
 import * as dotenv from 'dotenv';
 import axios from 'axios';
 import logger from './logger';
+import path from 'path';
 
-// Load environment variables
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
 const TOKEN = process.env.GITHUB_TOKEN;
 if (!TOKEN) {
     console.log("Missing GITHUB_TOKEN. Please provide a valid token in the .env file.");
