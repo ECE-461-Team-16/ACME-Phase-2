@@ -7,7 +7,7 @@ import { uploadS3 } from './routes/uploadS3';
 import fs from 'fs';
 import semver from 'semver';
 import * as AWS from 'aws-sdk';
-
+import base64 from 'base64-js';
 
 
 const app = express();
@@ -24,6 +24,71 @@ const db = new sqlite3.Database(dbPath, (err) => {
     console.log(`Connected to the database at ${dbPath}`);
   }
 });
+
+
+app.get('/package/:id', async (req: Request, res: Response): Promise<void> => {
+  const { id } = req.params;
+  const bucketName = 'team16-npm-registry';
+  const s3 = new AWS.S3({ region: 'us-east-1' });
+
+  try {
+    const [name, version] = id.split('/');
+    const prefix = `${name}/${version}/`;
+
+    // List objects under the prefix
+    const data = await s3
+      .listObjectsV2({
+        Bucket: bucketName,
+        Prefix: prefix,
+      })
+      .promise();
+
+    if (!data.Contents || data.Contents.length === 0) {
+      res.status(404).send('Package does not exist');
+      return;
+    }
+
+    // Get the first file in the directory
+    const fileKey = data.Contents[0].Key;
+    console.log(`Found File Key: ${fileKey}`);
+
+    // Retrieve the file from S3
+    const s3Object = await s3
+      .getObject({
+        Bucket: bucketName,
+        Key: fileKey!,
+      })
+      .promise();
+
+    if (!s3Object.Body) {
+      res.status(404).send('Package does not exist');
+      return;
+    }
+
+    // Convert the file content
+    const fileBuffer = s3Object.Body as Buffer;
+    const base64Content = fileBuffer.toString('base64');
+
+    // Check if it's a text file or JavaScript
+    const textContent = fileBuffer.toString('utf8'); // Decode as plain text
+
+    // Prepare the response
+    const metadata = { Name: name, Version: version, ID: name };
+    const dataResponse = {
+      Content: base64Content, // Base64 representation
+      JSProgram: textContent.includes('function') || textContent.includes('console') ? textContent : 'Not applicable', // Plain text representation if applicable
+    };
+
+    res.status(200).json({ metadata, data: dataResponse });
+  } catch (err) {
+    console.error('Error retrieving package:', err);
+    res.status(500).send('Internal server error');
+  }
+});
+
+
+
+
 
 // Middleware setup
 app.use(fileUpload());
@@ -225,6 +290,8 @@ app.post('/packages', async (req: Request, res: Response): Promise<void> => {
     }
   }
 
+  
+
   if (results.length === 0) {
     res.status(404).send('No matching packages found');
     return;
@@ -233,6 +300,90 @@ app.post('/packages', async (req: Request, res: Response): Promise<void> => {
   // Add offset header
   res.setHeader('offset', `${offsetValue + results.length}`);
   res.status(200).json(results);
+});
+
+app.delete('/reset', async (req: Request, res: Response): Promise<void> => {
+  const authHeader = req.headers['x-authorization'];
+
+  // Validate Authorization Token
+  if (!authHeader) {
+    res.status(403).send('Authentication failed: missing AuthenticationToken.');
+    return;
+  }
+  // Validate Authorization Token
+  if (!authHeader) {
+    res.status(403).send('Authentication failed: missing AuthenticationToken.');
+    return;
+  }
+
+  
+
+  // Reset SQLite Database
+  // const resetDatabase = () => {
+  //   return new Promise<void>((resolve, reject) => {
+  //     const schemaPath = path.join(__dirname, '../db/schema.sql');
+  //     const schemaSQL = fs.readFileSync(schemaPath, 'utf-8');
+      
+  //     db.exec(schemaSQL, (err) => {
+  //       if (err) reject(`Error resetting database: ${err.message}`);
+  //       else resolve();
+  //     });
+  //   });
+  // };
+
+  // Reset S3 Bucket
+  const resetS3Bucket = async () => {
+    const s3 = new AWS.S3({ region: 'us-east-1' });
+    const bucketName = 'team16-npm-registry';
+  
+    try {
+      // Step 1: List all objects in the bucket
+      let objects;
+      let isTruncated = true;
+      let continuationToken;
+      const allObjects: AWS.S3.Object[] = [];
+  
+      // Keep fetching objects as long as the response is truncated
+      while (isTruncated) {
+        objects = await s3
+          .listObjectsV2({
+            Bucket: bucketName,
+            ContinuationToken: continuationToken,
+          })
+          .promise();
+        allObjects.push(...(objects.Contents || []));
+        isTruncated = objects.IsTruncated;
+        continuationToken = objects.NextContinuationToken;
+      }
+  
+      // Step 2: Delete all objects (including those with folder-like prefixes)
+      if (allObjects.length > 0) {
+        const deleteParams = {
+          Bucket: bucketName,
+          Delete: {
+            Objects: allObjects.map((obj) => ({ Key: obj.Key! })),
+          },
+        };
+  
+        await s3.deleteObjects(deleteParams).promise();
+        console.log(`Successfully deleted ${allObjects.length} objects from the bucket.`);
+      } else {
+        console.log("No objects found in the bucket.");
+      }
+    } catch (err) {
+      throw new Error(`Error resetting S3 bucket: ${err.message}`);
+    }
+  };
+  
+  // Perform Reset
+  try {
+    //await resetDatabase();
+    await resetS3Bucket();
+    res.status(200).send('Registry is reset.');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error resetting the registry.');
+  }
 });
 
 
