@@ -153,69 +153,89 @@ interface PackageQuery {
 
 
 // /packages endpoint
-app.post('/packages', (req: Request, res: Response):void => {
+app.post('/packages', async (req: Request, res: Response): Promise<void> => {
   const { offset = '0' } = req.query; // Pagination offset
-  const packagesQuery: PackageQuery[] = req.body; // Assuming an array of PackageQuery
+  const packagesQuery: PackageQuery[] = req.body; // Array of PackageQuery
 
-  // Validate the input query
-  if (!packagesQuery || packagesQuery.length === 0 || !packagesQuery[0].Name) {
+  // Validate input format
+  if (!packagesQuery || !Array.isArray(packagesQuery) || packagesQuery.length === 0) {
     res.status(400).send('Invalid or incomplete PackageQuery');
+    return;
   }
 
   const offsetValue = parseInt(offset as string, 10);
-
-  // Extract version info
-  const versionQuery = packagesQuery[0].Version;
-  if (!versionQuery || !isValidVersion(versionQuery)) {
-    res.status(400).send('Invalid version format');
-  }
-  const s3 = new AWS.S3({ region: 'us-east-1' });  // Use your AWS region
+  const results: any[] = [];
+  const s3 = new AWS.S3({ region: 'us-east-1' }); // Use your AWS region
   const bucketName = 'team16-npm-registry'; // S3 bucket name
-  const nameQuery = packagesQuery[0].Name;
 
-  // Define the S3 prefix (directory structure) based on the package name
-  const prefix = `${nameQuery}/`;  // Filtering by package name
+  for (const query of packagesQuery) {
+    const { Name: nameQuery, Version: versionQuery } = query;
 
-  // List objects in S3 under the specified prefix (package name)
-  s3.listObjectsV2(
-    {
-      Bucket: bucketName,
-      Prefix: prefix,
-      MaxKeys: 10,
-      StartAfter: offsetValue > 0 ? `${prefix}${offsetValue}` : undefined,
-    },
-    (err, data) => {
-      if (err) {
-        return res.status(500).send('Error querying packages from S3');
-      }
-  
-      console.log('S3 data:', data); // Log the full data to inspect the keys
-      if (!data || !data.Contents) {
-        console.log('No packages found');
-        return res.status(404).send('No packages found');
-      }
-  
-      const filteredPackages = data.Contents.filter((object) => {
-        const version = object.Key.split('/')[1]; // Adjust if the version isn't in the second part of the key
-        return semver.satisfies(version, versionQuery);
-      });
-  
-      if (filteredPackages.length === 0) {
-        return res.status(404).send('No matching packages found');
-      }
-  
-      const packages = filteredPackages.map((object) => ({
-        Name: nameQuery,
-        Version: object.Key.split('/')[1],
-        ID: object.Key,
-      }));
-  
-      res.setHeader('offset', `${offsetValue + packages.length}`);
-      return res.status(200).json(packages);
+    if (!versionQuery || !isValidVersion(versionQuery)) {
+      res.status(400).send(`Invalid version format for package: ${nameQuery}`);
+      return;
     }
-  );
-  
+
+    const prefix = nameQuery === '*' ? '' : `${nameQuery}/`; // Handle the '*' wildcard
+
+    try {
+      // List objects in S3 under the specified prefix
+      const data = await s3
+        .listObjectsV2({
+          Bucket: bucketName,
+          Prefix: prefix,
+          MaxKeys: 50, // Adjust the limit as needed
+        })
+        .promise();
+
+      if (!data.Contents) {
+        continue; // Skip if no contents found
+      }
+
+      // Filter versions and names based on semver and the name query
+      const filteredPackages = data.Contents.filter((object) => {
+        const parts = object.Key?.split('/');
+        const packageName = parts[0]; // Extract package name from key
+        const version = parts[1]; // Extract version from key
+
+        const nameMatches = nameQuery === '*' || packageName.match(new RegExp(nameQuery, 'i'));
+        const versionMatches = semver.satisfies(version, versionQuery);
+
+        return nameMatches && versionMatches;
+      });
+
+      
+      filteredPackages.forEach((object) => {
+        const parts = object.Key?.split('/');
+        const packageName = parts[0]; // Extract the package name
+        const version = parts[1];    // Extract the version
+        if (packageName && version) {
+          results.push({
+            Name: packageName,
+            Version: version,
+            ID: packageName, // Use the package name as the ID
+          });
+        }
+      });
+      
+    } catch (err) {
+      console.error(`Error querying S3 for package ${nameQuery}:`, err);
+      res.status(500).send('Error querying packages from S3');
+      return;
+    }
+  }
+
+  if (results.length === 0) {
+    res.status(404).send('No matching packages found');
+    return;
+  }
+
+  // Add offset header
+  res.setHeader('offset', `${offsetValue + results.length}`);
+  res.status(200).json(results);
 });
+
+
 
 
 // Start the server

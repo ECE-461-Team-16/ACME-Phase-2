@@ -20,6 +20,9 @@ install_dependencies() {
     npm install aws-sdk # AWS interactions
     npm install express-fileupload
 
+    # sudo apt install pm2 -g
+    # npm install semver somehow
+    # sudo apt install aws-sdk --classic
     # npm install multer
 
 
