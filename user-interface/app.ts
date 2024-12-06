@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import path from 'path';
 import fileUpload from 'express-fileupload';
 import { uploadS3 } from './routes/uploadS3';
+import { calculateSizeCost } from './routes/sizeCost';
 import fs from 'fs';
 import semver from 'semver';
 import * as AWS from 'aws-sdk';
@@ -215,6 +216,20 @@ interface PackageQuery {
   Name: string;
   Version: string;
 }
+
+// Calculate the size cost of a package
+app.get('/package/size/:name/:version', async (req: Request, res: Response) => {
+  const { name, version } = req.params;
+  const bucketName = 'team16-npm-registry';
+  const s3 = new AWS.S3({ region: 'us-east-1' });
+
+  try {
+    const totalSize = await calculateSizeCost(bucketName, name, version, s3);
+    res.status(200).json({ packageName: name, version, size: totalSize });
+  } catch (err) {
+    res.status(500).send('Error calculating size cost');
+  }
+});
 
 
 // /packages endpoint
