@@ -19,6 +19,9 @@ install_dependencies() {
     npm install @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev > /dev/null 2>&1
     npm install aws-sdk # AWS interactions
     npm install express-fileupload
+    npm install adm-zip
+    npm install archiver
+
 
     # ****** add these later
     # sudo apt install pm2 -g
