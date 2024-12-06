@@ -9,7 +9,14 @@ import semver from 'semver';
 import * as AWS from 'aws-sdk';
 import base64 from 'base64-js';
 
-
+// for package endpoint
+import axios from 'axios';
+import archiver from 'archiver';
+import { exec } from 'child_process';
+import tar from 'tar';
+// import fs from 'fs/promises';
+// import rimraf from 'rimraf';
+// import { promisify } from 'util';
 
 const app = express();
 const PORT = 3000;
@@ -216,130 +223,227 @@ interface PackageQuery {
 
 
 // /packages endpoint
-app.post('/packages', async (req: Request, res: Response): Promise<void> => {
-  const { offset = '0' } = req.query; // Pagination offset
-  const packagesQuery: PackageQuery[] = req.body; // Array of PackageQuery
 
-  // Validate input format
-  if (!packagesQuery || !Array.isArray(packagesQuery) || packagesQuery.length === 0) {
-    res.status(400).send('Invalid or incomplete PackageQuery');
-    return;
+
+async function fetchNpmPackage(packageName: string, version: string): Promise<string> {
+  const npmUrl = `https://registry.npmjs.org/${packageName}`;
+  const response = await axios.get(npmUrl);
+  const tarballUrl = response.data.versions[version].dist.tarball;
+
+  // Download the tarball
+  const tarballPath = path.join(__dirname, `${packageName}-${version}.tgz`);
+  const writer = fs.createWriteStream(tarballPath);
+  const tarballResponse = await axios.get(tarballUrl, { responseType: 'stream' });
+  tarballResponse.data.pipe(writer);
+
+  await new Promise((resolve, reject) => {
+    writer.on('finish', resolve);
+    writer.on('error', reject);
+  });
+
+  // Extract the tarball
+  const extractDir = path.join(__dirname, `${packageName}-${version}`);
+  await tar.x({ file: tarballPath, cwd: extractDir });
+
+  return extractDir;
+}
+
+async function cloneGitHubRepo(repoUrl: string): Promise<string> {
+  const repoName = repoUrl.split('/').pop()?.replace('.git', '') || 'repo';
+  const cloneDir = path.join(__dirname, repoName);
+
+  await new Promise((resolve, reject) => {
+    exec(`git clone ${repoUrl} ${cloneDir}`, (error) => {
+      if (error) reject(error);
+      else resolve(cloneDir);
+    });
+  });
+
+  return cloneDir;
+}
+
+// Access fs.promises for async methods
+// import fs from 'fs';
+import { promises as fsp } from 'fs';
+
+async function cleanupFiles() {
+  try {
+    // Example usage
+    await fsp.rm('/path/to/directory', { recursive: true, force: true });
+  } catch (err) {
+    console.error('Error during cleanup:', err);
   }
+}
 
-  const offsetValue = parseInt(offset as string, 10);
-  const results: any[] = [];
-  const s3 = new AWS.S3({ region: 'us-east-1' }); // Use your AWS region
-  const bucketName = 'team16-npm-registry'; // S3 bucket name
+// Fetch version from npm registry
+async function getNpmPackageVersion(packageName: string, specifiedVersion?: string): Promise<string> {
+  try {
+    const npmUrl = `https://registry.npmjs.org/${packageName}`;
+    const response = await axios.get(npmUrl);
 
-  for (const query of packagesQuery) {
-    const { Name: nameQuery, Version: versionQuery } = query;
-
-    if (!versionQuery || !isValidVersion(versionQuery)) {
-      res.status(400).send(`Invalid version format for package: ${nameQuery}`);
-      return;
+    if (specifiedVersion && response.data.versions[specifiedVersion]) {
+      return specifiedVersion;
     }
 
-    const prefix = nameQuery === '*' ? '' : `${nameQuery}/`; // Handle the '*' wildcard
-
-    try {
-      // List objects in S3 under the specified prefix
-      const data = await s3
-        .listObjectsV2({
-          Bucket: bucketName,
-          Prefix: prefix,
-          MaxKeys: 50, // Adjust the limit as needed
-        })
-        .promise();
-
-      if (!data.Contents) {
-        continue; // Skip if no contents found
-      }
-
-      // Filter versions and names based on semver and the name query
-      const filteredPackages = data.Contents.filter((object) => {
-        const parts = object.Key?.split('/');
-        const packageName = parts[0]; // Extract package name from key
-        const version = parts[1]; // Extract version from key
-
-        const nameMatches = nameQuery === '*' || packageName.match(new RegExp(nameQuery, 'i'));
-        const versionMatches = semver.satisfies(version, versionQuery);
-
-        return nameMatches && versionMatches;
-      });
-
-      
-      filteredPackages.forEach((object) => {
-        const parts = object.Key?.split('/');
-        const packageName = parts[0]; // Extract the package name
-        const version = parts[1];    // Extract the version
-        if (packageName && version) {
-          results.push({
-            Name: packageName,
-            Version: version,
-            ID: packageName, // Use the package name as the ID
-          });
-        }
-      });
-      
-    } catch (err) {
-      console.error(`Error querying S3 for package ${nameQuery}:`, err);
-      res.status(500).send('Error querying packages from S3');
-      return;
-    }
+    return response.data['dist-tags'].latest; // Default to latest version
+  } catch (err) {
+    console.error(`Error fetching npm version for ${packageName}:`, err);
+    return '1.0.0'; // Fallback version
   }
+}
 
-  
+// Fetch version from GitHub releases
+async function getGitHubRepoVersion(repoUrl: string): Promise<string> {
+  try {
+    const repoPath = repoUrl.replace('https://github.com/', '').replace('.git', '');
+    const [owner, repo] = repoPath.split('/');
 
-  if (results.length === 0) {
-    res.status(404).send('No matching packages found');
-    return;
+    const githubApiUrl = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
+    const response = await axios.get(githubApiUrl, {
+      headers: { 'User-Agent': 'request' }, // Required by GitHub API
+    });
+
+    return response.data.tag_name || '1.0.0'; // Use tag_name or fallback
+  } catch (err) {
+    console.error(`Error fetching GitHub version for ${repoUrl}:`, err);
+    return '1.0.0'; // Fallback version
   }
+}
 
-  // Add offset header
-  res.setHeader('offset', `${offsetValue + results.length}`);
-  res.status(200).json(results);
-});
-
-
+// Updated /package endpoint
 app.post('/package', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { metadata, data } = req.body;
+    const { Name, URL, JSProgram } = req.body;
 
-    // Validate metadata fields
-    if (!metadata || !metadata.Name || !metadata.Version || !metadata.ID) {
-      res.status(400).send('Missing required metadata fields');
-      console.error('Metadata validation failed:', metadata);
+    if (!Name) {
+      res.status(400).send('Missing required field: Name');
       return;
     }
 
-    // Validate data fields
-    if (!data || (!data.Content && !data.URL)) {
-      res.status(400).send('Missing required data fields (Content or URL)');
-      console.error('Data validation failed:', data);
+    let packageDir = '';
+    let version = '1.0.0'; // Default version
+
+    if (URL) {
+      if (URL.includes('github.com')) {
+        packageDir = await cloneGitHubRepo(URL);
+        version = await getGitHubRepoVersion(URL);
+      } else if (URL.includes('npmjs.com')) {
+        const packageName = Name.split('@')[0];
+        const specifiedVersion = Name.split('@')[1];
+        version = await getNpmPackageVersion(packageName, specifiedVersion);
+        packageDir = await fetchNpmPackage(packageName, version);
+      } else {
+        res.status(400).send('Invalid URL. Only GitHub and npm URLs are supported.');
+        return;
+      }
+    } else {
+      res.status(400).send('URL is required for this operation.');
       return;
     }
 
-    // Log inputs for debugging
-    console.log('Received metadata:', metadata);
-    console.log('Received data:', data);
+    // Zip the package contents
+    const zipFilePath = path.join(__dirname, `${Name}.zip`);
+    const output = fs.createWriteStream(zipFilePath);
+    const archive = archiver('zip', { zlib: { level: 9 } });
 
-    // Ensure the JSProgram field is directly passed without transformation
-    const formattedJSProgram = data.JSProgram || null;
+    archive.pipe(output);
+    archive.directory(packageDir, false);
+    await archive.finalize();
 
-    // Respond with success
-    res.status(200).json({
-      metadata,
-      data: {
-        Content: data.Content || null,
-        URL: data.URL || null,
-        JSProgram: formattedJSProgram, // No transformation applied
-      },
-    });
+    const bucketName = 'team16-npm-registry';
+    const key = `${Name}/${version}/package.zip`;
+
+    try {
+      const result = await uploadS3(zipFilePath, bucketName, key);
+
+      // Cleanup
+      await fsp.rm(zipFilePath, { force: true });
+      await fsp.rm(packageDir, { recursive: true, force: true });
+
+      res.status(201).json({
+        metadata: { Name, Version: version, ID: Name },
+        data: {
+          URL,
+          JSProgram: JSProgram || null,
+          Location: result.Location,
+        },
+      });
+    } catch (err) {
+      console.error('Upload error:', err);
+      await fsp.rm(zipFilePath, { force: true });
+      await fsp.rm(packageDir, { recursive: true, force: true });
+      res.status(500).send('Error uploading to S3');
+    }
   } catch (err) {
-    console.error('Error processing package:', err);
+    console.error('Error:', err);
     res.status(500).send('Internal server error');
   }
 });
+
+// app.post('/package', async (req: Request, res: Response): Promise<void> => {
+//   try {
+//     const { Content, JSProgram, URL, debloat = false, Name } = req.body;
+
+//     if (!Name) {
+//       res.status(400).send('Missing required field: Name');
+//       return;
+//     }
+
+//     let fileContent = '';
+//     let fetchedFromURL = false;
+
+//     if (Content) {
+//       fileContent = Content;
+//     } else if (URL) {
+//       try {
+//         const response = await axios.get(URL);
+//         fileContent = response.data;
+//         fetchedFromURL = true;
+//       } catch (err) {
+//         console.error('Error fetching URL:', err);
+//         res.status(400).send('Invalid or inaccessible URL');
+//         return;
+//       }
+//     } else if (JSProgram) {
+//       fileContent = debloat
+//         ? JSProgram.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '').trim()
+//         : JSProgram;
+//     } else {
+//       res.status(400).send('Missing required field: Content, JSProgram, or URL');
+//       return;
+//     }
+
+//     const zippedContent = await zipContent(fileContent, Name);
+//     const tempFilePath = path.join(__dirname, `${Name}.zip`);
+//     fs.writeFileSync(tempFilePath, zippedContent);
+
+//     const bucketName = 'team16-npm-registry';
+//     const key = `${Name}/1.0.0/package.zip`;
+
+//     try {
+//       const result = await uploadS3(tempFilePath, bucketName, key);
+//       fs.unlinkSync(tempFilePath);
+
+//       res.status(201).json({
+//         metadata: { Name, Version: '1.0.0', ID: Name },
+//         data: {
+//           Content: fetchedFromURL ? null : 'Uploaded',
+//           URL: URL || null,
+//           JSProgram: JSProgram ? 'Processed' : null,
+//           Location: result.Location,
+//         },
+//       });
+//     } catch (err) {
+//       console.error('Upload error:', err);
+//       fs.unlinkSync(tempFilePath);
+//       res.status(500).send('Error uploading to S3');
+//     }
+//   } catch (err) {
+//     console.error('Error:', err);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+
 
 app.delete('/reset', async (req: Request, res: Response): Promise<void> => {
   const authHeader = req.headers['x-authorization'];
