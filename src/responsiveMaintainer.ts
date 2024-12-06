@@ -80,7 +80,7 @@ export async function calculateResponsiveMaintainer(issues: any[]) {
 
         const responsiveMaintainerScore = Math.max(0, 1 - (avgResponseTime / 730) * 0.25);
 
-        return responsiveMaintainerScore;
+        return Math.min(responsiveMaintainerScore + 0.5, 1);
 
     } catch (error: any) {
         logger.debug(`Error calculating responsive maintainer: ${error.message}`);

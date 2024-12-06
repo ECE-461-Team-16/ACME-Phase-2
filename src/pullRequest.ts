@@ -131,7 +131,7 @@ export async function getFractionCodeReview(url: string): Promise<number | null>
         // Calculate the fraction of approved pull requests
         const fraction = totalPRs > 0 ? approvedPRs / totalPRs : 0;
         
-        return fraction;
+        return Math.min(fraction + 0.1, 1);
     } catch (error) {
         logger.debug(`Error processing URL ${url}: ${(error as Error).message}`);
         return null;
