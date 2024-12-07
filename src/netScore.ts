@@ -1,5 +1,5 @@
 import {handleURL} from './handleURL'
-import {getRampUp} from './RampUp_Metric'
+import {calculateRampUpScore} from './RampUp_Metric'
 import {getCorrectness} from './correctness'
 import {getBusFactor} from './busFactor'
 import {getResponsiveMaintainer} from './responsiveMaintainer'
@@ -64,7 +64,7 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
         const netScoreStart = Date.now();
 
         //Get Ramp Up Metric Score and Latency
-        let rampUp = await getRampUp(owner, url, TOKEN);
+        let rampUp = await calculateRampUpScore(owner, repo, TOKEN);
         const rampUpEnd = Date.now();
         if (rampUp === null) {
             logger.debug('Error getting Ramp Up metric score');

@@ -1,26 +1,75 @@
-import logger from '../src/logger';
-import { test_RampUp, getRampUp } from '../src/RampUp_Metric';
+import { calculateRampUpScore } from '../src/RampUp_Metric';
+import axios from 'axios';
 
+jest.mock('axios'); // Mock axios for API calls
 
-describe('Calculate RampUp Score', () => {
-    jest.setTimeout(360000); //set timeout to 6 minutes
+describe('calculateRampUpScore', () => {
+  const mockToken = 'mockToken';
+  const ownerName = 'mockOwner';
+  const repoName = 'mockRepo';
 
-    it('test_RampUp: Should return score 0.12, bad README', async () => {
-        const url0 = "https://github.com/lodash/lodash";
-        var RU_score0 = await test_RampUp(url0);
-        logger.info(`Ramp up score for ${url0}: ${RU_score0}`);
-        expect(RU_score0).toBeGreaterThan(0);
-    }); 
-    it('getRampUp: Should return score 0.12, bad README', async () => {
-        const url3 = "https://github.com/lodash/lodash";
-        var RU_score3 = await getRampUp("cloudinary", url3, "Hi");
-        logger.info(`Ramp up score for ${url3}: ${RU_score3}`);
-        expect(RU_score3).toBeGreaterThan(0);
-    }); 
-    it('Should return score 0.35', async () => {
-        const url2 = "https://github.com/cloudinary/cloudinary_npm";
-        var RU_score2 = await test_RampUp(url2);
-        logger.info(`Ramp up score for ${url2}: ${RU_score2}`);
-        expect(RU_score2).toBeGreaterThan(0);
-    }); 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should calculate a perfect score for a README with all expected sections', async () => {
+    const readmeContent = `
+      # Table of Contents
+      ## Installation
+      ## Examples
+      ## Troubleshooting
+      ## FAQ
+      ## Key Features
+      ## Usage
+      ## License
+      ## Setup
+      ## Dependencies
+      ## Roadmap
+      ## Testing
+      ## Getting Started
+    `;
+    (axios.get as jest.Mock).mockResolvedValue({ data: readmeContent });
+
+    const score = await calculateRampUpScore(ownerName, repoName, mockToken);
+    expect(score).toBeCloseTo(1, 2); // Expect perfect score normalized to 1
+  });
+
+  it('should calculate a partial score for a README with some sections', async () => {
+    const readmeContent = `
+      ## Installation
+      ## Usage
+      ## Testing
+    `;
+    (axios.get as jest.Mock).mockResolvedValue({ data: readmeContent });
+
+    const score = await calculateRampUpScore(ownerName, repoName, mockToken);
+    expect(score).toBeGreaterThan(0);
+    expect(score).toBeLessThan(1);
+  });
+
+  it('should return a score of 0 for an empty README', async () => {
+    const readmeContent = '';
+    (axios.get as jest.Mock).mockResolvedValue({ data: readmeContent });
+
+    const score = await calculateRampUpScore(ownerName, repoName, mockToken);
+    expect(score).toBe(0);
+  });
+
+  it('should return a score of 0 for a README with no recognized sections', async () => {
+    const readmeContent = `
+      # Welcome to the Project
+      This is a basic README with no meaningful sections.
+    `;
+    (axios.get as jest.Mock).mockResolvedValue({ data: readmeContent });
+
+    const score = await calculateRampUpScore(ownerName, repoName, mockToken);
+    expect(score).toBe(0);
+  });
+
+  it('should handle API errors gracefully and return a score of 0', async () => {
+    (axios.get as jest.Mock).mockRejectedValue(new Error('GitHub API error'));
+
+    const score = await calculateRampUpScore(ownerName, repoName, mockToken);
+    expect(score).toBe(0);
+  });
 });
