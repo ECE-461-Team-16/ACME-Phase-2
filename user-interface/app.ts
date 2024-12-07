@@ -315,72 +315,128 @@ async function getGitHubRepoVersion(repoUrl: string): Promise<string> {
 // Updated /package endpoint
 app.post('/package', async (req: Request, res: Response): Promise<void> => {
   try {
-    const { Name, URL, JSProgram } = req.body;
+    const { Name, URL, JSProgram, Content } = req.body;
 
-    if (!Name) {
-      res.status(400).send('Missing required field: Name');
-      return;
-    }
+    let packageName = Name;
 
-    let packageDir = '';
-    let version = '1.0.0'; // Default version
-
-    if (URL) {
-      if (URL.includes('github.com')) {
-        packageDir = await cloneGitHubRepo(URL);
-        version = await getGitHubRepoVersion(URL);
-      } else if (URL.includes('npmjs.com')) {
-        const packageName = Name.split('@')[0];
-        const specifiedVersion = Name.split('@')[1];
-        version = await getNpmPackageVersion(packageName, specifiedVersion);
-        packageDir = await fetchNpmPackage(packageName, version);
-      } else {
-        res.status(400).send('Invalid URL. Only GitHub and npm URLs are supported.');
+    // Extract Name from URL if not provided
+    if (!packageName && URL) {
+      try {
+        if (URL.includes('github.com')) {
+          const repoPath = URL.replace('https://github.com/', '').split('/');
+          if (repoPath.length > 1) {
+            packageName = repoPath[1].replace('.git', '');
+          }
+        } else {
+          res.status(400).send('Invalid URL. Only GitHub URLs are supported.');
+          return;
+        }
+      } catch (err) {
+        res.status(400).send('Unable to extract Name from URL.');
         return;
       }
-    } else {
-      res.status(400).send('URL is required for this operation.');
+    }
+
+    // Validate Name
+    if (!packageName || typeof packageName !== 'string' || /[^a-zA-Z0-9\-]/.test(packageName)) {
+      res.status(400).send('Invalid or missing Name. Name must contain only alphanumeric characters or hyphens.');
       return;
     }
 
-    // Zip the package contents
-    const zipFilePath = path.join(__dirname, `${Name}.zip`);
-    const output = fs.createWriteStream(zipFilePath);
-    const archive = archiver('zip', { zlib: { level: 9 } });
-
-    archive.pipe(output);
-    archive.directory(packageDir, false);
-    await archive.finalize();
-
-    const bucketName = 'team16-npm-registry';
-    const key = `${Name}/${version}/package.zip`;
-
-    try {
-      const result = await uploadS3(zipFilePath, bucketName, key);
-
-      // Cleanup
-      await fsp.rm(zipFilePath, { force: true });
-      await fsp.rm(packageDir, { recursive: true, force: true });
-
-      res.status(201).json({
-        metadata: { Name, Version: version, ID: Name },
-        data: {
-          URL,
-          JSProgram: JSProgram || null,
-          Location: result.Location,
-        },
-      });
-    } catch (err) {
-      console.error('Upload error:', err);
-      await fsp.rm(zipFilePath, { force: true });
-      await fsp.rm(packageDir, { recursive: true, force: true });
-      res.status(500).send('Error uploading to S3');
+    if (packageName === '*') {
+      res.status(400).send('The name "*" is reserved.');
+      return;
     }
+
+    // Validate Version (Required)
+    const version = '1.0.0'; // Default version, can be dynamic if needed
+
+    // Validate ID
+    const id = packageName.toLowerCase().replace(/[^a-z0-9\-]/g, '-'); // Normalize Name to match ID requirements
+
+    // S3 Configuration
+    const bucketName = 'team16-npm-registry';
+    const key = `${id}/${version}/package.zip`;
+    const zipFilePath = path.join(__dirname, `${id}.zip`);
+
+    if (Content) {
+      try {
+        // Decode base64 content and save as ZIP file
+        const buffer = Buffer.from(Content, 'base64');
+        await fsp.writeFile(zipFilePath, buffer);
+
+        // Upload ZIP file to S3
+        const result = await uploadS3(zipFilePath, bucketName, key);
+
+        // Cleanup
+        await fsp.rm(zipFilePath, { force: true });
+
+        // Response
+        res.status(201).json({
+          metadata: { Name: packageName, Version: version, ID: id },
+          data: { Content, JSProgram: JSProgram || null },
+        });
+        return;
+      } catch (err) {
+        console.error('Error handling Content upload:', err);
+        res.status(500).send('Error processing Content upload.');
+        return;
+      }
+    }
+
+    if (URL) {
+      let packageDir = '';
+      try {
+        if (URL.includes('github.com')) {
+          packageDir = await cloneGitHubRepo(URL);
+        } else {
+          res.status(400).send('Invalid URL. Only GitHub URLs are supported.');
+          return;
+        }
+
+        // Zip the package contents
+        const output = fs.createWriteStream(zipFilePath);
+        const archive = new archiver('zip', { zlib: { level: 9 } });
+
+        archive.pipe(output);
+        archive.directory(packageDir, false);
+        await archive.finalize();
+
+        // Convert ZIP to base64
+        const contentBuffer = await fsp.readFile(zipFilePath);
+        const base64Content = contentBuffer.toString('base64');
+
+        // Upload ZIP file to S3
+        const result = await uploadS3(zipFilePath, bucketName, key);
+
+        // Cleanup
+        await fsp.rm(zipFilePath, { force: true });
+        await fsp.rm(packageDir, { recursive: true, force: true });
+
+        // Response
+        res.status(201).json({
+          metadata: { Name: packageName, Version: version, ID: id },
+          data: { Content: base64Content, URL, JSProgram: JSProgram || null },
+        });
+        return;
+      } catch (err) {
+        console.error('Error handling URL:', err);
+        res.status(500).send('Error processing URL.');
+        return;
+      }
+    }
+
+    res.status(400).send('Either Content or URL is required.');
   } catch (err) {
-    console.error('Error:', err);
-    res.status(500).send('Internal server error');
+    console.error('Internal server error:', err);
+    res.status(500).send('Internal server error.');
   }
 });
+
+
+
+
+
 
 // app.post('/package', async (req: Request, res: Response): Promise<void> => {
 //   try {
@@ -451,15 +507,11 @@ app.delete('/reset', async (req: Request, res: Response): Promise<void> => {
   const authHeader = req.headers['x-authorization'];
 
   // Validate Authorization Token
-  if (!authHeader) {
-    res.status(403).send('Authentication failed: missing AuthenticationToken.');
-    return;
-  }
-  // Validate Authorization Token
-  if (!authHeader) {
-    res.status(403).send('Authentication failed: missing AuthenticationToken.');
-    return;
-  }
+  // if (!authHeader) {
+  //   res.status(403).send('Authentication failed: missing AuthenticationToken.');
+  //   return;
+  // }
+
 
   
 
