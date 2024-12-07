@@ -12,15 +12,17 @@ install_dependencies() {
         sudo apt install -y npm > /dev/null 2>&1
     fi
     
-    npm install > /dev/null 2>&1
-    npm install axios-mock-adapter > /dev/null 2>&1
-    npm install express sqlite3 bcryptjs > /dev/null 2>&1
-    npm install @types/express @types/sqlite3 @types/bcryptjs --save-dev > /dev/null 2>&1
-    npm install @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev > /dev/null 2>&1
-    npm install aws-sdk # AWS interactions
-    npm install express-fileupload
-    npm install adm-zip
-    npm install archiver
+    {
+        npm install > /dev/null 2>&1
+        npm install axios-mock-adapter > /dev/null 2>&1
+        npm install express sqlite3 bcryptjs > /dev/null 2>&1
+        npm install @types/express @types/sqlite3 @types/bcryptjs --save-dev > /dev/null 2>&1
+        npm install @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev > /dev/null 2>&1
+        npm install aws-sdk > /dev/null 2>&1 # AWS interactions
+        npm install express-fileupload > /dev/null 2>&1
+        npm install adm-zip > /dev/null 2>&1
+        npm install archiver > /dev/null 2>&1
+    } && echo "9 dependencies installed..."
 
 
     # ****** add these later
@@ -35,7 +37,7 @@ install_dependencies() {
         echo "Error installing dependencies"
         exit 1
     fi
-    echo "9 dependencies installed..."
+    # echo "9 dependencies installed..."
 }
 
 # Compile the ts files
