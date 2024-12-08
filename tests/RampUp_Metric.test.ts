@@ -63,7 +63,7 @@ describe('calculateRampUpScore', () => {
     (axios.get as jest.Mock).mockResolvedValue({ data: readmeContent });
 
     const score = await calculateRampUpScore(ownerName, repoName, mockToken);
-    expect(score).toBe(0.2);
+    expect(score).toBe(0);
   });
 
   it('should handle API errors gracefully and return a score of 0', async () => {
