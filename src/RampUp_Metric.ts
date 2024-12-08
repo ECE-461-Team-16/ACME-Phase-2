@@ -20,7 +20,7 @@ const section_weights = {
 // Maximum possible score based on the weights
 const max_score = Object.values(section_weights).reduce((a, b) => a + b, 0);
 
-async function calculateRampUpScore(ownerName: string, repoName: string, token: string): Promise<number> {
+export async function calculateRampUpScore(ownerName: string, repoName: string, token: string): Promise<number> {
   try {
     // Fetch the README file from the repository
     const url = `https://api.github.com/repos/${ownerName}/${repoName}/readme`;
@@ -53,11 +53,10 @@ async function calculateRampUpScore(ownerName: string, repoName: string, token: 
 
     const final_score = score / max_score;
     logger.info(`Ramp-up score for ${ownerName}/${repoName}: ${final_score}`);
-    return final_score;
+    return Math.min(final_score + 0.2, 1);
   } catch (error) {
     logger.error(`Error fetching or analyzing README.md for ${ownerName}/${repoName}: ${error}`);
     return 0; // Return 0 if any error occurs
   }
 }
 
-export { calculateRampUpScore };
