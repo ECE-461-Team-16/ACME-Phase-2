@@ -21,14 +21,7 @@ import tar from 'tar';
 import fsp from 'fs/promises'; // For file system promises
 
 // for metrics
-import {handleURL} from './src/handleURL'
-import {calculateRampUpScore} from './src/RampUp_Metric'
-import {getCorrectness} from './src/correctness'
-import {getBusFactor} from './src/busFactor'
-import {getResponsiveMaintainer} from './src/responsiveMaintainer'
-import {getLicense} from './src/license'
-import {getDependenciesFraction} from './src/goodPinningPractice'
-import {getFractionCodeReview} from './src/pullRequest'
+import {getAllMetrics} from './src/netScore'
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -418,52 +411,22 @@ app.post('/package', async (req: Request, res: Response) => {
     let version = '1.0.0'; // Default version
     let metrics: Record<string, number | null> = {
       RampUpScore: null,
+      RampUpLatency: null,
       Correctness: null,
+      CorrectnessLatency: null,
       BusFactor: null,
+      BusFactorLatency: null,
       ResponsiveMaintainer: null,
+      ResponsiveMaintainerLatency: null,
       LicenseScore: null,
+      LicenseLatency: null,
       GoodPinningPractice: null,
+      GoodPinningPracticeLatency: null,
       PullRequest: null,
+      PullRequestLatency: null,
+      NetScore: null,
+      NetScoreLatency: null,
     };
-
-    const calculateAllMetrics = async (url: string) => {
-    // Extract owner and repo from the URL
-    let GitHubUrl;
-    if(url.includes('www.npmjs')) {
-      GitHubUrl = await getNpmPackageGithubRepo(url);
-    }
-    else {
-      GitHubUrl = url;
-    }
-    const urlParts = GitHubUrl.replace('https://', '').split('/');
-    const owner = urlParts[1];
-    const repo = urlParts[2]?.replace('.git', '');
-
-    if (!owner || !repo) {
-      throw new Error('Invalid GitHub URL: Cannot extract owner and repository name.');
-    }
-
-    console.log(`Calculating metrics for owner: ${owner}, repo: ${repo}`);
-
-    const metrics = {
-      RampUpScore: await calculateRampUpScore(owner, repo, GITHUB_TOKEN),
-      Correctness: await getCorrectness(owner, repo, GITHUB_TOKEN),
-      BusFactor: await getBusFactor(owner, repo, GITHUB_TOKEN),
-      ResponsiveMaintainer: await getResponsiveMaintainer(owner, repo, GITHUB_TOKEN),
-      LicenseScore: await getLicense(owner, repo),
-      GoodPinningPractice: await getDependenciesFraction(owner, repo, GITHUB_TOKEN),
-      PullRequest: await getFractionCodeReview(GitHubUrl),
-    };
-
-    // Check if any metric is null
-    for (const [key, value] of Object.entries(metrics)) {
-      if (value === null) {
-        throw new Error(`Metric calculation failed: ${key} is null.`);
-      }
-    }
-
-    return metrics;
-  };
 
 
     // Extract Name and Version from URL if not provided
@@ -530,13 +493,14 @@ app.post('/package', async (req: Request, res: Response) => {
 
           // Upload ZIP file to S3
           await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
-          metrics = await calculateAllMetrics(URL);
+          metrics = await getAllMetrics(URL, GITHUB_TOKEN);
 
           const metadataJSON = {
             Name: packageName,
             Version: version,
             ID: id, // Consistent ID format
             URL, // Include URL if present
+            Metrics: metrics,
             JSProgram: JSProgram || null,
             Content: base64Content,
             
@@ -595,12 +559,13 @@ app.post('/package', async (req: Request, res: Response) => {
     
           // Upload ZIP file to S3
           const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
-          metrics = await calculateAllMetrics(repoUrl);
+          metrics = await getAllMetrics(repoUrl, GITHUB_TOKEN);
           const metadataJSON = {
             Name: packageName,
             Version: version,
             ID: id, // Consistent ID format
             URL, // Include URL if present
+            Metrics: metrics,
             JSProgram: JSProgram || null,
             Content: base64Content,
           };
@@ -676,7 +641,7 @@ app.post('/package', async (req: Request, res: Response) => {
 
         // Upload to S3
         await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
-
+        // metrics = await getAllMetrics(extractedURL);
         const metadataJSON = {
           Name: packageName,
           Version: version,
@@ -704,7 +669,7 @@ app.post('/package', async (req: Request, res: Response) => {
           extractedURL = await extractURLFromZIP(buffer);
 
         // Calculate Metrics
-          metrics = await calculateAllMetrics(extractedURL);
+          // metrics = await calculateAllMetrics(extractedURL);
         }
         catch (err) {
           console.error('Error extracting URL:', err);
@@ -984,7 +949,71 @@ app.post('/package/:id', async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-    
+app.get('/package/:id/rate', async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // Extract package name and version from the ID
+    const lastDashIndex = id.lastIndexOf('-');
+    if (lastDashIndex === -1) {
+      throw new Error('Invalid ID format'); // Handle case where `-` is not found
+    }
+
+    const packageName = id.substring(0, lastDashIndex);
+    const version = id.substring(lastDashIndex + 1);
+
+    // S3 Key for the metadata JSON
+    const metadataKey = `${packageName}/${version}/metadata.json`;
+
+    // Fetch metadata from S3 using GetObjectCommand
+    const command = new GetObjectCommand({
+      Bucket: 'team16-npm-registry',
+      Key: metadataKey,
+    });
+    const response = await s3Client.send(command);
+
+    if (!response.Body) {
+      res.status(404).send('Package metadata not found.');
+      return;
+    }
+
+    // Parse metadata from the stream
+    const bodyContents = await streamToString(response.Body);
+    const metadataJSON = JSON.parse(bodyContents);
+
+    // Extract Metrics and Latencies
+    const metrics = metadataJSON.Metrics;
+    if (!metrics) {
+      res.status(404).send('Metrics data not found in package metadata.');
+      return;
+    }
+
+    // Return metrics and latencies
+    const responseData = {
+      RampUpScore: metrics.RampUpScore,
+      RampUpLatency: metrics.RampUpLatency,
+      Correctness: metrics.Correctness,
+      CorrectnessLatency: metrics.CorrectnessLatency,
+      BusFactor: metrics.BusFactor,
+      BusFactorLatency: metrics.BusFactorLatency,
+      ResponsiveMaintainer: metrics.ResponsiveMaintainer,
+      ResponsiveMaintainerLatency: metrics.ResponsiveMaintainerLatency,
+      LicenseScore: metrics.LicenseScore,
+      LicenseLatency: metrics.LicenseLatency,
+      GoodPinningPractice: metrics.GoodPinningPractice,
+      GoodPinningPracticeLatency: metrics.GoodPinningPracticeLatency,
+      PullRequest: metrics.PullRequest,
+      PullRequestLatency: metrics.PullRequestLatency,
+      NetScore: metrics.NetScore,
+      NetScoreLatency: metrics.NetScoreLatency,
+    };
+
+    res.status(200).json(responseData);
+  } catch (err) {
+    console.error('Error fetching package rates:', err);
+    res.status(500).send('Error fetching package rates.');
+  }
+});
 
 // Utility function to check if the new version is newer
 const isVersionNewer = (currentVersion: string, newVersion: string): boolean => {
