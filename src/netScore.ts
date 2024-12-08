@@ -208,3 +208,98 @@ export function calculateNetScore(rampUp: number, correctness: number, busFactor
     const netScore = (0.20*rampUp + 0.30*correctness + 0.20*busFactor + 0.30*responsiveMaintainer) * license;
     return netScore;
 }
+
+export async function getAllMetrics(url: string, TOKEN: string) {
+    try {
+        logger.debug(`Calculating all metrics for ${url}`);
+
+        // Extract owner and repo from the URL
+        const urlParts = url.replace('https://', '').split('/');
+        const owner = urlParts[1];
+        const repo = urlParts[2]?.replace('.git', '');
+
+        if (!owner || !repo) {
+            throw new Error('Invalid GitHub URL: Cannot extract owner and repository name.');
+        }
+
+        // Initialize Timer for Overall Latency
+        const metricsStart = Date.now();
+
+        // Calculate individual metrics and their latencies
+        const rampUpStart = Date.now();
+        let rampUp = await calculateRampUpScore(owner, repo, TOKEN);
+        const rampUpLatency = ((Date.now() - rampUpStart) / 1000);
+
+        const correctnessStart = Date.now();
+        let correctness = await getCorrectness(owner, repo, TOKEN);
+        const correctnessLatency = ((Date.now() - correctnessStart) / 1000);
+
+        const busFactorStart = Date.now();
+        let busFactor = await getBusFactor(owner, repo, TOKEN);
+        const busFactorLatency = ((Date.now() - busFactorStart) / 1000);
+
+        const responsiveMaintainerStart = Date.now();
+        let responsiveMaintainer = await getResponsiveMaintainer(owner, repo, TOKEN);
+        const responsiveMaintainerLatency = ((Date.now() - responsiveMaintainerStart) / 1000);
+
+        const licenseStart = Date.now();
+        let license = await getLicense(owner, repo);
+        const licenseLatency = ((Date.now() - licenseStart) / 1000);
+
+        const goodPinningPracticeStart = Date.now();
+        let goodPinningPractice = await getDependenciesFraction(owner, repo, TOKEN);
+        const goodPinningPracticeLatency = ((Date.now() - goodPinningPracticeStart) / 1000);
+
+        const pullRequestStart = Date.now();
+        let pullRequest = await getFractionCodeReview(url);
+        const pullRequestLatency = ((Date.now() - pullRequestStart) / 1000);
+
+        const metricsEnd = Date.now();
+        const netScoreLatency = ((metricsEnd - metricsStart) / 1000);
+
+        // Handle null values by setting defaults
+        rampUp = rampUp !== null ? rampUp : 0;
+        correctness = correctness !== null ? correctness : 0;
+        busFactor = busFactor !== null ? busFactor : 0;
+        responsiveMaintainer = responsiveMaintainer !== null ? responsiveMaintainer : 0;
+        license = license !== null ? license : 0;
+        goodPinningPractice = goodPinningPractice !== null ? goodPinningPractice : 0;
+        pullRequest = pullRequest !== null ? pullRequest : 0;
+
+        // Calculate Net Score
+        const netScore = calculateNetScore(
+            rampUp,
+            correctness,
+            busFactor,
+            responsiveMaintainer,
+            license
+        );
+
+        // Construct metrics object in the specified format
+        const metrics: Record<string, number | null> = {
+            RampUpScore: parseFloat(rampUp.toFixed(1)),
+            RampUpLatency: parseFloat(rampUpLatency.toFixed(3)),
+            Correctness: parseFloat(correctness.toFixed(1)),
+            CorrectnessLatency: parseFloat(correctnessLatency.toFixed(3)),
+            BusFactor: parseFloat(busFactor.toFixed(1)),
+            BusFactorLatency: parseFloat(busFactorLatency.toFixed(3)),
+            ResponsiveMaintainer: parseFloat(responsiveMaintainer.toFixed(1)),
+            ResponsiveMaintainerLatency: parseFloat(responsiveMaintainerLatency.toFixed(3)),
+            LicenseScore: parseFloat(license.toFixed(1)),
+            LicenseLatency: parseFloat(licenseLatency.toFixed(3)),
+            GoodPinningPractice: parseFloat(goodPinningPractice.toFixed(1)),
+            GoodPinningPracticeLatency: parseFloat(goodPinningPracticeLatency.toFixed(3)),
+            PullRequest: parseFloat(pullRequest.toFixed(1)),
+            PullRequestLatency: parseFloat(pullRequestLatency.toFixed(3)),
+            NetScore: parseFloat(netScore.toFixed(1)),
+            NetScoreLatency: parseFloat(netScoreLatency.toFixed(3)),
+        };
+
+        logger.debug(`Metrics for ${url}: ${JSON.stringify(metrics, null, 2)}`);
+        return metrics;
+    } catch (error) {
+        logger.error(`Error calculating all metrics for ${url}:`, error);
+        return null;
+    }
+}
+
