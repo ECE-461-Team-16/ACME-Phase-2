@@ -295,8 +295,8 @@ app.post('/packages', async (req: Request, res: Response): Promise<void> => {
         const version = parts[1];    // Extract the version
         if (packageName && version) {
           results.push({
-            Name: packageName,
             Version: version,
+            Name: packageName,
             ID: packageName, // Use the package name as the ID
           });
         }
