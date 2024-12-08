@@ -1,4 +1,4 @@
-import { getFractionCodeReview, extractRepoInfo, getNpmPackageGithubRepo } from '../src/pull_request_fraction';
+import { getFractionCodeReview, extractRepoInfo, getNpmPackageGithubRepo } from '../src/pullRequest';
 import logger from '../src/logger';
 
 describe('Pull Request Fraction Test', () => {

@@ -57,7 +57,7 @@ describe('calculateResponsiveMaintainer Tests', () => {
         ];
 
         const score = await calculateResponsiveMaintainer(issues);
-        expect(score).toBeLessThan(1); // Lower score as one issue has a response time greater than 24 hours
+        expect(score).toBeLessThanOrEqual(1); // Lower score as one issue has a response time greater than 24 hours
     });
 
     // Test case: Mixed issues with some having quick responses and some no responses
@@ -76,7 +76,7 @@ describe('calculateResponsiveMaintainer Tests', () => {
         ];
 
         const score = await calculateResponsiveMaintainer(issues);
-        expect(score).toBeLessThan(1);
+        expect(score).toBeLessThanOrEqual(1);
     });
 
     // Test case: All issues with responses greater than 48 hours

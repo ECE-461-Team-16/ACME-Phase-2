@@ -4,14 +4,18 @@ import {getCorrectness} from './correctness'
 import {getBusFactor} from './busFactor'
 import {getResponsiveMaintainer} from './responsiveMaintainer'
 import {getLicense} from './license'
-import {getDependenciesFraction} from './fractionDependencies'
-import {getFractionCodeReview} from './pull_request_fraction'
+import {getDependenciesFraction} from './goodPinningPractice'
+import {getFractionCodeReview} from './pullRequest'
 import logger from './logger';
 import * as fs from 'fs';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 //Main Function to Run Project
 export async function RunProject(inputFilePath: string) {
     const TOKEN: string = process.env.GITHUB_TOKEN || '';
+    
     const inputfile = fs.readFileSync(inputFilePath, 'utf-8');
     const lines: string[] = inputfile.split(/\r?\n/);
 
@@ -64,7 +68,9 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
         const netScoreStart = Date.now();
 
         //Get Ramp Up Metric Score and Latency
+
         let rampUp = await calculateRampUpScore(owner, repo, TOKEN);
+
         const rampUpEnd = Date.now();
         if (rampUp === null) {
             logger.debug('Error getting Ramp Up metric score');
@@ -104,19 +110,19 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
         }
 
         //Get Fraction of Dependencies Metric Score and Latency
-        let fractionofDependencies = await getDependenciesFraction(owner, repo, TOKEN);
-        const fractionofDependenciesEnd = Date.now();
-        if (fractionofDependencies === null) {
+        let goodPinningPractice = await getDependenciesFraction(owner, repo, TOKEN);
+        const goodPinningPracticeEnd = Date.now();
+        if (goodPinningPractice === null) {
             logger.debug('Error getting Fraction of Dependencies metric score');
-            fractionofDependencies = -1;
+            goodPinningPractice = -1;
         }
 
         //Get Fraction of Pull Request through code review Metric Score and Latency
-        let fractionofPullRequest = await getFractionCodeReview(url);
-        const fractionofPullRequestEnd = Date.now();
-        if (fractionofPullRequest === null) {
+        let pullRequest = await getFractionCodeReview(url);
+        const pullRequestEnd = Date.now();
+        if (pullRequest === null) {
             logger.debug('Error getting Fraction of Pull Request through code review metric score');
-            fractionofPullRequest = -1;
+            pullRequest = -1;
         }
 
         //Net Score Calculation and Latency
@@ -135,8 +141,8 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
         const busFactorLatency = ((busFactorEnd - correctnessEnd)/1000).toFixed(3);
         const responsiveMaintainerLatency = ((responsiveMaintainerEnd - busFactorEnd)/1000).toFixed(3);
         const licenseLatency = ((licenseEnd - responsiveMaintainerEnd)/1000).toFixed(3);
-        const fractionofDependenciesLatency = ((netScoreEnd - licenseEnd)/1000).toFixed(3);
-        const fractionofPullRequestLatency = ((netScoreEnd - licenseEnd)/1000).toFixed(3);
+        const goodPinningPracticeLatency = ((netScoreEnd - licenseEnd)/1000).toFixed(3);
+        const pullRequestLatency = ((netScoreEnd - licenseEnd)/1000).toFixed(3);
 
         logger.info(`Net Score Latency: ${netScoreLatency} seconds`);
 
@@ -155,10 +161,10 @@ export async function getNetScore(url:string, owner:string, repo:string, TOKEN: 
             ResponsiveMaintainer_Latency: parseFloat(responsiveMaintainerLatency),
             License: parseFloat(license.toFixed(1)),
             License_Latency: parseFloat(licenseLatency),
-            FractionofDependencies: parseFloat(fractionofDependencies.toFixed(1)),
-            FractionofDependencies_Latency: parseFloat(fractionofDependenciesLatency),
-            FractionofPullRequest: parseFloat(fractionofPullRequest.toFixed(1)),
-            FractionofPullRequest_Latency: parseFloat(fractionofPullRequestLatency)
+            goodPinningPractice: parseFloat(goodPinningPractice.toFixed(1)),
+            goodPinningPractice_Latency: parseFloat(goodPinningPracticeLatency),
+            pullRequest: parseFloat(pullRequest.toFixed(1)),
+            pullRequest_Latency: parseFloat(pullRequestLatency)
         }
         const json_output = JSON.stringify(output_data);
         //Print Output Data to Stdout

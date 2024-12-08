@@ -1,4 +1,4 @@
-import { getDependenciesFraction } from '../src/fractionDependencies';
+import { getDependenciesFraction } from '../src/goodPinningPractice';
 
 describe('getDependenciesFraction', () => {
     beforeEach(() => {
