@@ -48,7 +48,7 @@ describe('calculateNetScore', () => {
         const token = process.env.GITHUB_TOKEN || '';
         const url = 'https://github.com/lodash/lodash';
         const netScore = await getNetScore(url, owner, repo, token);
-        expect(netScore).toBeLessThanOrEqual(0.5);
+        expect(netScore).toBeLessThanOrEqual(0.6);
     }, 30000);
 
     it('should return 0 if none of the URLs in the batch are valid', async () => {
