@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import path from 'path';
 import fileUpload from 'express-fileupload';
 import { uploadS3 } from './routes/uploadS3';
+import { listS3Objects, matchPackagesWithS3Objects } from './routes/packageService';
 import { calculateSizeCost } from './routes/sizeCost';
 import fs from 'fs';
 import semver from 'semver';
@@ -235,10 +236,37 @@ app.get('/package/size/:name/:version', async (req: Request, res: Response) => {
   }
 });
 
+// Packages endpoint
+app.post('/packages', async (req: Request, res: Response) => {
+  try {
+    const requestedPackages = req.body;
 
-// /packages endpoint
+    if (!Array.isArray(requestedPackages)) {
+      res.status(400).send('Invalid request format. Expected an array of packages.');
+      return;
+    }
+
+    const bucketName = 'team16-npm-registry';
+    const s3Objects = await listS3Objects(bucketName);
+
+    console.log('S3 Objects:', s3Objects.map((obj) => obj.Key)); // Debug log
+
+    const packageMetadata = matchPackagesWithS3Objects(requestedPackages, s3Objects);
+
+    if (packageMetadata.length > 100) {
+      res.status(413).send('Too many packages returned');
+      return;
+    }
+
+    res.status(200).json(packageMetadata);
+  } catch (err) {
+    console.error('Error retrieving packages:', err);
+    res.status(500).send('Internal server error.');
+  }
+});
 
 
+// Package Endpoint
 async function fetchNpmPackage(packageName: string, version: string): Promise<string> {
   const npmUrl = `https://registry.npmjs.org/${packageName}`;
   const response = await axios.get(npmUrl);
@@ -276,10 +304,6 @@ async function cloneGitHubRepo(repoUrl: string): Promise<string> {
 
   return cloneDir;
 }
-
-// Access fs.promises for async methods
-// import fs from 'fs';
-// import { promises as fsp } from 'fs';
 
 async function cleanupFiles() {
   try {
@@ -350,19 +374,26 @@ app.post('/package', async (req: Request, res: Response) => {
     const { Name, URL, JSProgram, Content } = req.body;
 
     let packageName = Name;
+    let version = '1.0.0'; // Default version
 
-    // Extract Name from URL if not provided
+    // Extract Name and Version from URL if not provided
     if (!packageName && URL) {
       if (URL.includes('github.com')) {
         const repoPath = URL.replace('https://github.com/', '').split('/');
         if (repoPath.length > 1) {
           packageName = repoPath[1].replace('.git', '');
+          version = await getGitHubRepoVersion(URL);
         } else {
           res.status(400).send('Invalid GitHub URL format.');
           return;
         }
+      } else if (URL.includes('npmjs.com')) {
+        const packagePath = URL.replace('https://www.npmjs.com/package/', '');
+        const [npmPackageName, npmVersion] = packagePath.split('/');
+        packageName = npmPackageName;
+        version = npmVersion || (await getNpmPackageVersion(packageName));
       } else {
-        res.status(400).send('Invalid URL. Only GitHub URLs are supported.');
+        res.status(400).send('Invalid URL. Only GitHub or npm URLs are supported.');
         return;
       }
     }
@@ -381,36 +412,53 @@ app.post('/package', async (req: Request, res: Response) => {
     // Handle URL-based processing
     if (URL) {
       try {
-        const packageDir = await cloneGitHubRepo(URL); // Assuming this function exists
-        const zipFilePath = path.join(__dirname, `${packageName}.zip`);
+        if (URL.includes('github.com')) {
+          const packageDir = await cloneGitHubRepo(URL); // Assuming this function exists
+          const zipFilePath = path.join(__dirname, `${packageName}.zip`);
 
-        // Zip the repository contents
-        const output = fs.createWriteStream(zipFilePath);
-        const archive = archiver('zip', { zlib: { level: 9 } });
-        archive.pipe(output);
-        archive.directory(packageDir, false);
-        await archive.finalize();
+          // Zip the repository contents
+          const output = fs.createWriteStream(zipFilePath);
+          const archive = archiver('zip', { zlib: { level: 9 } });
+          archive.pipe(output);
+          archive.directory(packageDir, false);
+          await archive.finalize();
 
-        // Upload ZIP file to S3
-        const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/1.0.0/package.zip`);
+          // Upload ZIP file to S3
+          const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
 
-        // Cleanup
-        await fsp.rm(zipFilePath, { force: true });
-        await fsp.rm(packageDir, { recursive: true, force: true });
+          // Cleanup
+          await fsp.rm(zipFilePath, { force: true });
+          await fsp.rm(packageDir, { recursive: true, force: true });
 
-        res.status(201).json({
-          metadata: {
-            Name: packageName,
-            Version: '1.0.0',
-            ID: packageName.toLowerCase(),
-          },
-          data: {
-            Content: null,
-            URL: URL, // Use the provided URL
-            JSProgram: JSProgram || null,
-          },
-        });
-        return;
+          res.status(201).json({
+            metadata: {
+              Name: packageName,
+              Version: version,
+              ID: packageName.toLowerCase(),
+            },
+            data: {
+              Content: null,
+              URL: URL, // Use the provided URL
+              JSProgram: JSProgram || null,
+            },
+          });
+          return;
+        } else if (URL.includes('npmjs.com')) {
+          // Simply return metadata for npm packages since no cloning/zipping is needed
+          res.status(201).json({
+            metadata: {
+              Name: packageName,
+              Version: version,
+              ID: packageName.toLowerCase(),
+            },
+            data: {
+              Content: null,
+              URL: URL,
+              JSProgram: JSProgram || null,
+            },
+          });
+          return;
+        }
       } catch (err) {
         console.error('Error handling URL:', err);
         res.status(500).send('Error processing URL.');
@@ -423,37 +471,37 @@ app.post('/package', async (req: Request, res: Response) => {
       let extractedURL = '';
       try {
         const buffer = Buffer.from(Content, 'base64');
-    
+
         // Verify buffer is not empty
         if (buffer.length === 0) {
           res.status(400).send('Invalid Content. Empty Base64 string.');
           return;
         }
-    
+
         const zipFilePath = path.join(__dirname, `${packageName}.zip`);
-    
+
         // Write the decoded buffer as a ZIP file
         await fsp.writeFile(zipFilePath, buffer, { encoding: 'binary' });
-    
+
         // Test the file locally to ensure it is a valid ZIP
         const testBuffer = await fsp.readFile(zipFilePath);
-        if (testBuffer[0] !== 0x50 || testBuffer[1] !== 0x4B) { // ZIP magic numbers
+        if (testBuffer[0] !== 0x50 || testBuffer[1] !== 0x4B) {
           throw new Error('Decoded file is not a valid ZIP.');
         }
-    
+
         // Extract URL from ZIP content
         extractedURL = await extractURLFromZIP(buffer);
-    
+
         // Upload to S3
-        const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/1.0.0/package.zip`);
-    
+        const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
+
         // Cleanup
         await fsp.rm(zipFilePath, { force: true });
-    
+
         res.status(201).json({
           metadata: {
             Name: packageName,
-            Version: '1.0.0',
+            Version: version,
             ID: packageName.toLowerCase(),
           },
           data: {
@@ -468,7 +516,6 @@ app.post('/package', async (req: Request, res: Response) => {
       }
       return;
     }
-    
 
     res.status(400).send('Either Content or URL is required.');
   } catch (err) {
@@ -476,8 +523,6 @@ app.post('/package', async (req: Request, res: Response) => {
     res.status(500).send('Internal server error.');
   }
 });
-
-
 
 // app.post('/package', async (req: Request, res: Response): Promise<void> => {
 //   try {
