@@ -58,14 +58,14 @@ export const matchPackagesWithS3Objects = (requestedPackages: any[], s3Objects: 
       if (Version === 'unknown') {
         // Find the latest version (assuming versions are lexicographically sorted)
         selectedObject = matchingObjects.sort((a, b) => {
-          const versionA = a.Key?.split('/')[1];
+          const versionA = a.Key?.split('/')[1]; // Extract version
           const versionB = b.Key?.split('/')[1];
           return versionA > versionB ? -1 : 1; // Descending order
         })[0];
       } else {
         // Match specific version
         selectedObject = matchingObjects.find((obj) => {
-          const packageVersion = obj.Key?.split('/')[1];
+          const packageVersion = obj.Key?.split('/')[1]; // Extract version
           return matchVersionRange(Version, packageVersion);
         }) || selectedObject;
       }
@@ -74,11 +74,12 @@ export const matchPackagesWithS3Objects = (requestedPackages: any[], s3Objects: 
       const keyParts = selectedObject.Key?.split('/') || [];
       return {
         Name: keyParts[0],
-        Version: keyParts[1],
+        Version: keyParts[1], // Extracted from the S3 key
         ID: keyParts[0].toLowerCase().replace(/[^a-z0-9]/g, ''),
       };
     });
   };
+  
   
  
   /**
