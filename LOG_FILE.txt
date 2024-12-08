@@ -1,0 +1,19 @@
+2024-12-08 02:41:28 [INFO]: Section not found: "table of contents"
+2024-12-08 02:41:28 [INFO]: Matched section: "installation" with weight 3
+2024-12-08 02:41:28 [INFO]: Section not found: "examples"
+2024-12-08 02:41:28 [INFO]: Section not found: "troubleshooting"
+2024-12-08 02:41:28 [INFO]: Section not found: "faq"
+2024-12-08 02:41:28 [INFO]: Section not found: "key features"
+2024-12-08 02:41:28 [INFO]: Section not found: "usage"
+2024-12-08 02:41:28 [INFO]: Matched section: "license" with weight 1
+2024-12-08 02:41:28 [INFO]: Section not found: "setup"
+2024-12-08 02:41:28 [INFO]: Section not found: "dependencies"
+2024-12-08 02:41:28 [INFO]: Matched section: "roadmap" with weight 2
+2024-12-08 02:41:28 [INFO]: Matched section: "testing" with weight 3
+2024-12-08 02:41:28 [INFO]: Section not found: "getting started"
+2024-12-08 02:41:28 [INFO]: Ramp-up score for lodash/lodash: 0.2903225806451613
+2024-12-08 02:41:29 [INFO]: Correctness score for lodash/lodash: 0.42857142857142855
+2024-12-08 02:41:29 [INFO]: Bus Factor score for lodash/lodash: 1
+2024-12-08 02:41:29 [INFO]: Fetching issues for repo: lodash/lodash
+2024-12-08 02:41:49 [INFO]: Responsive Maintainer score for lodash/lodash: 0.5033520525414563
+2024-12-08 02:41:50 [INFO]: Processing repository: lodash/lodash

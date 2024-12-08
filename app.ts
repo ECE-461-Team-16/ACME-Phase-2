@@ -19,6 +19,20 @@ import { exec } from 'child_process';
 import tar from 'tar';
 import fsp from 'fs/promises'; // For file system promises
 
+// for metrics
+import {handleURL} from './src/handleURL'
+import {calculateRampUpScore} from './src/RampUp_Metric'
+import {getCorrectness} from './src/correctness'
+import {getBusFactor} from './src/busFactor'
+import {getResponsiveMaintainer} from './src/responsiveMaintainer'
+import {getLicense} from './src/license'
+import {getDependenciesFraction} from './src/goodPinningPractice'
+import {getFractionCodeReview, getNpmPackageGithubRepo} from './src/pullRequest'
+
+import * as dotenv from 'dotenv';
+dotenv.config();
+const GITHUB_TOKEN: string = process.env.GITHUB_TOKEN || '';
+
 const app = express();
 const PORT = 3000;
 
@@ -237,88 +251,33 @@ app.get('/package/size/:name/:version', async (req: Request, res: Response) => {
 });
 
 // Packages endpoint
-app.post('/packages', async (req: Request, res: Response): Promise<void> => {
-  const { offset = '0' } = req.query; // Pagination offset
-  const packagesQuery: PackageQuery[] = req.body; // Array of PackageQuery
+app.post('/packages', async (req: Request, res: Response) => {
+  try {
+    const requestedPackages = req.body;
 
-  // Validate input format
-  if (!packagesQuery || !Array.isArray(packagesQuery) || packagesQuery.length === 0) {
-    res.status(400).send('Invalid or incomplete PackageQuery');
-    return;
-  }
-
-  const offsetValue = parseInt(offset as string, 10);
-  const results: any[] = [];
-  const s3 = new AWS.S3({ region: 'us-east-1' }); // Use your AWS region
-  const bucketName = 'team16-npm-registry'; // S3 bucket name
-
-  for (const query of packagesQuery) {
-    const { Name: nameQuery, Version: versionQuery } = query;
-
-    if (!versionQuery || !isValidVersion(versionQuery)) {
-      res.status(400).send(`Invalid version format for package: ${nameQuery}`);
+    if (!Array.isArray(requestedPackages)) {
+      res.status(400).send('Invalid request format. Expected an array of packages.');
       return;
     }
 
-    const prefix = nameQuery === '*' ? '' : `${nameQuery}/`; // Handle the '*' wildcard
+    const bucketName = 'team16-npm-registry';
+    const s3Objects = await listS3Objects(bucketName);
 
-    try {
-      // List objects in S3 under the specified prefix
-      const data = await s3
-        .listObjectsV2({
-          Bucket: bucketName,
-          Prefix: prefix,
-          MaxKeys: 50, // Adjust the limit as needed
-        })
-        .promise();
+    console.log('S3 Objects:', s3Objects.map((obj) => obj.Key)); // Debug log
 
-      if (!data.Contents) {
-        continue; // Skip if no contents found
-      }
+    const packageMetadata = matchPackagesWithS3Objects(requestedPackages, s3Objects);
 
-      // Filter versions and names based on semver and the name query
-      const filteredPackages = data.Contents.filter((object) => {
-        const parts = object.Key?.split('/');
-        const packageName = parts[0]; // Extract package name from key
-        const version = parts[1]; // Extract version from key
-
-        const nameMatches = nameQuery === '*' || packageName.match(new RegExp(nameQuery, 'i'));
-        const versionMatches = semver.satisfies(version, versionQuery);
-
-        return nameMatches && versionMatches;
-      });
-
-      
-      filteredPackages.forEach((object) => {
-        const parts = object.Key?.split('/');
-        const packageName = parts[0]; // Extract the package name
-        const version = parts[1];    // Extract the version
-        if (packageName && version) {
-          results.push({
-            Version: version,
-            Name: packageName,
-            ID: packageName, // Use the package name as the ID
-          });
-        }
-      });
-      
-    } catch (err) {
-      console.error(`Error querying S3 for package ${nameQuery}:`, err);
-      res.status(500).send('Error querying packages from S3');
+    if (packageMetadata.length > 100) {
+      res.status(413).send('Too many packages returned');
       return;
     }
-  }
 
-  if (results.length === 0) {
-    res.status(404).send('No matching packages found');
-    return;
+    res.status(200).json(packageMetadata);
+  } catch (err) {
+    console.error('Error retrieving packages:', err);
+    res.status(500).send('Internal server error.');
   }
-
-  // Add offset header
-  res.setHeader('offset', `${offsetValue + results.length}`);
-  res.status(200).json(results);
 });
-
 
 
 // Package Endpoint
@@ -407,7 +366,6 @@ const getGitHubLatestRelease = async (owner: string, repo: string): Promise<stri
   }
 };
 
-
 // POST Package endpoint
 import unzipper from 'unzipper'; // Install with `npm install unzipper`
 
@@ -434,6 +392,55 @@ app.post('/package', async (req: Request, res: Response) => {
 
     let packageName = Name;
     let version = '1.0.0'; // Default version
+    let metrics: Record<string, number | null> = {
+      RampUpScore: null,
+      Correctness: null,
+      BusFactor: null,
+      ResponsiveMaintainer: null,
+      LicenseScore: null,
+      GoodPinningPractice: null,
+      PullRequest: null,
+    };
+
+    const calculateAllMetrics = async (url: string) => {
+    // Extract owner and repo from the URL
+    let GitHubUrl;
+    if(url.includes('www.npmjs')) {
+      GitHubUrl = await getNpmPackageGithubRepo(url);
+    }
+    else {
+      GitHubUrl = url;
+    }
+    const urlParts = GitHubUrl.replace('https://', '').split('/');
+    const owner = urlParts[1];
+    const repo = urlParts[2]?.replace('.git', '');
+
+    if (!owner || !repo) {
+      throw new Error('Invalid GitHub URL: Cannot extract owner and repository name.');
+    }
+
+    console.log(`Calculating metrics for owner: ${owner}, repo: ${repo}`);
+
+    const metrics = {
+      RampUpScore: await calculateRampUpScore(owner, repo, GITHUB_TOKEN),
+      Correctness: await getCorrectness(owner, repo, GITHUB_TOKEN),
+      BusFactor: await getBusFactor(owner, repo, GITHUB_TOKEN),
+      ResponsiveMaintainer: await getResponsiveMaintainer(owner, repo, GITHUB_TOKEN),
+      LicenseScore: await getLicense(owner, repo),
+      GoodPinningPractice: await getDependenciesFraction(owner, repo, GITHUB_TOKEN),
+      PullRequest: await getFractionCodeReview(GitHubUrl),
+    };
+
+    // Check if any metric is null
+    for (const [key, value] of Object.entries(metrics)) {
+      if (value === null) {
+        throw new Error(`Metric calculation failed: ${key} is null.`);
+      }
+    }
+
+    return metrics;
+  };
+
 
     // Extract Name and Version from URL if not provided
     if (!packageName && URL) {
@@ -500,17 +507,27 @@ app.post('/package', async (req: Request, res: Response) => {
           await archive.finalize();
 
           // Upload ZIP file to S3
-          const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
+          await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
 
           // Cleanup
           await fsp.rm(zipFilePath, { force: true });
           await fsp.rm(packageDir, { recursive: true, force: true });
+
+          // Calculate Metrics
+          metrics = await calculateAllMetrics(URL);
 
           res.status(201).json({
             metadata: {
               Name: packageName,
               Version: version,
               ID: packageName.toLowerCase(),
+              RampUpScore: metrics.RampUpScore,
+              Correctness: metrics.Correctness,
+              BusFactor: metrics.BusFactor,
+              ResponsiveMaintainer: metrics.ResponsiveMaintainer,
+              LicenseScore: metrics.LicenseScore,
+              GoodPinningPractice: metrics.GoodPinningPractice,
+              PullRequest: metrics.PullRequest
             },
             data: {
               Content: null,
@@ -518,14 +535,24 @@ app.post('/package', async (req: Request, res: Response) => {
               JSProgram: JSProgram || null,
             },
           });
+          console.log('Successfully processed GitHub URL:', URL);
           return;
         } else if (URL.includes('npmjs.com')) {
-          // Simply return metadata for npm packages since no cloning/zipping is needed
+          // Calculate Metrics
+          // metrics = await calculateAllMetrics(URL);
+
           res.status(201).json({
             metadata: {
               Name: packageName,
               Version: version,
               ID: packageName.toLowerCase(),
+              // RampUpScore: metrics.RampUpScore,
+              // Correctness: metrics.Correctness,
+              // BusFactor: metrics.BusFactor,
+              // ResponsiveMaintainer: metrics.ResponsiveMaintainer,
+              // LicenseScore: metrics.LicenseScore,
+              // GoodPinningPractice: metrics.GoodPinningPractice,
+              // PullRequest: metrics.PullRequest
             },
             data: {
               Content: null,
@@ -533,6 +560,7 @@ app.post('/package', async (req: Request, res: Response) => {
               JSProgram: JSProgram || null,
             },
           });
+          console.log('Successfully processed npmjs URL:', URL);
           return;
         }
       } catch (err) {
@@ -569,16 +597,26 @@ app.post('/package', async (req: Request, res: Response) => {
         extractedURL = await extractURLFromZIP(buffer);
 
         // Upload to S3
-        const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
+        await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
 
         // Cleanup
         await fsp.rm(zipFilePath, { force: true });
+
+        // Calculate Metrics
+        metrics = await calculateAllMetrics(extractedURL);
 
         res.status(201).json({
           metadata: {
             Name: packageName,
             Version: version,
             ID: packageName.toLowerCase(),
+            RampUpScore: metrics.RampUpScore,
+            Correctness: metrics.Correctness,
+            BusFactor: metrics.BusFactor,
+            ResponsiveMaintainer: metrics.ResponsiveMaintainer,
+            LicenseScore: metrics.LicenseScore,
+            GoodPinningPractice: metrics.GoodPinningPractice,
+            PullRequest: metrics.PullRequest
           },
           data: {
             Content: Content,
@@ -586,6 +624,7 @@ app.post('/package', async (req: Request, res: Response) => {
             JSProgram: JSProgram || null,
           },
         });
+        console.log('Successfully processed Content upload:', packageName);
       } catch (err) {
         console.error('Error handling Content:', err);
         res.status(500).send('Error processing Content upload.');
@@ -599,6 +638,72 @@ app.post('/package', async (req: Request, res: Response) => {
     res.status(500).send('Internal server error.');
   }
 });
+
+
+// app.post('/package', async (req: Request, res: Response): Promise<void> => {
+//   try {
+//     const { Content, JSProgram, URL, debloat = false, Name } = req.body;
+
+//     if (!Name) {
+//       res.status(400).send('Missing required field: Name');
+//       return;
+//     }
+
+//     let fileContent = '';
+//     let fetchedFromURL = false;
+
+//     if (Content) {
+//       fileContent = Content;
+//     } else if (URL) {
+//       try {
+//         const response = await axios.get(URL);
+//         fileContent = response.data;
+//         fetchedFromURL = true;
+//       } catch (err) {
+//         console.error('Error fetching URL:', err);
+//         res.status(400).send('Invalid or inaccessible URL');
+//         return;
+//       }
+//     } else if (JSProgram) {
+//       fileContent = debloat
+//         ? JSProgram.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '').trim()
+//         : JSProgram;
+//     } else {
+//       res.status(400).send('Missing required field: Content, JSProgram, or URL');
+//       return;
+//     }
+
+//     const zippedContent = await zipContent(fileContent, Name);
+//     const tempFilePath = path.join(__dirname, `${Name}.zip`);
+//     fs.writeFileSync(tempFilePath, zippedContent);
+
+//     const bucketName = 'team16-npm-registry';
+//     const key = `${Name}/1.0.0/package.zip`;
+
+//     try {
+//       const result = await uploadS3(tempFilePath, bucketName, key);
+//       fs.unlinkSync(tempFilePath);
+
+//       res.status(201).json({
+//         metadata: { Name, Version: '1.0.0', ID: Name },
+//         data: {
+//           Content: fetchedFromURL ? null : 'Uploaded',
+//           URL: URL || null,
+//           JSProgram: JSProgram ? 'Processed' : null,
+//           Location: result.Location,
+//         },
+//       });
+//     } catch (err) {
+//       console.error('Upload error:', err);
+//       fs.unlinkSync(tempFilePath);
+//       res.status(500).send('Error uploading to S3');
+//     }
+//   } catch (err) {
+//     console.error('Error:', err);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+
 
 app.delete('/reset', async (req: Request, res: Response): Promise<void> => {
   const authHeader = req.headers['x-authorization'];
@@ -798,8 +903,6 @@ async function checkReadmeForRegex(fileKey: string, regex: string): Promise<bool
 
   return false;
 }
-
-
 
 // Start the server
 const startServer = () => {
