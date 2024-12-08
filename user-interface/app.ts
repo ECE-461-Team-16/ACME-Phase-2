@@ -370,42 +370,101 @@ async function cleanupFiles() {
 }
 
 // Fetch version from npm registry
-async function getNpmPackageVersion(packageName: string, specifiedVersion?: string): Promise<string> {
-  try {
-    const npmUrl = `https://registry.npmjs.org/${packageName}`;
-    const response = await axios.get(npmUrl);
+const getNpmPackageVersion = async (packageName: string): Promise<string> => {
+  const npmRegistryUrl = `https://registry.npmjs.org/${packageName}`;
 
-    if (specifiedVersion && response.data.versions[specifiedVersion]) {
-      return specifiedVersion;
+  try {
+    const response = await axios.get(npmRegistryUrl);
+    const latestVersion = response.data['dist-tags']?.latest;
+
+    if (!latestVersion) {
+      throw new Error(`Unable to find latest version for package: ${packageName}`);
     }
 
-    return response.data['dist-tags'].latest; // Default to latest version
-  } catch (err) {
-    console.error(`Error fetching npm version for ${packageName}:`, err);
-    return '1.0.0'; // Fallback version
+    return latestVersion;
+  } catch (error) {
+    console.error(`Error fetching NPM package metadata: ${error.message}`);
+    throw new Error('Failed to fetch package version from NPM registry.');
   }
-}
+};
 
-// Fetch version from GitHub releases
-async function getGitHubRepoVersion(repoUrl: string): Promise<string> {
+const getGitHubLatestRelease = async (owner: string, repo: string): Promise<string> => {
+  const githubApiUrl = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
+
   try {
-    const repoPath = repoUrl.replace('https://github.com/', '').replace('.git', '');
-    const [owner, repo] = repoPath.split('/');
-
-    const githubApiUrl = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
     const response = await axios.get(githubApiUrl, {
-      headers: { 'User-Agent': 'request' }, // Required by GitHub API
+      headers: { 'Accept': 'application/vnd.github.v3+json' },
     });
-
-    return response.data.tag_name || '1.0.0'; // Use tag_name or fallback
-  } catch (err) {
-    console.error(`Error fetching GitHub version for ${repoUrl}:`, err);
-    return '1.0.0'; // Fallback version
+    return response.data.tag_name; // Return the release tag (e.g., "v1.0.0")
+  } catch (error) {
+    if (error.response?.status === 404) {
+      console.warn(`No releases found for ${owner}/${repo}. Defaulting to '1.0.0'.`);
+      return '1.0.0'; // Default version if no releases are found
+    } else {
+      console.error(`Error fetching GitHub release: ${error.message}`);
+      throw new Error('Failed to fetch release version from GitHub.');
+    }
   }
-}
+};
+
 
 // POST Package endpoint
 import unzipper from 'unzipper'; // Install with `npm install unzipper`
+
+const extractVersionFromContent = async (buffer: Buffer): Promise<string> => {
+  const tempDir = path.join(__dirname, 'temp', `extract_${Date.now()}`);
+  
+  try {
+    // Create temporary directory
+    await fsp.mkdir(tempDir, { recursive: true });
+
+    // Unzip buffer into the temporary directory
+    await new Promise<void>((resolve, reject) => {
+      const stream = require('stream');
+      const passThrough = new stream.PassThrough();
+      passThrough.end(buffer);
+
+      passThrough.pipe(unzipper.Extract({ path: tempDir }))
+        .on('close', resolve)
+        .on('error', reject);
+    });
+
+    // Recursively find package.json
+    const findPackageJson = async (dir: string): Promise<string | null> => {
+      const files = await fsp.readdir(dir, { withFileTypes: true });
+      for (const file of files) {
+        const filePath = path.join(dir, file.name);
+        if (file.isDirectory()) {
+          const nestedResult = await findPackageJson(filePath);
+          if (nestedResult) return nestedResult;
+        } else if (file.isFile() && file.name === 'package.json') {
+          return filePath;
+        }
+      }
+      return null;
+    };
+
+    const packageJsonPath = await findPackageJson(tempDir);
+    if (!packageJsonPath) {
+      throw new Error('No package.json found in the content.');
+    }
+
+    // Read and parse package.json
+    const packageJsonContent = await fsp.readFile(packageJsonPath, 'utf-8');
+    const packageJson = JSON.parse(packageJsonContent);
+
+    if (packageJson.version) {
+      return packageJson.version;
+    }
+    throw new Error('Version not found in package.json.');
+  } catch (error) {
+    console.error('Error extracting version from content:', error.message);
+    return '1.0.0'; // Default version
+  } finally {
+    // Cleanup temporary directory
+    await fsp.rm(tempDir, { recursive: true, force: true });
+  }
+};
 
 // Function to parse URL from ZIP content
 async function extractURLFromZIP(buffer: Buffer): Promise<string> {
@@ -435,18 +494,35 @@ app.post('/package', async (req: Request, res: Response) => {
     if (!packageName && URL) {
       if (URL.includes('github.com')) {
         const repoPath = URL.replace('https://github.com/', '').split('/');
-        if (repoPath.length > 1) {
-          packageName = repoPath[1].replace('.git', '');
-          version = await getGitHubRepoVersion(URL);
+        if (repoPath.length >= 2) {
+          const owner = repoPath[0];
+          const repo = repoPath[1].replace('.git', '');
+          packageName = repo;
+      
+          // Fetch the latest release from GitHub
+          try {
+            version = await getGitHubLatestRelease(owner, repo);
+          } catch (err) {
+            res.status(500).send(`Failed to fetch release version for GitHub repository: ${owner}/${repo}`);
+            return;
+          }
         } else {
           res.status(400).send('Invalid GitHub URL format.');
           return;
         }
       } else if (URL.includes('npmjs.com')) {
         const packagePath = URL.replace('https://www.npmjs.com/package/', '');
-        const [npmPackageName, npmVersion] = packagePath.split('/');
+        const [npmPackageName] = packagePath.split('/');
+
         packageName = npmPackageName;
-        version = npmVersion || (await getNpmPackageVersion(packageName));
+
+        // Fetch the latest version from NPM registry
+        try {
+          version = await getNpmPackageVersion(packageName);
+        } catch (err) {
+          res.status(500).send(`Failed to fetch version for NPM package: ${packageName}`);
+          return;
+        }
       } else {
         res.status(400).send('Invalid URL. Only GitHub or npm URLs are supported.');
         return;
@@ -526,33 +602,37 @@ app.post('/package', async (req: Request, res: Response) => {
       let extractedURL = '';
       try {
         const buffer = Buffer.from(Content, 'base64');
-
+    
         // Verify buffer is not empty
         if (buffer.length === 0) {
           res.status(400).send('Invalid Content. Empty Base64 string.');
           return;
         }
-
+    
         const zipFilePath = path.join(__dirname, `${packageName}.zip`);
-
+    
         // Write the decoded buffer as a ZIP file
-        await fsp.writeFile(zipFilePath, buffer, { encoding: 'binary' });
-
+        fs.writeFileSync(zipFilePath, buffer, { encoding: 'binary' });
+    
         // Test the file locally to ensure it is a valid ZIP
-        const testBuffer = await fsp.readFile(zipFilePath);
+        const testBuffer = fs.readFileSync(zipFilePath);
         if (testBuffer[0] !== 0x50 || testBuffer[1] !== 0x4B) {
           throw new Error('Decoded file is not a valid ZIP.');
         }
-
-        // Extract URL from ZIP content
-        extractedURL = await extractURLFromZIP(buffer);
-
+    
+        // Extract version from ZIP content
+        try {
+          version = await extractVersionFromContent(buffer);
+        } catch (error) {
+          console.warn('Version not found in content. Defaulting to 1.0.0.');
+        }
+    
         // Upload to S3
         const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
-
+    
         // Cleanup
         await fsp.rm(zipFilePath, { force: true });
-
+    
         res.status(201).json({
           metadata: {
             Name: packageName,
