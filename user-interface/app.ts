@@ -411,61 +411,6 @@ const getGitHubLatestRelease = async (owner: string, repo: string): Promise<stri
 // POST Package endpoint
 import unzipper from 'unzipper'; // Install with `npm install unzipper`
 
-const extractVersionFromContent = async (buffer: Buffer): Promise<string> => {
-  const tempDir = path.join(__dirname, 'temp', `extract_${Date.now()}`);
-  
-  try {
-    // Create temporary directory
-    await fsp.mkdir(tempDir, { recursive: true });
-
-    // Unzip buffer into the temporary directory
-    await new Promise<void>((resolve, reject) => {
-      const stream = require('stream');
-      const passThrough = new stream.PassThrough();
-      passThrough.end(buffer);
-
-      passThrough.pipe(unzipper.Extract({ path: tempDir }))
-        .on('close', resolve)
-        .on('error', reject);
-    });
-
-    // Recursively find package.json
-    const findPackageJson = async (dir: string): Promise<string | null> => {
-      const files = await fsp.readdir(dir, { withFileTypes: true });
-      for (const file of files) {
-        const filePath = path.join(dir, file.name);
-        if (file.isDirectory()) {
-          const nestedResult = await findPackageJson(filePath);
-          if (nestedResult) return nestedResult;
-        } else if (file.isFile() && file.name === 'package.json') {
-          return filePath;
-        }
-      }
-      return null;
-    };
-
-    const packageJsonPath = await findPackageJson(tempDir);
-    if (!packageJsonPath) {
-      throw new Error('No package.json found in the content.');
-    }
-
-    // Read and parse package.json
-    const packageJsonContent = await fsp.readFile(packageJsonPath, 'utf-8');
-    const packageJson = JSON.parse(packageJsonContent);
-
-    if (packageJson.version) {
-      return packageJson.version;
-    }
-    throw new Error('Version not found in package.json.');
-  } catch (error) {
-    console.error('Error extracting version from content:', error.message);
-    return '1.0.0'; // Default version
-  } finally {
-    // Cleanup temporary directory
-    await fsp.rm(tempDir, { recursive: true, force: true });
-  }
-};
-
 // Function to parse URL from ZIP content
 async function extractURLFromZIP(buffer: Buffer): Promise<string> {
   try {
@@ -602,37 +547,33 @@ app.post('/package', async (req: Request, res: Response) => {
       let extractedURL = '';
       try {
         const buffer = Buffer.from(Content, 'base64');
-    
+
         // Verify buffer is not empty
         if (buffer.length === 0) {
           res.status(400).send('Invalid Content. Empty Base64 string.');
           return;
         }
-    
+
         const zipFilePath = path.join(__dirname, `${packageName}.zip`);
-    
+
         // Write the decoded buffer as a ZIP file
-        fs.writeFileSync(zipFilePath, buffer, { encoding: 'binary' });
-    
+        await fsp.writeFile(zipFilePath, buffer, { encoding: 'binary' });
+
         // Test the file locally to ensure it is a valid ZIP
-        const testBuffer = fs.readFileSync(zipFilePath);
+        const testBuffer = await fsp.readFile(zipFilePath);
         if (testBuffer[0] !== 0x50 || testBuffer[1] !== 0x4B) {
           throw new Error('Decoded file is not a valid ZIP.');
         }
-    
-        // Extract version from ZIP content
-        try {
-          version = await extractVersionFromContent(buffer);
-        } catch (error) {
-          console.warn('Version not found in content. Defaulting to 1.0.0.');
-        }
-    
+
+        // Extract URL from ZIP content
+        extractedURL = await extractURLFromZIP(buffer);
+
         // Upload to S3
         const result = await uploadS3(zipFilePath, 'team16-npm-registry', `${packageName}/${version}/package.zip`);
-    
+
         // Cleanup
         await fsp.rm(zipFilePath, { force: true });
-    
+
         res.status(201).json({
           metadata: {
             Name: packageName,
