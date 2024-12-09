@@ -1,46 +1,74 @@
+/* General Body Styles */
 body {
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .search-bar {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
-  .package-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .package-item {
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    padding: 10px;
-  }
-  
-  .package-item h3 {
-    margin: 0;
-  }
-  
-  .actions {
-    margin-top: 10px;
-  }
-  
-  .actions a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: #007bff;
-  }
-  
-  .actions a:hover {
-    text-decoration: underline;
-  }
-  
+  font-family: Arial, sans-serif;
+}
+
+/* Container Layout */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Search Bar Styling */
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* Package List Styling */
+.package-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.package-item {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.package-item h3 {
+  margin: 0;
+}
+
+/* Actions Section Styling */
+.actions {
+  margin-top: 10px;
+}
+
+/* Unified Button Styles */
+.actions a {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white; /* Default text color */
+  border: none;
+  margin-right: 10px;
+}
+
+/* Download Button */
+.actions a.download {
+  background-color: #4caf50; /* Green */
+}
+
+.actions a.download:hover {
+  background-color: #45a049;
+}
+
+/* Check Rating Button */
+.actions a.rate {
+  background-color: #2196f3; /* Blue */
+}
+
+.actions a.rate:hover {
+  background-color: #0b7dda;
+}

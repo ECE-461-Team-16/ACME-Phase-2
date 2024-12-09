@@ -35,53 +35,55 @@ export const listS3Objects = async (bucketName: string, prefix: string = '') => 
  * @returns Matched package metadata
  */
 export const matchPackagesWithS3Objects = (requestedPackages: any[], s3Objects: AWS.S3.Object[]) => {
-    return requestedPackages.map((pkg) => {
-      const { Name, Version } = pkg;
-  
-      // Filter objects for the requested package
-      const matchingObjects = s3Objects.filter((obj) => {
-        const keyParts = obj.Key?.split('/') || [];
-        const packageName = keyParts[0];
-        return packageName.toLowerCase() === Name.toLowerCase();
-      });
-  
-      if (matchingObjects.length === 0) {
-        return {
+  const matchedPackages = new Map<string, any>(); // Use a Map to enforce uniqueness
+
+  requestedPackages.forEach((pkg) => {
+    const { Name, Version } = pkg;
+
+    // Filter S3 objects for the requested package name
+    const matchingObjects = s3Objects.filter((obj) => {
+      const keyParts = obj.Key?.split('/') || [];
+      const packageName = keyParts[0];
+      return Name === '*' || packageName.toLowerCase() === Name.toLowerCase();
+    });
+
+    matchingObjects.forEach((obj) => {
+      const keyParts = obj.Key?.split('/') || [];
+      const packageName = keyParts[0];
+      const packageVersion = keyParts[1];
+
+      if (!packageVersion) return; // Skip objects without version info
+
+      // Check version range match
+      if (Version === '*' || matchVersionRange(Version, packageVersion)) {
+        const packageId = `${packageName}-${packageVersion}`; // Unique identifier
+
+        if (!matchedPackages.has(packageId)) {
+          matchedPackages.set(packageId, {
+            Name: packageName,
+            Version: packageVersion,
+            ID: packageId.toLowerCase().replace(/[^a-z0-9]/g, ''),
+          });
+        }
+      }
+    });
+
+    // Handle case where no matches were found for a package
+    if (matchingObjects.length === 0) {
+      const packageId = `${Name}-${Version}`;
+      if (!matchedPackages.has(packageId)) {
+        matchedPackages.set(packageId, {
           Name,
           Version: 'unknown',
           ID: Name.toLowerCase().replace(/[^a-z0-9]/g, ''),
-        };
+        });
       }
-  
-      // Handle "unknown" version: return the latest version if available
-      let selectedObject = matchingObjects[0]; // Default to the first matching object
-      if (Version === 'unknown') {
-        // Find the latest version (assuming versions are lexicographically sorted)
-        selectedObject = matchingObjects.sort((a, b) => {
-          const versionA = a.Key?.split('/')[1]; // Extract version
-          const versionB = b.Key?.split('/')[1];
-          return versionA > versionB ? -1 : 1; // Descending order
-        })[0];
-      } else {
-        // Match specific version
-        selectedObject = matchingObjects.find((obj) => {
-          const packageVersion = obj.Key?.split('/')[1]; // Extract version
-          return matchVersionRange(Version, packageVersion);
-        }) || selectedObject;
-      }
-  
-      // Extract metadata from the selected object
-      const keyParts = selectedObject.Key?.split('/') || [];
-      return {
-        Name: keyParts[0],
-        Version: keyParts[1], // Extracted from the S3 key
-        ID: keyParts[0].toLowerCase().replace(/[^a-z0-9]/g, ''),
-      };
-    });
-  };
-  
-  
- 
+    }
+  });
+
+  return Array.from(matchedPackages.values()); // Convert Map to array
+};
+
   /**
    * Matches a version range (e.g., ^1.2.0 or ~1.2.0) against a specific version.
    * @param range - Version range string

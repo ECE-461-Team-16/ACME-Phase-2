@@ -3,9 +3,6 @@ import sqlite3 from 'sqlite3';
 import bcrypt from 'bcryptjs';
 import path from 'path';
 import fileUpload from 'express-fileupload';
-import { uploadS3 } from './routes/uploadS3';
-import { listS3Objects, matchPackagesWithS3Objects } from './routes/packageService';
-import { calculateSizeCost } from './routes/sizeCost';
 import fs from 'fs';
 import semver from 'semver';
 import * as AWS from 'aws-sdk';
@@ -13,6 +10,7 @@ import AdmZip from 'adm-zip';
 import base64 from 'base64-js';
 import { S3Client, ListObjectsV2Command, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 
+import { Readable } from 'stream';
 // for package endpoint
 import axios from 'axios';
 import archiver from 'archiver';
@@ -22,6 +20,12 @@ import fsp from 'fs/promises'; // For file system promises
 
 // for metrics
 import {getAllMetrics} from './src/netScore'
+import {registerUser, authenticateUser, updateUser, deleteUser,} from './routes/userService';
+
+import { uploadS3 } from './routes/uploadS3';
+import { listS3Objects, matchPackagesWithS3Objects } from './routes/packageService';
+import { calculateSizeCost } from './routes/sizeCost';
+
 
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -31,17 +35,6 @@ const app = express();
 const PORT = 3000;
 
 let server: any; // Define a variable to hold the server instance
-
-// Database setup
-const dbPath = path.join(__dirname, '../db/users.db');
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error(`Error opening database at ${dbPath}: ${err.message}`);
-  } else {
-    console.log(`Connected to the database at ${dbPath}`);
-  }
-});
-
 
 const streamToString = (stream: any): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -131,91 +124,6 @@ const getMetadata = async (bucketName: string, key: string) => {
     throw err;
   }
 };
-
-// Static files setup
-const projectRoot = path.resolve(__dirname, '..');
-app.use(express.static(path.join(projectRoot, 'public')));
-
-// Routes
-app.get('/sign_in', (req: Request, res: Response) => {
-  res.sendFile(path.join(projectRoot, 'views', 'sign_in.html'));
-});
-
-app.get('/register', (req: Request, res: Response) => {
-  res.sendFile(path.join(projectRoot, 'views', 'register.html'));
-});
-
-app.get('/search', (req: Request, res: Response) => {
-  res.sendFile(path.join(projectRoot, 'views', 'search.html'));
-});
-
-app.get('/user_preferences', (req: Request, res: Response) => {
-  res.sendFile(path.join(projectRoot, 'views', 'user_preferences.html'));
-});
-
-app.post('/register', (req: Request, res: Response) => {
-  const { username, password, email, first_name, last_name } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10);
-
-  db.run(
-    'INSERT INTO users (username, password, email, first_name, last_name, permissions) VALUES (?, ?, ?, ?, ?, ?)',
-    [username, hashedPassword, email, first_name, last_name, 'user'],
-    function (err) {
-      if (err) {
-        return res.status(500).send('Error registering new user');
-      }
-      res.redirect('/sign_in');
-    }
-  );
-});
-
-app.post('/sign_in', (req: Request, res: Response) => {
-  const { identifier, password } = req.body;
-
-  db.get(
-    'SELECT * FROM users WHERE username = ? OR email = ?',
-    [identifier, identifier],
-    (err, user: { password: string } | undefined) => {
-      if (err || !user) {
-        return res.status(400).send('User not found');
-      }
-
-      const isMatch = bcrypt.compareSync(password, user.password);
-      if (!isMatch) {
-        return res.status(400).send('Invalid credentials');
-      }
-
-      res.redirect('/search');
-    }
-  );
-});
-
-app.post('/update_user', (req: Request, res: Response) => {
-  const { first_name, last_name, email } = req.body;
-  const userId = 1;
-
-  db.run(
-    'UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE id = ?',
-    [first_name, last_name, email, userId],
-    function (err) {
-      if (err) {
-        return res.status(500).send('Error updating user information');
-      }
-      res.redirect('/user_preferences');
-    }
-  );
-});
-
-app.post('/delete_account', (req: Request, res: Response) => {
-  const userId = 1;
-
-  db.run('DELETE FROM users WHERE id = ?', [userId], function (err) {
-    if (err) {
-      return res.status(500).send('Error deleting account');
-    }
-    res.redirect('/sign_in');
-  });
-});
 
 app.put('/upload/:packageName/:version', async (req: Request, res: Response): Promise<void> => {
   const { packageName, version } = req.params;
@@ -989,7 +897,7 @@ app.get('/package/:id/rate', async (req: Request, res: Response) => {
     }
 
     // Return metrics and latencies
-    const responseData = {
+    res.status(200).json({
       RampUpScore: metrics.RampUpScore,
       RampUpLatency: metrics.RampUpLatency,
       Correctness: metrics.Correctness,
@@ -1006,14 +914,13 @@ app.get('/package/:id/rate', async (req: Request, res: Response) => {
       PullRequestLatency: metrics.PullRequestLatency,
       NetScore: metrics.NetScore,
       NetScoreLatency: metrics.NetScoreLatency,
-    };
-
-    res.status(200).json(responseData);
+    });
   } catch (err) {
     console.error('Error fetching package rates:', err);
     res.status(500).send('Error fetching package rates.');
   }
 });
+
 
 // Utility function to check if the new version is newer
 const isVersionNewer = (currentVersion: string, newVersion: string): boolean => {
@@ -1226,6 +1133,149 @@ async function checkReadmeForRegex(fileKey: string, regex: string): Promise<bool
 
   return false;
 }
+
+// *************** UI ROUTES ***************
+
+// Static files setup
+const projectRoot = path.resolve(__dirname, '..');
+app.use(express.static(path.join(projectRoot, 'public')));
+
+// Routes
+app.get('/sign_in', (req: Request, res: Response) => {
+  res.sendFile(path.join(projectRoot, 'views', 'sign_in.html'));
+});
+
+app.get('/register', (req: Request, res: Response) => {
+  res.sendFile(path.join(projectRoot, 'views', 'register.html'));
+});
+
+app.get('/search', (req: Request, res: Response) => {
+  res.sendFile(path.join(projectRoot, 'views', 'search.html'));
+});
+
+// import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
+
+export async function listUniqueS3Objects(bucketName: string): Promise<{ Key: string }[]> {
+  const s3Client = new S3Client({ region: 'us-east-1' });
+  let objects: { Key: string }[] = [];
+  let continuationToken: string | undefined;
+
+  do {
+    const command = new ListObjectsV2Command({
+      Bucket: bucketName,
+      ContinuationToken: continuationToken,
+    });
+
+    const data = await s3Client.send(command);
+    if (data.Contents) {
+      objects.push(...data.Contents.map(obj => ({ Key: obj.Key! })));
+    }
+    continuationToken = data.NextContinuationToken;
+  } while (continuationToken);
+
+  // Ensure unique keys
+  return Array.from(new Set(objects.map(obj => obj.Key))).map(Key => ({ Key }));
+}
+
+
+app.get('/packages', async (req: Request, res: Response) => {
+  try {
+    const bucketName = 'team16-npm-registry';
+    const s3Objects = await listUniqueS3Objects(bucketName);
+
+    const packages = s3Objects
+      .map(obj => {
+        const [Name, Version] = obj.Key.split('/');
+        if (Name && Version && !Version.endsWith('.json')) { // Exclude metadata files
+          return { Name, Version };
+        }
+        return null;
+      })
+      .filter(pkg => pkg !== null); // Remove null entries
+
+    const uniquePackages = Array.from(
+      new Map(packages.map(pkg => [`${pkg.Name}-${pkg.Version}`, pkg])).values()
+    );
+
+    res.status(200).json(uniquePackages);
+  } catch (err) {
+    console.error('Error retrieving packages:', err);
+    res.status(500).send('Internal server error.');
+  }
+});
+
+app.get('/packages/:name-:version.zip', async (req: Request, res: Response) => {
+  const { name, version } = req.params;
+  const bucketName = 'team16-npm-registry';
+  const key = `${name}/${version}/package.zip`;
+
+  try {
+    // Fetch file from S3
+    const command = new GetObjectCommand({
+      Bucket: bucketName,
+      Key: key,
+    });
+    const response = await s3Client.send(command);
+
+    if (!response.Body) {
+      res.status(404).send('Package not found.');
+      return;
+    }
+
+    // Convert the Body to a Node.js readable stream
+    const readableStream = Readable.from(response.Body as any);
+
+    // Set the response headers for file download
+    res.setHeader('Content-Disposition', `attachment; filename="${name}-${version}.zip"`);
+    res.setHeader('Content-Type', 'application/zip');
+
+    // Pipe the file to the response
+    readableStream.pipe(res);
+  } catch (err) {
+    console.error('Error downloading package:', err);
+    res.status(500).send('Error downloading package.');
+  }
+});
+
+app.get('/user_preferences', (req: Request, res: Response) => {
+  res.sendFile(path.join(projectRoot, 'views', 'user_preferences.html'));
+});
+
+app.post('/register', async (req: Request, res: Response) => {
+  try {
+    const newUser = await registerUser(req.body);
+    res.status(201).json({ message: 'User registered successfully', user: newUser });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/sign_in', async (req: Request, res: Response) => {
+  try {
+    const user = await authenticateUser(req.body.username, req.body.password);
+    res.status(200).json({ message: 'Signed in successfully', user });
+  } catch (error) {
+    res.status(401).json({ error: error.message });
+  }
+});
+
+app.post('/update_user', async (req: Request, res: Response) => {
+  try {
+    const updatedUser = await updateUser(req.body.username, req.body.updates);
+    res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/delete_account', async (req: Request, res: Response) => {
+  try {
+    await deleteUser(req.body.username);
+    res.status(200).json({ message: 'Account deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // Start the server
 const startServer = () => {

@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Package Directory</title>
-  <!-- Link to external CSS file -->
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -16,24 +15,7 @@
 
     <!-- Package List -->
     <ul id="packageList" class="package-list">
-      <li class="package-item" data-name="Package One">
-        <h3>Package One</h3>
-        <p>Description: This is a placeholder package description for Package One.</p>
-        <div class="actions">
-          <a href="/packages/package-one.zip" download>Download</a>
-          <a href="/rate?package=package-one">Check Rating</a>
-          <a href="/packages/package-one">View Details</a>
-        </div>
-      </li>
-      <li class="package-item" data-name="Package Two">
-        <h3>Package Two</h3>
-        <p>Description: This is a placeholder package description for Package Two.</p>
-        <div class="actions">
-          <a href="/packages/package-two.zip" download>Download</a>
-          <a href="/rate?package=package-two">Check Rating</a>
-          <a href="/packages/package-two">View Details</a>
-        </div>
-      </li>
+      <!-- Packages will be dynamically populated here -->
     </ul>
 
     <!-- Upload Form -->
@@ -47,33 +29,97 @@
       <label for="package">Select .zip File:</label>
       <input type="file" id="package" name="package" accept=".zip" required>
     
-      <label for="debloat">
-        <input type="checkbox" id="debloat" name="debloat">
-        Enable Debloating
-      </label>
-    
       <button type="button" id="uploadButton">Upload</button>
     </form>
-    
+  </div>
 
   <script>
-    // JavaScript to filter packages based on search input
+    // Fetch packages from the server
+    async function fetchPackages() {
+      try {
+        const response = await fetch('/packages'); // Fetch the raw JSON
+        if (!response.ok) {
+          console.error('Failed to fetch packages');
+          return;
+        }
+
+        const rawPackages = await response.json(); // Get the raw JSON
+        const formattedPackages = formatPackagesForUI(rawPackages); // Preprocess data
+        populatePackageList(formattedPackages); // Populate the UI
+      } catch (error) {
+        console.error('Error fetching packages:', error);
+      }
+    }
+
+    function formatPackagesForUI(rawPackages) {
+      // Transform raw JSON into a UI-friendly format
+      const formatted = [];
+
+      rawPackages.forEach(pkg => {
+        // Assuming each package entry is something like:
+        // { "Name": "example", "Version": "1.0.0" }
+        const name = pkg.Name;
+        const version = pkg.Version;
+
+        if (name && version) {
+          formatted.push({
+            Name: name,
+            Version: version,
+            DownloadLink: `/packages/${name}-${version}.zip`,
+            RateLink: `/package/${name}-${version}/rate`,
+            DetailsLink: `/packages/${name}-${version}`,
+          });
+        }
+      });
+
+      return formatted;
+    }
+
+
+
+
+    // Populate the package list dynamically
+    function populatePackageList(packages) {
+      const packageList = document.getElementById('packageList');
+      packageList.innerHTML = ''; // Clear existing content
+
+      packages.forEach(pkg => {
+        const listItem = document.createElement('li');
+        listItem.className = 'package-item';
+        listItem.setAttribute('data-id', `${pkg.Name}-${pkg.Version}`);
+
+        listItem.innerHTML = `
+          <h3>${pkg.Name}</h3>
+          <p>Version: ${pkg.Version}</p>
+          <div class="actions">
+            <a href="/packages/${pkg.Name}-${pkg.Version}.zip" class="button download" download>Download</a>
+            <a href="javascript:void(0);" class="button rate" onclick="checkRating('${pkg.Name}-${pkg.Version}')">Check Rating</a>
+          </div>
+        `;
+
+        packageList.appendChild(listItem);
+      });
+    }
+
+
+
+
+
+
+    // Filter packages based on search input
+    // Filter packages based on search input
     function filterPackages() {
       const searchValue = document.getElementById('searchBar').value.toLowerCase();
       const packages = document.querySelectorAll('.package-item');
 
       packages.forEach(pkg => {
-        const name = pkg.getAttribute('data-name').toLowerCase();
-        if (name.includes(searchValue)) {
-          pkg.style.display = 'block';
-        } else {
-          pkg.style.display = 'none';
-        }
+        const name = pkg.getAttribute('data-id').split('-')[0].toLowerCase(); // Extract the name part of the ID
+        pkg.style.display = name.includes(searchValue) ? 'block' : 'none';
       });
     }
-  </script>
 
-  <script>
+
+    // Upload new package
     document.getElementById('uploadButton').addEventListener('click', async () => {
       const packageName = document.getElementById('packageName').value.trim();
       const version = document.getElementById('version').value.trim();
@@ -90,23 +136,70 @@
 
       try {
         const response = await fetch(`/upload/${packageName}/${version}`, {
-          method: 'PUT', // Matches the HTTP method in your API
+          method: 'PUT',
           body: formData,
         });
 
         if (response.ok) {
-          const result = await response.text();
-          alert(`Success: ${result}`);
+          alert('Upload successful!');
+          fetchPackages(); // Refresh the package list
         } else {
-          const error = await response.text();
-          alert(`Error: ${error}`);
+          alert('Upload failed!');
         }
       } catch (err) {
         console.error('Error during upload:', err);
         alert('An error occurred while uploading the file.');
       }
     });
-  </script>
 
+    // Check rating for a package
+    async function checkRating(packageId) {
+      try {
+        const response = await fetch(`/package/${packageId}/rate`);
+        if (!response.ok) {
+          alert('Failed to fetch rating for the package.');
+          return;
+        }
+
+        const metrics = await response.json();
+        displayMetrics(metrics, packageId);
+      } catch (error) {
+        console.error('Error fetching rating:', error);
+      }
+    }
+
+    function displayMetrics(metrics, packageId) {
+      // Find the package element
+      const packageElement = document.querySelector(`.package-item[data-id="${packageId}"]`);
+      if (!packageElement) return;
+
+      // Create a metrics display section
+      let metricsSection = packageElement.querySelector('.metrics');
+      if (!metricsSection) {
+        metricsSection = document.createElement('div');
+        metricsSection.className = 'metrics';
+        packageElement.appendChild(metricsSection);
+      }
+
+      // Populate metrics
+      metricsSection.innerHTML = `
+        <h4>Metrics:</h4>
+        <ul>
+          <li>Ramp-Up Score: ${metrics.RampUpScore ?? 'N/A'}</li>
+          <li>Correctness: ${metrics.Correctness ?? 'N/A'}</li>
+          <li>Bus Factor: ${metrics.BusFactor ?? 'N/A'}</li>
+          <li>Responsive Maintainer: ${metrics.ResponsiveMaintainer ?? 'N/A'}</li>
+          <li>License Score: ${metrics.LicenseScore ?? 'N/A'}</li>
+          <li>Good Pinning Practice: ${metrics.GoodPinningPractice ?? 'N/A'}</li>
+          <li>Pull Request: ${metrics.PullRequest ?? 'N/A'}</li>
+          <li>Net Score: ${metrics.NetScore ?? 'N/A'}</li>
+        </ul>
+      `;
+    }
+
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', fetchPackages);
+  </script>
 </body>
 </html>

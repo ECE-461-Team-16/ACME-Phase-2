@@ -23,6 +23,7 @@ install_dependencies() {
         npm install adm-zip > /dev/null 2>&1
         npm install archiver > /dev/null 2>&1
         npm install unzipper > /dev/null 2>&1
+        npm install bcrypt > /dev/null 2>&1
     } && echo "9 dependencies installed..."
 
 
