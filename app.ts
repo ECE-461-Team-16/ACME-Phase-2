@@ -647,6 +647,110 @@ export async function getNpmPackageGithubRepo(packageName: string): Promise<stri
   }
 }
 
+app.post('/package/byRegEx', async (req: Request, res: Response): Promise<void> => {
+  const { RegEx } = req.body; // Regular expression from the request body
+
+  // Validate the RegEx field
+  if (!RegEx || typeof RegEx !== 'string') {
+    res.status(400).send('Invalid or missing RegEx');
+    return;
+  }
+
+  const results: any[] = [];
+  const s3 = new AWS.S3({ region: 'us-east-1' }); // AWS S3 client
+  const bucketName = 'team16-npm-registry'; // S3 bucket name
+
+  try {
+    // List objects in S3 (you can adjust MaxKeys as needed)
+    const data = await s3
+      .listObjectsV2({
+        Bucket: bucketName,
+      })
+      .promise();
+
+    if (!data.Contents) {
+      res.status(404).send('No packages found');
+      return;
+    }
+
+    // Use Promise.all to handle async filtering properly
+    const filteredPackages = await Promise.all(
+      data.Contents.map(async (object) => {
+        const parts = object.Key?.split('/');
+        const packageName = parts[0]; // Extract package name from key
+        const version = parts[1]; // Extract version from key
+
+        // Check if the package name matches the provided RegEx
+        const nameMatches = new RegExp(RegEx, 'i').test(packageName);
+        console.log('Name Matches:', packageName);
+
+        // Check README content (if applicable)
+        const readmeMatches = await checkReadmeForRegex(object.Key, RegEx);
+        console.log('Readme Matches:', packageName);
+
+        // Return the package if it matches either name or readme
+        return nameMatches || readmeMatches ? {
+          Version: version,
+          Name: packageName,
+          ID: `${packageName}-${version}`, // Use the package name as the ID
+        } : null;
+      })
+    );
+
+    // Filter out any null results
+    const finalResults = filteredPackages.filter((result) => result !== null);
+
+    // Handle case where no matching packages are found
+    if (finalResults.length === 0) {
+      res.status(404).send('No matching packages found');
+      return;
+    }
+
+    // Return the results
+    res.status(200).json(finalResults);
+
+  } catch (err) {
+    console.error('Error querying S3:', err);
+    res.status(500).send('Error querying packages from S3');
+  }
+});
+
+
+// Helper function to check if README.md matches the provided regex
+async function checkReadmeForRegex(fileKey: string, regex: string): Promise<boolean> {
+  const s3 = new AWS.S3({ region: 'us-east-1' });
+
+  // Check if the fileKey points to a package zip file and contains README.md
+  if (fileKey.endsWith('.zip')) {
+    try {
+      // Fetch the zip file from S3
+      const fileData = await s3.getObject({
+        Bucket: 'team16-npm-registry',
+        Key: fileKey,
+      }).promise();
+
+      const zip = new AdmZip(fileData.Body as Buffer);
+
+      // Look for a README.md file inside the zip
+      const readmeFile = zip.getEntries().find((entry) =>
+        entry.entryName.toLowerCase().includes('readme.md')
+      );
+
+      if (readmeFile) {
+        const readmeContent = readmeFile.getData().toString('utf8');
+        return new RegExp(regex, 'i').test(readmeContent);
+      }
+
+      return false;
+    } catch (err) {
+      console.error('Error processing zip file:', err);
+      return false;
+    }
+  }
+
+  return false;
+}
+
 app.post('/package/:id', async (req: Request, res: Response): Promise<void> => {
   try {
   const { id } = req.params;
@@ -1030,109 +1134,7 @@ app.get('/tracks', (req: Request, res: Response) => {
 });
 
 
-app.post('/package/byRegEx', async (req: Request, res: Response): Promise<void> => {
-  const { RegEx } = req.body; // Regular expression from the request body
 
-  // Validate the RegEx field
-  if (!RegEx || typeof RegEx !== 'string') {
-    res.status(400).send('Invalid or missing RegEx');
-    return;
-  }
-
-  const results: any[] = [];
-  const s3 = new AWS.S3({ region: 'us-east-1' }); // AWS S3 client
-  const bucketName = 'team16-npm-registry'; // S3 bucket name
-
-  try {
-    // List objects in S3 (you can adjust MaxKeys as needed)
-    const data = await s3
-      .listObjectsV2({
-        Bucket: bucketName,
-      })
-      .promise();
-
-    if (!data.Contents) {
-      res.status(404).send('No packages found');
-      return;
-    }
-
-    // Use Promise.all to handle async filtering properly
-    const filteredPackages = await Promise.all(
-      data.Contents.map(async (object) => {
-        const parts = object.Key?.split('/');
-        const packageName = parts[0]; // Extract package name from key
-        const version = parts[1]; // Extract version from key
-
-        // Check if the package name matches the provided RegEx
-        const nameMatches = new RegExp(RegEx, 'i').test(packageName);
-        console.log('Name Matches:', packageName);
-
-        // Check README content (if applicable)
-        const readmeMatches = await checkReadmeForRegex(object.Key, RegEx);
-        console.log('Readme Matches:', packageName);
-
-        // Return the package if it matches either name or readme
-        return nameMatches || readmeMatches ? {
-          Version: version,
-          Name: packageName,
-          ID: `${packageName}-${version}`, // Use the package name as the ID
-        } : null;
-      })
-    );
-
-    // Filter out any null results
-    const finalResults = filteredPackages.filter((result) => result !== null);
-
-    // Handle case where no matching packages are found
-    if (finalResults.length === 0) {
-      res.status(404).send('No matching packages found');
-      return;
-    }
-
-    // Return the results
-    res.status(200).json(finalResults);
-
-  } catch (err) {
-    console.error('Error querying S3:', err);
-    res.status(500).send('Error querying packages from S3');
-  }
-});
-
-
-// Helper function to check if README.md matches the provided regex
-async function checkReadmeForRegex(fileKey: string, regex: string): Promise<boolean> {
-  const s3 = new AWS.S3({ region: 'us-east-1' });
-
-  // Check if the fileKey points to a package zip file and contains README.md
-  if (fileKey.endsWith('.zip')) {
-    try {
-      // Fetch the zip file from S3
-      const fileData = await s3.getObject({
-        Bucket: 'team16-npm-registry',
-        Key: fileKey,
-      }).promise();
-
-      const zip = new AdmZip(fileData.Body as Buffer);
-
-      // Look for a README.md file inside the zip
-      const readmeFile = zip.getEntries().find((entry) =>
-        entry.entryName.toLowerCase().includes('readme.md')
-      );
-
-      if (readmeFile) {
-        const readmeContent = readmeFile.getData().toString('utf8');
-        return new RegExp(regex, 'i').test(readmeContent);
-      }
-
-      return false;
-    } catch (err) {
-      console.error('Error processing zip file:', err);
-      return false;
-    }
-  }
-
-  return false;
-}
 
 // *************** UI ROUTES ***************
 
