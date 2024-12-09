@@ -9,6 +9,7 @@ import {getFractionCodeReview} from './pullRequest'
 import logger from './logger';
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
+import { parse } from 'path'
 
 dotenv.config();
 
@@ -277,12 +278,12 @@ export async function getAllMetrics(url: string, TOKEN: string) {
 
         // Construct metrics object in the specified format
         const metrics: Record<string, number | null> = {
-            RampUpScore: parseFloat(rampUp.toFixed(1)),
-            RampUpLatency: parseFloat(rampUpLatency.toFixed(3)),
-            Correctness: parseFloat(correctness.toFixed(1)),
-            CorrectnessLatency: parseFloat(correctnessLatency.toFixed(3)),
             BusFactor: parseFloat(busFactor.toFixed(1)),
             BusFactorLatency: parseFloat(busFactorLatency.toFixed(3)),
+            Correctness: parseFloat(correctness.toFixed(1)),
+            CorrectnessLatency: parseFloat(correctnessLatency.toFixed(3)),
+            RampUp: parseFloat(rampUp.toFixed(1)),
+            RampUpLatency: parseFloat(rampUpLatency.toFixed(3)),
             ResponsiveMaintainer: parseFloat(responsiveMaintainer.toFixed(1)),
             ResponsiveMaintainerLatency: parseFloat(responsiveMaintainerLatency.toFixed(3)),
             LicenseScore: parseFloat(license.toFixed(1)),

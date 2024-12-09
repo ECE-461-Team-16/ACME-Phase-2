@@ -318,12 +318,12 @@ app.post('/package', async (req: Request, res: Response) => {
     let packageName = Name;
     let version = '1.0.0'; // Default version
     let metrics: Record<string, number | null> = {
-      RampUpScore: null,
-      RampUpLatency: null,
-      Correctness: null,
-      CorrectnessLatency: null,
       BusFactor: null,
       BusFactorLatency: null,
+      Correctness: null,
+      CorrectnessLatency: null,
+      RampUp: null,
+      RampUpLatency: null,
       ResponsiveMaintainer: null,
       ResponsiveMaintainerLatency: null,
       LicenseScore: null,
@@ -898,12 +898,12 @@ app.get('/package/:id/rate', async (req: Request, res: Response) => {
 
     // Return metrics and latencies
     res.status(200).json({
-      RampUpScore: metrics.RampUpScore,
-      RampUpLatency: metrics.RampUpLatency,
-      Correctness: metrics.Correctness,
-      CorrectnessLatency: metrics.CorrectnessLatency,
       BusFactor: metrics.BusFactor,
       BusFactorLatency: metrics.BusFactorLatency,
+      Correctness: metrics.Correctness,
+      CorrectnessLatency: metrics.CorrectnessLatency,
+      RampUp: metrics.RampUpScore,
+      RampUpLatency: metrics.RampUpLatency,
       ResponsiveMaintainer: metrics.ResponsiveMaintainer,
       ResponsiveMaintainerLatency: metrics.ResponsiveMaintainerLatency,
       LicenseScore: metrics.LicenseScore,
