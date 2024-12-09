@@ -1,31 +1,38 @@
-A CLI for Trustworthy Module Re-Use
+A Trustworthy Module Registry
 =========================
 ## About
-This module allows the user to determine the trustworthiness of a Node.js package via a command line interface that uses the URL of the package on npmjs.org or the GitHub repository URL. The trustworthiness of a module is measured by its Net Score, which is calculated via an equation composed of sub-scores. These sub-scores are calculated independently from each other and perform an estimation of the following metrics that are relevant to a module’s trustworthiness: ramp up time, correctness, bus factor, responsive maintainers, and license compatibility. The evaluation of some of these metrics includes the use of the GitHub REST API to access repository data (i.e. number of contributors, number of total closed issues, etc.), and some of the metrics clone the module’s repository to access the data of specific files (i.e. README.md). The Net Score is calculated as a weighted sum of the ramp-up time, correctness, bus factor, and responsive maintainer metrics, with the license compatibility being a calculation requirement for the Net Score to not be set to zero. The weight factors for each of the metrics were chosen to accommodate the stakeholder’s project specifications and priorities. 
+This repository contains the implementation of a next-generation package registry designed to address the limitations of existing solutions like npm while providing developers with improved features, transparency, and control over their dependencies.
 
 ## Table of Contents
-- [Dependencies](#dependencies)
 - [Key Features](#key-features)
 - [Version Support](#Version-Support)
 - [Installation](#installation)
-- [Usage](#usage)
-	- [Setup](#Setup)
 - [License](#license)
 
-## Dependencies
-- commander — npm install commander
-- axios — npm install axios
-- fs — npm install fs
-- path — npm install path
-- adm-zip — npm install adm-zip
-- dotenv — npm install dotenv
-- axios-mock-adapter — npm install axios-mock-adapter
-
-This module has several dependencies that must be installed prior to use. The names of these dependencies and their commands are shown above.
-
 ## Key Features
-There are several key features that are part of this module. Description of each will be described below.
+### Core Functionalities
+1. Upload, Update, Rate, and Download Packages:
+	Support for uploading and updating packages in the form of zipped files.
+	Rating system based on:
+	Fraction of dependencies pinned to a specific major+minor version.
+	Fraction of project code introduced via pull requests with code review.
+2. Debloat Option:
+   	Optimizes uploaded packages by removing unnecessary code, reducing storage costs.
+3. Fetch Package Versions:
+	Retrieve available versions of a package using:
+		Exact notation (e.g., 1.2.3).
+		Ranges (e.g., 1.2.3-2.1.0 or ~1.2.0).
+4. Public NPM Ingestion:
+	Import public npm packages based on predefined quality thresholds.
+5. Dependency Size Analysis:
+	Calculate the size of a package and its transitive dependencies in terms of zipped files.
+6. Registry Reset:
+	Reset the registry to a default state with no uploaded packages.
+### For Developers
+RESTful API compliant with the OpenAPI schema for programmatic access.
+Web browser interface for easy interaction by non-technical users.
 
+### Metrics
 ### Bus Factor
 This feature determines the bus factor of packages. It is used to find out how much of an impact it would make if contributors to a package were to ‘get hit by a bus’. Of course, this is not literal. Hopefully. What this does is deliver a score based on how much a package may suffer if it were to lose contributors. The calculation is based on the number of total contributors to a repository, then normalized using a set minimum and maximum number of acceptable contributors. We have set the minimum to be 10 to account for every contributor being active, and the maximum is 100 to account for a large number of contributors being inactive. 
 
@@ -47,26 +54,20 @@ If the average issue response time is under 24 hours, then a score of 1 is retur
 ### License Compatibility
 This feature determines if a package has a license. It simply returns a score of 1 if it contains a license and a score of 0 if there is no mention of one.
 
+### Fraction of Dependencies 
+This feature calculates the fraction of dependencies that are pinned to at least a specific major+minor version, e.g., version 2.3.X of the dependency.
+
+### Fraction of Project Code
+This feature calculates the fraction of project code that was introduced through pull requests with a code review.
+
 ### Net Score
 The net score is calculated first using the license compatibility score as a check condition to see if the net score should already be set to zero. If the license is compatible, then the net score is calculated as a weighted sum of the remaining four metrics.
 -  NetScore = License * (0.2*RampUp + 0.3*Correctness + 0.2*BusFactor + 0.3*ResponsiveMaintainers)
 
 ## Installation
-git clone https://github.com/kumar488/461-team-repo 
+git clone https://github.com/ECE-461-Team-16/ACME-Phase-2.git
+Install dependencies ./run install 
 
-
-# Usage
-### Setup
--  To download files
-  -  git clone https://github.com/kumar488/461-team-repo 
-- To compile typescript files
-  -  npx tsc
-- To install required modules
-  -  ./run install
-- To run net score analysis on a file with URLs
-  -  ./run <URL_FILE>
-- To run test cases
-  -	 ./run test
 
 ## License
 Released under the LGPLv2.1 license.
