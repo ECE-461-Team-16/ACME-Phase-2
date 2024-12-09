@@ -291,7 +291,7 @@ export async function getAllMetrics(url: string, TOKEN: string) {
             GoodPinningPracticeLatency: parseFloat(goodPinningPracticeLatency.toFixed(3)),
             PullRequest: parseFloat(pullRequest.toFixed(1)),
             PullRequestLatency: parseFloat(pullRequestLatency.toFixed(3)),
-            NetScore: parseFloat(netScore.toFixed(1)),
+            NetScore: parseFloat((netScore !== null ? netScore : 0).toFixed(1)),
             NetScoreLatency: parseFloat(netScoreLatency.toFixed(3)),
         };
 
